@@ -20,7 +20,7 @@
             </view>
             <view class="userInfo-basic">
                 <text class="basic-name">{{userName}}（{{userYkth}}）</text>
-                <text class="basic-time">截至时间：{{renderData.last_time}}</text>
+                <text class="basic-time">截至时间：{{renderData.record_time}}</text>
             </view>
         </view>
         <!--result-chargeInfo-->
@@ -64,6 +64,6 @@
                 <text>度</text>
             </view>
         </view>
-        <image class="sdf-bg" mode="aspectFit" src="/images/core/sdf/sdf-bg.png"></image>
+        <image class="sdf-bg" src="/images/core/sdf/sdf-bg.png"></image>
     </view>
 </view>

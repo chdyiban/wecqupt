@@ -30,6 +30,14 @@ Page({
       path: '/pages/core/ks/ks?id='+id+'&name='+name
     };
   },
+  //下拉更新
+  onPullDownRefresh: function(){
+    var _this = this;
+    _this.loginHandler({
+      id: _this.data.id || app._user.we.info.id,
+      name: _this.data.name || app._user.we.info.name
+    });
+  },
   onLoad: function(options){
     var _this = this;
     app.loginLoad(function(){
@@ -67,10 +75,10 @@ Page({
       openid: app._user.openid,
       id: id
     };
-    if(app._user.teacher){ data.type = 'teacher'; }
+    if(app._user.teacher && !options.name){ data.type = 'teacher'; }
 
     //判断并读取缓存
-    if(app.cache.ks){ ksRender(app.cache.ks); }
+    if(app.cache.ks && !options.name){ ksRender(app.cache.ks); }
     function ksRender(list){
       if(!list || !list.length){
         _this.setData({
@@ -118,20 +126,23 @@ Page({
         if (res.data && res.data.status === 200){
           var list = res.data.data;
           if(list) {
-            //保存考试缓存
-            app.saveCache('ks', list);
+            if(!options.name){
+              //保存考试缓存
+              app.saveCache('ks', list);
+            }
             ksRender(list);
-          }
+          } else { _this.setData({ remind: '暂无数据' }); }
 
         } else {
+          app.removeCache('ks');
           _this.setData({
             remind: res.data.message || '未知错误'
           });
         }
       },
       fail: function(res) {
-        if(this.data.remind == '加载中'){
-          this.setData({
+        if(_this.data.remind == '加载中'){
+          _this.setData({
             remind: '网络错误'
           });
         }
@@ -139,6 +150,7 @@ Page({
       },
       complete: function() {
         wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
       }
     });
   },

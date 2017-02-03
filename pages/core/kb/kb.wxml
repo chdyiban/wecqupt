@@ -71,7 +71,7 @@
                         <!-- today 0周一,1周二 -->
                         <block wx:if="{{(today===day) && (toweek == week)}}">
                             <view class="kb-bg" style="background:-webkit-gradient(linear,left top,left bottom,from(#eff7ff),color-stop({{(timelineTop+4)/1260}}, #8cc4ff),to(#eff7ff));"></view>
-                            <view class="kb-timeline" style="top:{{timelineTop}}rpx"></view>
+                            <view class="kb-timeline" style="display:block;top:{{timelineTop}}rpx"></view>
                         </block>
                         <!-- 循环当天的的6节课 -->
                         <view class="kb-card {{wid%2==0?'mg-8':'mg-12'}}" wx:for="{{day_lesson}}" wx:key="{{wid}}" wx:for-index="wid">
@@ -110,7 +110,7 @@
         </view>
 
         <!-- 底部 -->
-        <view class="kb-info-ctn {{blur?'kb-info-ctn-open':''}}">
+        <view class="kb-info-ctn {{blur?'kb-info-ctn-open':''}}" catchtouchmove="catchMoveDetail">
 
             <view class="kb-info-title" wx:if="{{!blur}}">
                 <block wx:if="{{week != '*'}}">
@@ -155,7 +155,7 @@
                 </view>
             </block>
 
-            <view class="kb-info-card-tabs" wx:if="{{targetLen<=2}}" bindtouchstart="bindStartDetail" bindtouchend="bindEndDetail">
+            <view class="kb-info-card-tabs" wx:if="{{targetLen<=2}}" bindtouchstart="bindStartDetail" bindtouchmove="bindMoveDetail">
                 <block wx:for="{{targetLessons}}" wx:key="{{cid}}" wx:for-index="cid" style="z-index:{{cid}};">
                     <view class="kb-info-card {{!cid ? '' : 'kb-info-card-shadow'}} {{targetI == cid ? 'kb-info-card-active' : 'kb-info-card-static'}}" data-index="{{cid}}" bindtap="infoCardTap">
                         <view class="kb-info-card-content">

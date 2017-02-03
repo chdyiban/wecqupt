@@ -209,13 +209,14 @@ Page({
       week: current+1
     });
   },
+  catchMoveDetail: function(){ /*阻止滑动穿透*/ },
   bindStartDetail: function(e){
     this.setData({
       startPoint: [e.touches[0].pageX, e.touches[0].pageY]
     });
   },
   //滑动切换课程详情
-  bindEndDetail: function(e){
+  bindMoveDetail: function(e){
     var _this = this;
     var curPoint = [e.changedTouches[0].pageX, e.changedTouches[0].pageY],
         startPoint = _this.data.startPoint, i = 0;
@@ -369,17 +370,18 @@ Page({
               app.saveCache('kb', _data);
             }
             kbRender(_data);
-          }
+          }else{ _this.setData({ remind: '暂无数据' }); }
 
         }else{
+          app.removeCache('kb');
           _this.setData({
             remind: res.data.message || '未知错误'
           });
         }
       },
       fail: function(res) {
-        if(this.data.remind == '加载中'){
-          this.setData({
+        if(_this.data.remind == '加载中'){
+          _this.setData({
             remind: '网络错误'
           });
         }
