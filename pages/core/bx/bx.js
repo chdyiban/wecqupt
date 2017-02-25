@@ -4,6 +4,7 @@ var app = getApp();
 Page({
   data: {
     remind: '加载中',
+    count: '-',
     list: [],
     process_state: {
       '未审核': 'waited',
@@ -48,23 +49,26 @@ Page({
           }else{
             for(var i = 0, len = list.length; i < len; i++) {
               list[i].state = that.data.process_state[list[i].wx_wxztm];
-              list[i].wx_bt = that.convertHtmlToText(list[i].wx_bxnr).replace(/[\r|\n]/g, "");
+              list[i].wx_bt = that.convertHtmlToText(list[i].wx_bt).replace(/[\r|\n]/g, "");
             }
             that.setData({
               'list': list,
+              'count': len,
               'remind': ''
             });
           }
         }else{
           that.setData({
-            remind: res.data.message || '未知错误'
+            remind: res.data.message || '未知错误',
+            'count': 0
           });
         }
       },
       fail: function(res) {
         app.showErrorModal(res.errMsg);
         that.setData({
-          remind: '网络错误'
+          remind: '网络错误',
+          'count': 0
         });
       },
       complete: function(){

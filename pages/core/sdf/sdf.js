@@ -26,6 +26,17 @@ Page({
       userName: app._user.we.info.name,
       userYkth: app._user.we.ykth
     });
+    //判断并读取缓存
+    if(app.cache.sdf){ sdfRender(app.cache.sdf); }
+    function sdfRender(info){
+      _this.setData({
+        'renderData': info,
+        'renderData.room_name': info.room.split('-').join('栋'),
+        'renderData.record_time': info.record_time.split(' ')[0].split('/').join('-'),
+        remind: ''
+      });
+    }
+    wx.showNavigationBarLoading();
     // 发送请求
     wx.request({
       url: app._server + '/api/get_elec.php', 
@@ -39,23 +50,29 @@ Page({
       success: function(res) {
         if(res.data && res.data.status === 200){
           var info = res.data.data;
-          _this.setData({
-            'renderData': info,
-            'renderData.room_name': info.room.split('-').join('栋'),
-            'renderData.last_time': info.record_time.split(' ')[0],
-            remind: ''
-          });
+          if(info) {
+            //保存电费缓存
+            app.saveCache('sdf', info);
+            sdfRender(info);
+          }else{ _this.setData({ remind: '暂无数据' }); }
+
         }else{
+          app.removeCache('sdf');
           _this.setData({
             remind: res.data.message || '未知错误'
           });
         }
       },
       fail: function(res) {
-        app.showErrorModal(res.errMsg);
-        _this.setData({
-          remind: '网络错误'
-        });
+        if(_this.data.remind == '加载中'){
+          _this.setData({
+            remind: '网络错误'
+          });
+        }
+        console.warn('网络错误');
+      },
+      complete: function() {
+        wx.hideNavigationBarLoading();
       }
     });
   }

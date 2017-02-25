@@ -81,15 +81,15 @@ Page({
   },
   confirm: function(){
     var _this = this;
+    if(app.g_status){
+      app.showErrorModal(app.g_status, '提交失败');
+      return;
+    }
     var data = {
       openid: app._user.openid
     };
     if(!_this.data.ibuilding || !_this.data.room){
-      app.showErrorModal('请先输入表单信息', '提醒');
-      return false;
-    }
-    if(!/^\d+$/.test(_this.data.room) || _this.data.room.length !== 3){
-      app.showErrorModal('请输入正确的寝室号', '提醒');
+      app.showErrorModal('请填写完整的表单信息', '提醒');
       return false;
     }
     var buildText = _this.data.buildings[_this.data.ibuilding];
@@ -115,7 +115,7 @@ Page({
           app.showErrorModal(res.data.message);
         }
       },
-      fail: function() {
+      fail: function(res) {
         wx.hideToast();
         app.showErrorModal(res.errMsg);
       }
