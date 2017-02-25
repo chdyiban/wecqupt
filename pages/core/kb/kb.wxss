@@ -212,6 +212,7 @@
     flex-flow: column nowrap;
     overflow: hidden;
     color: #fff;
+    box-shadow: 0 0 6rpx 2rpx rgba(255,255,255,.45)
 }
 .kb-card-place-num{
     font-size: 13pt;
@@ -236,7 +237,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
-    line-height: 120%;
+    line-height: 130%;
 }
 .k-sec::before{
     content: '';
