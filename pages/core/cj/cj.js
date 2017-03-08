@@ -31,10 +31,10 @@ Page({
     //判断并读取缓存
     if(app.cache.cj){ cjRender(app.cache.cj); }
     function cjRender(_data){
-      var term = _data[0].term;
+      var term = _data[0].term.trim();
       var xh = _data[0].xh;
       var year = term.slice(0,4);
-      var semester = term.slice(4);
+      var semester = term.slice(-3,-2);
       var yearIn = xh.slice(0,4);
       var xqName_grade = changeNum(year - yearIn + 1);
       var xqName_semester = (semester == 1) ? '上' : '下';
