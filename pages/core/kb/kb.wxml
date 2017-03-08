@@ -78,7 +78,7 @@
                             <!-- 循环重叠课 -->
                             <block wx:for="{{day_lesson[wid]}}" wx:key="{{cid}}" wx:for-item="cards" wx:for-index="cid">
                                 <!-- 循环周数，与当前周相同或当前周为*时显示 -->
-                                <view style="height:{{cards.number*100}}rpx" data-day="{{day}}" data-wid="{{wid}}" data-cid="{{cid}}" bindtap="showDetail" wx:for="{{cards.weeks}}" wx:key="*this" wx:for-item="iweek" class="mg-8 kb-card-content {{cards.conflictWeeks[iweek] || (week == '*' && cards.klen > 1) ?'k-sec':''}} {{iweek==week || week == '*' ?cards.color:''}}" wx:if="{{iweek==week || week == '*'}}">
+                                <view style="height:{{cards.number==2?cards.number*100:cards.number*100+9}}rpx" data-day="{{day}}" data-wid="{{wid}}" data-cid="{{cid}}" bindtap="showDetail" wx:for="{{cards.weeks}}" wx:key="*this" wx:for-item="iweek" class="mg-8 kb-card-content {{cards.conflictWeeks[iweek] || (week == '*' && cards.klen > 1) ?'k-sec':''}} {{iweek==week || week == '*' ?cards.color:''}}" wx:if="{{iweek==week || week == '*'}}">
                                     <!-- 判断上课地点是数字还是汉字 -->
                                     <text wx:if="{{cards.place < '99999'}}" class="kb-card-place-num">{{cards.place}}</text>
                                     <text wx:else class="kb-card-place-words">{{cards.place}}</text>
