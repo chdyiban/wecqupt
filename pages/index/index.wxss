@@ -17,7 +17,6 @@
   background: #fff;
   border-bottom: 1rpx solid #e5e5e5;
   padding: 15rpx 10rpx 10rpx;
-  margin-bottom: 20rpx;
   min-height: 350rpx;
   overflow: hidden;
 }
@@ -42,6 +41,14 @@
 .core-item-name{
   display: block;
   margin: 5rpx;
+}
+.main-swpier{
+  height:390rpx;
+  margin-bottom:20rpx;
+}
+.main-swpier .wx-swiper-dots.wx-swiper-dots-horizontal{
+  bottom: 0;
+  margin-bottom: -5rpx;
 }
 /**卡片列表**/
 .main-card {

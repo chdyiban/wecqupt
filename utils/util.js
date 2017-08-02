@@ -40,7 +40,9 @@ sign = function(data) {
 key = function(data) {
   if(!isPlainObject(data)){ return false; }
   data.timestamp = parseInt(new Date().getTime().toString().substr(0,10));
+
   data.sign = sign(data);
+
   return {
     key: base64.encode(JSON.stringify(data))
   };

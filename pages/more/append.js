@@ -15,6 +15,8 @@ Page({
     ibuilding: false,  // picker-index
     room_focus: false,
     room: '',
+    volunteer_uid_focus:false,
+    volunteer_uid:'',
     angle: 0
   },
   onLoad: function(){
@@ -31,6 +33,11 @@ Page({
     if(app._user.we.room){
       _this.setData({
         'room': app._user.we.room
+      });
+    }
+    if(app._user.we.volunteer_uid){
+      _this.setData({
+        'volunteer_uid': app._user.we.volunteer_uid
       });
     }
     wx.onAccelerometerChange(function(res) {
@@ -58,26 +65,34 @@ Page({
     });
   },
   inputFocus: function(e){
-    if(e.target.id == 'room'){
-      this.setData({
-        'room_focus': true
-      });
-    }
+    var id = e.target.id,
+      newData = {};
+    newData[id + '_focus'] = true; 
+    this.setData(newData);     
   },
   inputBlur: function(e){
-    if(e.target.id == 'room'){
-      this.setData({
-        'room_focus': false
-      });
-    }
+    var id = e.target.id,
+         newData = {};
+    newData[id + '_focus'] = false;   
+    this.setData(newData);  
   },
   roomInput:  function(e){
     this.setData({
       'room': e.detail.value
     });
-    if(e.detail.value.length >= 3){
+    if(e.detail.value.length >= 4){
       wx.hideKeyboard();
     }
+  },
+  volunteerUidInput: function(e){
+    this.setData({
+      'volunteer_uid': e.detail.value
+    });
+  },
+  volunteerHelp:function(){
+    wx.navigateTo({
+      url: './help/volunteerHelp',
+    })
   },
   confirm: function(){
     var _this = this;
@@ -88,7 +103,7 @@ Page({
     var data = {
       openid: app._user.openid
     };
-    if(!_this.data.ibuilding || !_this.data.room){
+    if (!_this.data.ibuilding || !_this.data.room ){
       app.showErrorModal('请填写完整的表单信息', '提醒');
       return false;
     }
@@ -96,6 +111,7 @@ Page({
     var build = buildText.split("栋")[0];
     data.build = build;
     data.room = _this.data.room;
+    data.volunteer_uid = _this.data.volunteer_uid;
     app.showLoadToast();
     wx.request({
       url: app._server + '/api/users/set_info.php',
@@ -109,6 +125,10 @@ Page({
             icon: 'success',
             duration: 2000
           });
+          app._user.we.volunteer_uid = _this.data.volunteer_uid;
+          app._user.we.room = _this.data.room;
+          app._user.we.build = data.build;
+          app.removeCache('fw');
           wx.navigateBack();
         }else{
           wx.hideToast();

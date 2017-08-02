@@ -38,8 +38,7 @@ Page({
     week: 1,    //视图周数（'*'表示学期视图）
     lessons : [],  //课程data
     dates: [],     //本周日期
-    teacher: false,   //是否为教师课表
-    is_vacation:false,// 是否为假期
+    teacher: false   //是否为教师课表
   },
   //分享
   onShareAppMessage: function(){
@@ -97,7 +96,7 @@ Page({
     //设置滚动至当前时间附近，如果周末为设置left为其最大值102
     var nowWeek = new Date().getDay();
     _this.setData({
-      'scroll.left': ((nowWeek===6||nowWeek===0) && !this.data.is_vacation) ? 102 : 0
+      'scroll.left': (nowWeek===6||nowWeek===0) ? 102 : 0
     });
   },
   onReady: function(){
@@ -110,11 +109,9 @@ Page({
     }
   },
   scrollXHandle: function(e){
-    // 鬼畜特效，为什么要加这个QAQ
-    
-    // this.setData({
-    //   'scroll.left': e.detail.scrollLeft
-    // });
+    this.setData({
+      'scroll.left': e.detail.scrollLeft
+    });
   },
   showDetail: function(e){
     // 点击课程卡片后执行
@@ -193,15 +190,11 @@ Page({
     });
   },
   chooseView: function(){
-    if (this.data.is_vacation === 'T'){
-
-    }else{
-      app.showLoadToast('切换视图中', 500);
-      //切换视图(周/学期) *表示学期视图
-      this.setData({
-        week: this.data.week == '*' ? this.data.toweek : '*'
-      });
-    }
+    app.showLoadToast('切换视图中', 500);
+    //切换视图(周/学期) *表示学期视图
+    this.setData({
+      week: this.data.week == '*' ? this.data.toweek : '*'
+    });
   },
   returnCurrent: function(){
     //返回本周
@@ -277,8 +270,6 @@ Page({
       var colorsDic = {};
       var _lessons = _data.lessons;
       var _colors = colors.slice(0); //暂存一次都未用过的颜色
-      var is_vacation = _data.is_vacation;
-        
       // 循环课程
       for( i = 0, ilen = _lessons.length; i < ilen; i++){
         for( j = 0, jlen = _lessons[i].length; j < jlen; j++){
@@ -357,12 +348,11 @@ Page({
       });
       _this.setData({
         today : today,
-        week: is_vacation ==="T"?'*':week,
+        week : week,
         toweek: week,
         lessons : lessons,
         dates: dates,
-        remind: '',
-        is_vacation:is_vacation
+        remind: ''
       });
     }
     wx.showNavigationBarLoading();

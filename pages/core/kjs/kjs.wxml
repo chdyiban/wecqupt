@@ -32,7 +32,7 @@
             <view class="scroll-space"></view>
             <block wx:for="{{DATA.CLASSTIME_DATA}}" wx:key="index">
                 <block wx:if="{{!!item}}">
-                    <view class="condition-li {{index == active.classNo ? 'classTime-active' : ''}}"  data-classNo="{{index}}">{{item.time}}</view>
+                    <view class="condition-li {{active.classNo[index] ? 'classTime-active' : ''}}"  data-classNo="{{index}}">{{item.time}}</view>
                 </block>
             </block>
             <view class="scroll-space"></view>

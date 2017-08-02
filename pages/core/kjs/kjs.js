@@ -10,6 +10,21 @@ var WEEK_DATA = ['', '第一周', '第二周', '第三周', '第四周', '第五
                       {time: '7-8节', index: '7@8'}, {time: '9-10节', index: '9@10'}, {time: '11-12节', index: '11@12'}],
     BUILDING_DATA = ['', '', '二教', '三教', '四教', '五教', '', '', '八教'];
 
+
+// 处理数组classNo
+function getHandledClassNo(classNo){
+  var result = '';
+  classNo.forEach(function(value,index){
+    if(value){
+      if(index === 1){
+        result = CLASSTIME_DATA[index].index;
+      }else if(index > 1){
+        result = result + '@' + CLASSTIME_DATA[index].index;
+      }
+    }
+  });
+  return result;
+}
 Page({
   data: {
     DATA: {
@@ -22,7 +37,7 @@ Page({
       weekNo: 1,
       weekDay: 1,
       buildingNo: 2,
-      classNo: 1,
+      classNo: ['',true,false,false,false,false,false],
     },
     nowWeekNo: 1,
     testData: null
@@ -53,7 +68,7 @@ Page({
     var requestData = {
       weekNo: query.weekNo || activeData.weekNo,
       weekDay: query.weekDay || activeData.weekDay,
-      classNo: that.data.DATA.CLASSTIME_DATA[query.classNo || activeData.classNo].index,
+      classNo: getHandledClassNo(query.classNo || activeData.classNo),
       buildingNo: query.buildingNo || activeData.buildingNo,
       openid: app._user.openid,
     };
@@ -132,15 +147,26 @@ Page({
   // classTime
   chooseClaasTime: function (e) {
     
-    var index = e.target.dataset.classno;
-    
+    var index = e.target.dataset.classno,
+        classNo = this.data.active.classNo,
+        selectNum = 0;
+    console.log(classNo);
+    classNo.forEach(function(value){
+      if(value)
+        ++selectNum;
+    });
+    if (classNo[index] && selectNum > 1){
+      classNo[index] = !classNo[index];
+    }else{
+      classNo[index] = true;
+    }
     if(isNaN(index)){ return false; }
 
     this.sendRequest({
-      classNo: index
+      classNo: classNo
     }, function(that){
       that.setData({
-        'active.classNo': index
+        'active.classNo': classNo
       });
     });
   },
