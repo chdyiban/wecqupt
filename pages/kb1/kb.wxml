@@ -133,7 +133,7 @@
                     </view>
                 </block>
                 <block wx:else>
-                    <text class="kb-info-week">总课表</text>
+                    <text class="kb-info-week">{{toweek}}周周{{_days[today]}}</text>
                     <text class="kb-term">{{term}}</text>
                 </block>
                 <!--切换视图-->

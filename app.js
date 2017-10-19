@@ -140,6 +140,7 @@ App({
     _this._user.we = data.user;
     _this._time = data.time;
     _this._t = data['\x74\x6f\x6b\x65\x6e'];
+    console.log(_this);
     return data;
   },
   getUserInfo: function(cb){
@@ -180,6 +181,7 @@ App({
   },
   util: require('./utils/util'),
   key: function(data){ return this.util.key(data) },
+  enCodeBase64:function(data){ return this.util.base64.encode(data)},
   cache: {},
   _server: 'https://we.cqu.pt',
   _user: {

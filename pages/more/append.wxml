@@ -25,6 +25,14 @@
                         <text class="input-label">寝室号</text>
                         <input type="number" cursor-spacing="30" value="{{room}}" id="room" placeholder="请输入寝室号" bindinput="roomInput" bindfocus="inputFocus" bindblur="inputBlur" />
                     </view>
+                    <view class="input-group {{volunteer_uid_focus ? 'active' : ''}}">
+                        <text class="input-label">志愿号</text>
+                        <input type="number" cursor-spacing="30" value="{{volunteer_uid}}" id="volunteer_uid" placeholder="请输入志愿者账号(选填)" bindinput="volunteerUidInput" bindfocus="inputFocus" bindblur="inputBlur" />
+                    </view>
+                     <view class="volunteer-help" bindtap="volunteerHelp">
+                       <text>不知道志愿号</text>
+                        <image class="volunteer-help-img" src="/images/more/help.png"></image>
+                     </view>
                 </form>
                 <view class="confirm-btn" bindtap="confirm">
                     <text>保存</text>

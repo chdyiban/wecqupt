@@ -36,6 +36,35 @@
     <view class="log-list" wx:else>
       <view class="describe">
           <view class="desc-title">
+            <text class="desc-v">v0.1.4 公测版</text>
+            <text class="desc-time">2017.08.02</text>
+          </view>
+          <text class="desc-content">修复BUG</text>
+          <view class="desc-list">
+            <text class="desc-list-item">修复假期不显示课表，改为显示下学期课表</text>
+            <text class="desc-list-item">修复课表鬼畜抖动特效</text>
+          </view>
+          <text class="desc-content">优化完善</text>
+          <view class="desc-list">
+            <text class="desc-list-item">优化空教室可以多选时间段查询</text>
+            <text class="desc-list-item">新增四六级查询功能</text>
+            <text class="desc-list-item">新增志愿者时长查询功能</text>
+          </view>
+      </view>
+      <view class="describe">
+          <view class="desc-title">
+            <text class="desc-v">v0.1.3 公测版</text>
+            <text class="desc-time">2017.05.10</text>
+          </view>
+          <text class="desc-content">修复BUG</text>
+          <view class="desc-list">
+            <text class="desc-list-item">修复学期课表显示不整齐问题</text>
+            <text class="desc-list-item">修复4位寝室号无法查询电费的问题</text>
+            <text class="desc-list-item">修复成绩查询学期显示错误的问题</text>
+          </view>
+      </view>
+      <view class="describe">
+          <view class="desc-title">
             <text class="desc-v">v0.1.2 公测版</text>
             <text class="desc-time">2017.01.10</text>
           </view>

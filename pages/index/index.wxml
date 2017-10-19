@@ -5,7 +5,8 @@
     </view>
 
   <!--功能导航-->
-  <view class="main-core">
+  <swiper class="main-swpier" indicator-dots="true" indicator-active-color="#73b4ef">
+  <swiper-item class="main-core" wx:for="{{cores}}"  wx:for-item="core" wx:key="id" >
     <block wx:for="{{core}}" wx:key="id">
       <navigator wx:if="{{user.is_bind && !item.disabled && (!user.teacher || !item.teacher_disabled) && (!offline || !item.offline_disabled) }}" class="main-core-item" url="{{'/pages/core/'+item.id+'/'+item.id}}">
         <image class="core-item-icon" src="/images/core/{{item.id}}.png"></image>
@@ -16,11 +17,12 @@
         <text class="core-item-name">{{item.name}}</text>
       </view>
     </block>
+  </swiper-item >
+  </swiper>
     <view class="fix_tip {{disabledItemTap?'active':''}}">
         <text wx:if="{{remind == '未绑定'}}">请先绑定帐号</text>
         <text wx:else>{{(user.teacher && !offline) ? '无权限' : '该服务不可用'}}</text>
     </view>
-  </view>
   <view wx:if="{{remind}}" class="remind-box">
     <image wx:if="{{remind == '加载中'}}" class="remind-img" src="/images/index/loading.gif"></image>
     <block wx:else>
