@@ -19,7 +19,7 @@ Page({
   },
   getData: function () {
     var _this = this;
-    if(!app._user.we.ykth || !_this.data.bxID){
+    if (!app._user.we.id /* ||!_this.data.bxID*/){
       _this.setData({
         remind: '404'
       });
@@ -27,11 +27,11 @@ Page({
     }
     // 发送请求
     wx.request({
-      url: app._server + "/api/bx/get_repair_detail.php", 
+      url: app._server + "/public/api/repair/get_repair_detail", 
       method: 'POST',
       data: app.key({
-        openid: app._user.openid,
-        "yktID": app._user.we.ykth,
+        "openid": app._user.openid,
+        "id": app._user.we.id,
         "bxID": _this.data.bxID
       }),
       success: function(res) {

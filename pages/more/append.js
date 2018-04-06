@@ -5,18 +5,14 @@ Page({
   data: {
     remind: '加载中',
     building_list: ['1','2','3','4','5','6','8','9',
-      '10','11','12','15','16','17','18','19',
-      '20','21','22','23A','23B','24','25','26','27','28','29',
-      '30','31','32','33','34','35','36','37','39'],  //寝室楼栋
-    buildings: ['1栋（知行苑1舍）', '2栋（知行苑2舍）', '3栋（知行苑3舍）', '4栋（知行苑4舍）', '5栋（知行苑5舍）', '6栋（知行苑6舍）', '8栋（宁静苑1舍）', '9栋（宁静苑2舍）',
-      '10栋（宁静苑3舍）', '11栋（宁静苑4舍）', '12栋（宁静苑5舍）', '15栋（知行苑7舍）', '16栋（知行苑8舍）', '17栋（兴业苑1舍）', '18栋（兴业苑2舍）', '19栋（兴业苑3舍）',
-      '20栋（兴业苑4舍）', '21栋（兴业苑5舍）', '22栋（兴业苑6舍）', '23A栋（兴业苑7舍）', '23B栋（兴业苑8舍）', '24栋（明理苑1舍）', '25栋（明理苑2舍）', '26栋（明理苑3舍）', '27栋（明理苑4舍）', '28栋（明理苑5舍）', '29栋（明理苑6舍）',
-      '30栋（明理苑7舍）', '31栋（明理苑8舍）', '32栋（宁静苑6舍）', '33栋（宁静苑7舍）', '34栋（宁静苑8舍）', '35栋（宁静苑9舍）', '36栋（四海苑1舍）', '37栋（四海苑2舍）', '39栋（明理苑9舍）'], // picker-range
+      '10','11','12','15','16','17','18','19'
+    ],  //寝室楼栋
+    buildings: ['1号公寓（西区）', '2号公寓（西区）', '3号公寓（西区）', '4号公寓（西区）', '5号公寓（西区）', '6号公寓（西区）', '7号公寓（东区）', '8号公寓（东区）', '9号公寓（东区）', '10号公寓（东区）', '11号公寓（东区）', '12号公寓（东区）', '13号公寓（东区）', '14号公寓（东区）', '15号公寓（东区）', '16号公寓（东区）', '17号公寓（西区）', '18号公寓（西区）', '19号公寓（西区）'], // picker-range
     ibuilding: false,  // picker-index
     room_focus: false,
     room: '',
-    volunteer_uid_focus:false,
-    volunteer_uid:'',
+    mobile_focus:false,
+    mobile:'',
     angle: 0
   },
   onLoad: function(){
@@ -35,9 +31,9 @@ Page({
         'room': app._user.we.room
       });
     }
-    if(app._user.we.volunteer_uid){
+    if(app._user.we.mobile){
       _this.setData({
-        'volunteer_uid': app._user.we.volunteer_uid
+        'mobile': app._user.we.mobile
       });
     }
     wx.onAccelerometerChange(function(res) {
@@ -84,9 +80,9 @@ Page({
       wx.hideKeyboard();
     }
   },
-  volunteerUidInput: function(e){
+  mobileInput: function(e){
     this.setData({
-      'volunteer_uid': e.detail.value
+      'moblie': e.detail.value
     });
   },
   volunteerHelp:function(){
@@ -111,10 +107,10 @@ Page({
     var build = buildText.split("栋")[0];
     data.build = build;
     data.room = _this.data.room;
-    data.volunteer_uid = _this.data.volunteer_uid;
+    data.mobile = _this.data.mobile;
     app.showLoadToast();
     wx.request({
-      url: app._server + '/api/users/set_info.php',
+      url: app._server + '/public/api/wxuser/set_info',
       data: app.key(data),
       method: 'POST',
       success: function(res){
@@ -125,7 +121,7 @@ Page({
             icon: 'success',
             duration: 2000
           });
-          app._user.we.volunteer_uid = _this.data.volunteer_uid;
+          app._user.we.mobile = _this.data.mobile;
           app._user.we.room = _this.data.room;
           app._user.we.build = data.build;
           app.removeCache('fw');

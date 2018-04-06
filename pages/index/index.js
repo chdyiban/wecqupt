@@ -7,19 +7,14 @@ Page({
     remind: '加载中',
     cores: [
       [
+        { id: 'bx', name: '物业报修', disabled: false, teacher_disabled: false, offline_disabled: true },
         { id: 'kb', name: '课表查询', disabled: false, teacher_disabled: false, offline_disabled: false },
-        { id: 'cj', name: '成绩查询', disabled: false, teacher_disabled: true, offline_disabled: false },
-        { id: 'ks', name: '考试安排', disabled: false, teacher_disabled: false, offline_disabled: false },
+        { id: 'cj', name: '成绩查询', disabled: false, teacher_disabled: false, offline_disabled: false },
+        { id: 'ks', name: '考试安排', disabled: true, teacher_disabled: false, offline_disabled: false },
         { id: 'kjs', name: '空教室', disabled: false, teacher_disabled: false, offline_disabled: true },
         { id: 'xs', name: '学生查询', disabled: false, teacher_disabled: false, offline_disabled: true },
-        { id: 'ykt', name: '一卡通', disabled: false, teacher_disabled: false, offline_disabled: false },
-        { id: 'jy', name: '借阅信息', disabled: false, teacher_disabled: false, offline_disabled: false },
-        { id: 'xf', name: '学费信息', disabled: false, teacher_disabled: true, offline_disabled: false },
-        { id: 'sdf', name: '电费查询', disabled: false, teacher_disabled: true, offline_disabled: false },
-        { id: 'bx', name: '物业报修', disabled: false, teacher_disabled: false, offline_disabled: true }
-      ],[
-        { id: 'cet', name: '四六级', disabled: false, teacher_disabled: true, offline_disabled: true},
-        { id: 'fw', name: "志愿活动", disabled: false, teacher_disabled: true, offline_disabled: false}
+        { id: 'ykt', name: '一卡通', disabled: true, teacher_disabled: false, offline_disabled: false },
+        { id: 'jy', name: '借阅信息', disabled: true, teacher_disabled: false, offline_disabled: false },
       ]
     ],
     card: {
@@ -73,7 +68,7 @@ Page({
   //分享
   onShareAppMessage: function(){
     return {
-      title: 'We重邮',
+      title: '长大易班',
       desc: '碎片化、一站式、一体化校园移动门户',
       path: '/pages/index/index'
     };
@@ -200,11 +195,14 @@ Page({
 
     //课表渲染
     function kbRender(info){
-      var today = parseInt(info.day),
-          lessons = info.lessons[today===0 ? 6 : today-1], //day为0表示周日(6)，day为1表示周一(0)..
-          list = [],
-          time_list = _this.data.card.kb.time_list;
-      for(var i = 0; i < 6; i++){
+      var today = parseInt(info.day);
+      var lessons = info.lessons[today===0 ? 6 : today-1], //day为0表示周日(6)，day为1表示周一(0)..
+          list = [];
+      var time_list = _this.data.card.kb.time_list;
+      console.log(lessons[0]);
+
+      for(var i = 0; i < 1; i++){
+        console.log("i:"+i);
         for(var j = 0; j < lessons[i].length; j++){
           var lesson = lessons[i][j];
           if(lesson.weeks && lesson.weeks.indexOf(parseInt(info.week)) !== -1){
@@ -227,13 +225,14 @@ Page({
     }
     //获取课表数据
     var kb_data = {
-      id: app._user.we.info.id,
+      //id: app._user.we.info.id,
+      id:app._user.we.id,
     };
     if(app._user.teacher){ kb_data.type = 'teacher'; }
     var loadsum = 0; //正在请求连接数
     loadsum++; //新增正在请求连接
     wx.request({
-      url: app._server + '/api/get_kebiao.php',
+      url: app._server + '/public/api/portal/kebiao',
       method: 'POST',
       data: app.key(kb_data),
       success: function(res) {
@@ -267,6 +266,7 @@ Page({
             last_time = last.time.split(' ')[0],
             now_time = app.util.formatTime(new Date()).split(' ')[0];
         //筛选并计算当日消费（一卡通数据有一定延迟，无法成功获取到今日数据，主页卡片通常不能展示）
+        console.log(last);
         for(var i = 0, today_cost = [], cost_total = 0; i < list.length; i++){
           if(list[i].time.split(' ')[0] == now_time && list[i].cost.indexOf('-') == 0){
             var cost_value = Math.abs(parseInt(list[i].cost));
@@ -292,10 +292,11 @@ Page({
     //获取一卡通数据
     loadsum++; //新增正在请求连接
     wx.request({
-      url: app._server + '/api/get_yktcost.php',
+      url: app._server + '/public/api/portal/yikatong',
       method: 'POST',
       data: app.key({
-        yktID: app._user.we.ykth
+        //yktID: app._user.we.ykth
+        id: app._user.we.id
       }),
       success: function(res) {
         if(res.data && res.data.status === 200){
@@ -388,7 +389,7 @@ Page({
     //获取借阅信息
     loadsum++; //新增正在请求连接
     wx.request({
-      url: app._server + "/api/get_books.php",
+      url: app._server + "/public/api/portal/books",
       method: 'POST',
       data: app.key({
         ykth: app._user.we.ykth

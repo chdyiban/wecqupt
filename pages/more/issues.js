@@ -15,7 +15,7 @@ Page({
     info: '',
     imgs: [],
     imgLen: 0,
-    upload: false,
+    upload: true,
     uploading: false,
     qiniu: '',
     showError: false
@@ -41,7 +41,7 @@ Page({
     if(app.g_status){ return; }
     wx.showNavigationBarLoading();
     wx.request({
-      url: app._server + '/api/get_feedback.php',
+      url: app._server + '/public/api/more/issue/',
       method: 'POST',
       data: app.key({
         openid: app._user.openid
@@ -77,7 +77,7 @@ Page({
       }
     });
     wx.request({
-      url: app._server + '/api/upload/get_upload_token.php',
+      url: app._server + '/public/api/upload/token',
       method: 'POST',
       data: app.key({
         openid: app._user.openid
@@ -196,7 +196,7 @@ Page({
     wx.showNavigationBarLoading();
     // 上传图片
     wx.uploadFile({
-      url: 'https://up.qbox.me',
+      url: 'https://upload-z2.qiniup.com',
       header: {
         'Content-Type': 'multipart/form-data'
       },
@@ -209,7 +209,7 @@ Page({
         var data = JSON.parse(res.data);
         if(data.key){
           _this.setData({
-            imgs: _this.data.imgs.concat('http://wecqupt.congm.in/'+data.key)
+            imgs: _this.data.imgs.concat('http://yibancdn.ohao.ren/'+data.key)
           });
         }
         if(_this.data.imgs.length === _this.data.imgLen){
@@ -261,13 +261,13 @@ Page({
           content = _this.data.content + '\r\n\r\n' + _this.data.info;
           if(_this.data.imgLen){
             _this.data.imgs.forEach(function(e){
-              imgs += '\r\n\r\n' + '![img]('+e+'?imageView2/2/w/750/interlace/0/q/88|watermark/2/text/V2Xph43pgq4=/font/5b6u6L2v6ZuF6buR/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)';
+              imgs += '\r\n\r\n' + '![img]('+e+')';
             });
             content += imgs;
           }
           app.showLoadToast();
           wx.request({
-            url: app._server + '/api/feedback.php',
+            url: app._server + '/public/api/more/issue/submit',
             data: app.key({
               openid: app._user.openid,
               title: title,

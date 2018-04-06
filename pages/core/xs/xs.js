@@ -146,6 +146,7 @@ Page({
     function doSuccess(data, messageDisplay) {
 
       var rows = data.rows;
+      //console.log(rows);
       // 对数据进行自定义加工 给每个数据对象添加一些自定义属性
       function doData(data) {
 
@@ -268,7 +269,7 @@ Page({
     });
     app.showLoadToast();
     wx.request({
-      url: app._server + '/api/get_student_info.php',
+      url: app._server + '/public/api/student/get_info',
       method: 'POST',
       data: app.key({
         openid: app._user.openid,

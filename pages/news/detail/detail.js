@@ -14,10 +14,10 @@ module.exports.ipage = {
     file_loading: false, //下载状态
     source: '',   // 附件来源
     sources: {
-      'jw': '教务在线',
-      'oa': 'OA系统',
-      'hy': 'OA系统',
-      'jz': 'OA系统',
+      'yiban': '长安大学易班',
+      // 'oa': 'OA系统',
+      // 'hy': 'OA系统',
+      // 'jz': 'OA系统',
       'new': '新闻中心'
     }
   },
@@ -26,7 +26,7 @@ module.exports.ipage = {
     var _this = this;
     return {
       title: _this.data.title,
-      desc: 'We重邮 - 资讯详情',
+      desc: '长大易班 - 资讯详情',
       path: 'pages/news/'+_this.data.type+'/'+_this.data.type+'_detail?type='+_this.data.type+'&id='+_this.data.id
     }
   },
@@ -59,22 +59,23 @@ module.exports.ipage = {
     });
     options.openid = app._user.openid;
     wx.request({
-      url: app._server + '/api/get_news_detail.php',
+      url: app._server + '/public/api/news/detail/',
       data: options,
       success: function(res){
         if(res.data && res.data.status === 200){
           var info = res.data.data;
           // 提取信息中的时间，作者，阅读量
-          var author_info = [];
-          if(info.author){
-            author_info = info.author.split(' ').map(function(e){
-              return e.split(':')[1];
-            });
-          }
+          //var author_info = [];
+          // if(info.author){
+          //   author_info = info.author.split(' ').map(function(e){
+          //     return e.split(':')[1];
+          //   });
+          // }
+          //console.log(author_info);
           _this.setData({
-            date: author_info[0] || info.time || "",  // 发布日期
-            author: author_info[1] || "",     // 发布作者
-            reading: author_info[2] || "",    // 阅读量
+            date: info.createtime || "",  // 发布日期
+            author: info.author || "",     // 发布作者
+            reading: info.views || "",    // 阅读量
             title: info.title,            //新闻标题
             content: _this.convertHtmlToText(info.body),  // 新闻内容
             source: _this.data.sources[options.type],

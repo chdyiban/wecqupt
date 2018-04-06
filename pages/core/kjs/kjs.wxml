@@ -7,9 +7,9 @@
             <view class="roomUl-floor" >
                 <!--楼层的空教室-->
                 <view class="floor">
-                    <block wx:for="{{item.room}}" wx:key="">
+                     <block wx:for="{{item.room}}" wx:key="">
                         <text>{{item}}</text>
-                    </block>
+                    </block> 
                 </view>
             </view>
         </block>

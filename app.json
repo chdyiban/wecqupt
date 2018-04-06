@@ -2,7 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/news/news",
-    "pages/news/jw/jw_detail",
+    "pages/news/yiban/yiban_detail",
     "pages/news/oa/oa_detail",
     "pages/news/hy/hy_detail",
     "pages/news/jz/jz_detail",
@@ -32,7 +32,7 @@
   "window": {
     "navigationBarBackgroundColor": "#7acfa6",
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "We重邮",
+    "navigationBarTitleText": "长大易班",
     "backgroundColor": "#7acfa6",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": true

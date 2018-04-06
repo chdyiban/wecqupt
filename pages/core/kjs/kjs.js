@@ -3,12 +3,11 @@
 var app = getApp();
 
 // 定义常量数据
-var WEEK_DATA = ['', '第一周', '第二周', '第三周', '第四周', '第五周', '第六周', '第七周', '第八周', '第九周', '第十周',
-                    '十一周', '十二周', '十三周', '十四周', '十五周', '十六周', '十七周', '十八周', '十九周', '二十周'],
+var WEEK_DATA = ['', '第一周', '第二周', '第三周', '第四周', '第五周', '第六周', '第七周', '第八周', '第九周', '第十周','十一周', '十二周', '十三周', '十四周', '十五周', '十六周', '十七周', '十八周', '十九周', '二十周'],
     DAY_DATA = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
     CLASSTIME_DATA = ['', {time: '1-2节', index: '1@2'}, {time: '3-4节', index: '3@4'}, {time: '5-6节', index: '5@6'},
-                      {time: '7-8节', index: '7@8'}, {time: '9-10节', index: '9@10'}, {time: '11-12节', index: '11@12'}],
-    BUILDING_DATA = ['', '', '二教', '三教', '四教', '五教', '', '', '八教'];
+                      {time: '7-8节', index: '7@8'}, {time: '9-11节', index: '9@11'}],
+    BUILDING_DATA = ['宏远', '明远', '修远'];
 
 
 // 处理数组classNo
@@ -90,7 +89,7 @@ Page({
 
     // 发送请求
     wx.request({
-      url: app._server + '/api/get_empty_room.php', 
+      url: app._server + '/public/api/portal/empty_room', 
       method: 'POST',
       data: app.key(requestData),
       success: function(res) {

@@ -43,11 +43,11 @@ Page({
   },
   //分享
   onShareAppMessage: function(){
-    var name = this.data.name || app._user.we.info.name,
-        id = this.data.id || app._user.we.info.id;
+    var name = this.data.name || app._user.we.name,
+        id = this.data.id || app._user.we.id;
     return {
       title: name + '的课表',
-      desc: 'We重邮 - 课表查询',
+      desc: '长大易班 - 课表查询',
       path: '/pages/core/kb/kb?id='+id+'&name='+name
     };
   },
@@ -65,7 +65,7 @@ Page({
       'teacher': app._user.teacher
     });
     // onLoad时获取一次课表
-    var id = options.id || app._user.we.info.id;
+    var id = options.id || app._user.we.id;
     if(!id){
       _this.setData({
         remind: '未绑定'
@@ -368,7 +368,7 @@ Page({
     wx.showNavigationBarLoading();
     //获取课表
     wx.request({
-      url: "https://we.cqu.pt/api/get_kebiao.php",
+      url: app._server + "/public/api/course/get_list",
       method: 'POST',
       data: app.key(data),
       success: function(res) {

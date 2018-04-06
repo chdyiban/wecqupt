@@ -46,10 +46,10 @@ Page({
     app.showLoadToast('绑定中');
     wx.request({
       method: 'POST',
-      url: app._server + '/api/users/bind.php',
+      url: app._server + '/public/api/wxuser/bind',
       data: app.key({
         openid: app._user.openid,
-        yktid: _this.data.userid,
+        stuid: _this.data.userid,
         passwd: _this.data.passwd
       }),
       success: function(res){
@@ -101,7 +101,7 @@ Page({
     this.setData({
       userid: e.detail.value
     });
-    if(e.detail.value.length >= 7){
+    if(e.detail.value.length >= 12){
       wx.hideKeyboard();
     }
   },

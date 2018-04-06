@@ -166,3 +166,43 @@
 .submit-declare:active{
     opacity: .8;
 }
+ .gallery {
+    display: flex;
+    flex-direction: row;
+    /*justify-content: flex-start;*/
+    flex-wrap: wrap;
+    background-color: #fff;
+}  
+/*每张图片所占容器*/
+.itemImage {
+    position: relative;
+}
+
+
+/*小图片*/
+.thumb {
+	margin: 10rpx;
+  position: relative;
+  width: 120rpx;
+  height:120rpx;
+}
+
+/*删除按钮*/
+.delete {
+	position: absolute;
+	height: 40rpx;
+	top: 0rpx;
+  right:0;
+	width: 40rpx;
+}
+
+.delete image {
+	position: absolute;
+	width: 30rpx;
+	height: 30rpx;
+}
+
+.photo{
+ text-align: center;
+ margin: 30rpx 0rpx 20rpx 0rpx;
+}

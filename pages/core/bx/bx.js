@@ -24,7 +24,7 @@ Page({
   },
   getData: function(){
     var that = this;
-    if(!app._user.we.ykth){
+    if(!app._user.we.id){
       that.setData({
         remind: '未绑定'
       });
@@ -32,11 +32,11 @@ Page({
     }
     // 发送请求
     wx.request({
-      url: app._server + "/api/bx/get_repair_list.php", 
+      url: app._server + "/public/api/repair/get_list", 
       method: 'POST',
       data: app.key({
         openid: app._user.openid,
-        "yktID": app._user.we.ykth
+        id: app._user.we.id
       }),
       success: function(res) {
 

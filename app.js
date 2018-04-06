@@ -1,6 +1,6 @@
 //app.js
 App({
-  version: 'v0.1.2', //版本号
+  version: 'v0.0.1', //版本号
   onLaunch: function() {
     var _this = this;
     //读取缓存
@@ -76,7 +76,7 @@ App({
             //发送code与微信用户信息，获取学生数据
             wx.request({
               method: 'POST',
-              url: _this._server + '/api/users/get_info.php',
+              url: _this._server + '/public/api/wxuser/get_info',
               data: {
                 code: res.code,
                 key: info.encryptedData,
@@ -139,8 +139,7 @@ App({
     _this._user.teacher = (data.user.type == '教职工');
     _this._user.we = data.user;
     _this._time = data.time;
-    _this._t = data['\x74\x6f\x6b\x65\x6e'];
-    console.log(_this);
+    _this._t = data['token'];
     return data;
   },
   getUserInfo: function(cb){
@@ -183,7 +182,7 @@ App({
   key: function(data){ return this.util.key(data) },
   enCodeBase64:function(data){ return this.util.base64.encode(data)},
   cache: {},
-  _server: 'https://we.cqu.pt',
+  _server: 'https://chd.mynatapp.cc/fastadmin',
   _user: {
     //微信数据
     wx: {},

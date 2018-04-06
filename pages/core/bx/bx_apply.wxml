@@ -85,6 +85,15 @@
             </view>
         </view>
 
+        <view class="gallery">
+              <view class="itemImage" wx:for="{{urlArr}}" wx:key="{{item}}">
+                <image class="thumb" data-current="{{item}}" src="{{item.url}}" />
+                <image class="delete" src="/images/core/bx/delete_image.png" data-index="{{index}}" bindtap="delete"></image>
+              </view>
+              <image class="thumb" src="/images/core/bx/upload.png"  bindtap="upImg"/>
+        </view>
+    
+
         <view class="submit-declare" bindtap="submitApply">
             <text>提交申请</text>
         </view>

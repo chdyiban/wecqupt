@@ -32,7 +32,7 @@
             <view class="cj-info-box">
                 <view class="cj-info" wx:for="{{cjInfo}}" wx:key="courseid">
                     <text class="cj-info-name">{{item.course_name}}</text>
-                    <text class="cj-info-socre">{{item.socres}}</text>
+                    <text class="cj-info-socre">{{item.score}}</text>
                 </view>
             </view>
         </view>
