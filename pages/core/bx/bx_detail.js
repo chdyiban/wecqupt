@@ -19,7 +19,8 @@ Page({
   },
   getData: function () {
     var _this = this;
-    if (!app._user.we.id /* ||!_this.data.bxID*/){
+    console.log(_this.data.bxID);
+    if (!app._user.we.id  ||!_this.data.bxID){
       _this.setData({
         remind: '404'
       });

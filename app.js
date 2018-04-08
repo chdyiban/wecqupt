@@ -182,7 +182,7 @@ App({
   key: function(data){ return this.util.key(data) },
   enCodeBase64:function(data){ return this.util.base64.encode(data)},
   cache: {},
-  _server: 'https://chd.mynatapp.cc/fastadmin',
+  _server: 'http://chdliutao.s1.natapp.cc/yibanbx',
   _user: {
     //微信数据
     wx: {},
