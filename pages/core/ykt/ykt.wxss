@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     height: 350rpx;
-    margin: 15rpx 50rpx 45rpx;
+    margin: 15rpx 25rpx 45rpx;
     background: #ffcb63;
     border-radius: 15rpx;
     box-shadow: 5rpx 5rpx 15rpx #ccc;
@@ -72,7 +72,7 @@
     font-size: 9pt;
 }
 .ykt-ye-id {
-    font-size: 10pt;
+    font-size: 9pt;
 }
 
 /* canvas */

@@ -124,11 +124,14 @@ Page({
     var lessons = _this.data.lessons[dataset.day][dataset.wid];
     var targetI = 0;
     lessons[dataset.cid].target = true;
-    if(week != '*'){
-      lessons = lessons.filter(function(e){
-        return e.weeks.indexOf(parseInt(week)) !== -1;
-      });
-    }
+    //可能是数据字段的问题，注释掉
+    // if(week != '*'){
+    //   lessons = lessons.filter(function(e){
+    //     console.log(week);
+    //     console.log(e.weeks);
+    //     return e.weeks.indexOf(parseInt(week)) !== -1;
+    //   });
+    // }
     lessons.map(function(e,i){
       if(lessons.length === 1){
         e.left = 0;
@@ -272,7 +275,8 @@ Page({
     if(app.cache.kb && !_this.data.name){ kbRender(app.cache.kb); }
     //课表渲染
     function kbRender(_data){
-      var colors = ['red','green','purple','yellow'];
+      //console.log(_data);
+      var colors = ['blue','red','green','purple','yellow'];
       var i,ilen,j,jlen,k,klen;
       var colorsDic = {};
       var _lessons = _data.lessons;
@@ -322,7 +326,7 @@ Page({
                   if (!iColors.length) { iColors = colors.slice(0); }
                 }
                 //剩余可选颜色随机/固定上色
-                // var iColor = iColors[Math.floor(Math.random()*iColors.length)];
+                //var iColor = iColors[Math.floor(Math.random()*iColors.length)];
                 var iColor = iColors[0];
                 _lessons[i][j][k].color = iColor;
                 colorsDic[_lessons[i][j][k].class_id] = iColor;

@@ -166,43 +166,69 @@
 .submit-declare:active{
     opacity: .8;
 }
- .gallery {
+.issues-label{
+    font-size: 10pt;
+    line-height: 100%;
+    color: #999;
+    margin: 25rpx 20rpx 15rpx;
+}
+
+.issues-img-panel{
     display: flex;
-    flex-direction: row;
-    /*justify-content: flex-start;*/
     flex-wrap: wrap;
     background-color: #fff;
-}  
-/*每张图片所占容器*/
-.itemImage {
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 15rpx 25rpx;
+}
+.issues-img-panel.error{
+    background: rgba(231, 138, 176, 0.06);
+}
+.issues-photo-item {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    margin: 20rpx;
+    margin-right: 0;
+    width: 135rpx;
+    height: 135rpx;
+    border: 1rpx solid #e5e5e5;
+    border-radius: 5rpx;
 }
-
-
-/*小图片*/
-.thumb {
-	margin: 10rpx;
-  position: relative;
-  width: 120rpx;
-  height:120rpx;
+.issues-photo-item:active{
+    opacity: .8;
 }
-
-/*删除按钮*/
-.delete {
-	position: absolute;
-	height: 40rpx;
-	top: 0rpx;
-  right:0;
-	width: 40rpx;
+.issues-photo-item .remind-img{
+    padding: 0;
 }
-
-.delete image {
-	position: absolute;
-	width: 30rpx;
-	height: 30rpx;
+.issues-photo-item image{
+    width: 100%;
+    height: 100%;
 }
-
-.photo{
- text-align: center;
- margin: 30rpx 0rpx 20rpx 0rpx;
+.add-photo:active {
+    background: #f0f0f0;
+}
+.add-photo::before, .add-photo::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #e5e5e5;
+}
+.add-photo:active::before, .add-photo:active::after{
+    background: #ddd;
+}
+.add-photo::before {
+    width: 10rpx;
+    height: 80rpx;
+    margin-top: -40rpx;
+    margin-left: -5rpx;
+}
+.add-photo::after {
+    width: 80rpx;
+    height: 10rpx;
+    margin-top: -5rpx;
+    margin-left: -40rpx;
 }

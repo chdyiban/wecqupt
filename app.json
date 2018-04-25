@@ -30,16 +30,16 @@
     "pages/more/help/volunteerHelp"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#7acfa6",
+    "navigationBarBackgroundColor": "#0167b8",
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "长大易班",
-    "backgroundColor": "#7acfa6",
+    "backgroundColor": "#0167b8",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#7f848a",
-    "selectedColor": "#7acfa6",
+    "selectedColor": "#0167b8",
     "backgroundColor": "#f7f6fb",
     "list": [
       {

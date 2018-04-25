@@ -24,9 +24,16 @@ Page({
         Content: ''     //报修内容
     },
     showError: false,
-    images: [],
-    urlArr: [],
-    loading: false,
+    // images: [],
+    // urlArr: [],
+    // loading: false,
+
+    imgs: [],
+    imgLen: 0,
+    upload: true,
+    uploading: false,
+    qiniu: '',
+    showError: false
   },
   onLoad: function(){
     if(!app._user.we.id || !app._user.we.name){
@@ -42,6 +49,28 @@ Page({
     // 发送请求
     this.getServiceType();
     this.getServiceArea();
+    this.getImgUploadToken();
+  },
+  getImgUploadToken:function(){
+    var _this = this;
+    wx.request({
+      url: app._server + '/public/api/upload/token',
+      method: 'POST',
+      data: app.key({
+        openid: app._user.openid
+      }),
+      success: function (res) {
+        if (res.data.status === 200) {
+          _this.setData({
+            upload: true,
+            qiniu: res.data.data.token
+          });
+        }
+      },
+      complete: function () {
+        wx.hideNavigationBarLoading();
+      }
+    });
   },
   getServiceType: function () {
     var _this = this;
@@ -208,96 +237,96 @@ Page({
 
   },
 
-  //拍照上传
-  upImg: function () {
-    var that = this;
-    wx.chooseImage({
-      count: 9, // 默认9
-      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
+  // //拍照上传
+  // upImg: function () {
+  //   var that = this;
+  //   wx.chooseImage({
+  //     count: 9, // 默认9
+  //     sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+  //     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+  //     success: function (res) {
 
-        wx.showNavigationBarLoading()
-        that.setData({
-          loading: false
-        })
-        var urlArr = that.data.urlArr;
-        // var urlArr={};
-        var tempFilePaths = res.tempFilePaths;
-        var images = that.data.images;
+  //       wx.showNavigationBarLoading()
+  //       that.setData({
+  //         loading: false
+  //       })
+  //       var urlArr = that.data.urlArr;
+  //       // var urlArr={};
+  //       var tempFilePaths = res.tempFilePaths;
+  //       var images = that.data.images;
 
-        that.setData({
-          images: images.concat(tempFilePaths)
-        });
-        var imgLength = tempFilePaths.length;
-        if (imgLength > 0) {
-          var newDate = new Date();
-          var newDateStr = newDate.toLocaleDateString();
-          var j = 0;
-          //如果想顺序变更，可以for (var i = imgLength; i > 0; i--)
-          for (var i = 0; i < imgLength; i++) {
-            var tempFilePath = [tempFilePaths[i]];
-            var extension = /\.([^.]*)$/.exec(tempFilePath[0]);
-            if (extension) {
-              extension = extension[1].toLowerCase();
-            }
-            var name = newDateStr + "." + extension;//上传的图片的别名 
-            wx.uploadFile({
-              url: app._server + '/public/api/repair/upload',
-              filePath: tempFilePaths[i],
-              name: 'upload_repair_pic',
-              method: 'POST',
-              formData: {
-                'imgIndex': i
-              },
-              header: {
-                "Content-Type": "multipart/form-data"
-              },
-              success: function (res) {
-                wx.hideNavigationBarLoading();
-                i++; 
-                console.log(res.data);
-                var data = JSON.parse(res.data);
-                console.log(data);
-                var url = data.url;
-                console.log(url);
-                urlArr.push({ url }); 
-                that.setData({
-                  urlArr: urlArr,
-                  loading: true,
-                  'formData.ImgUrl': urlArr
-                });
+  //       that.setData({
+  //         images: images.concat(tempFilePaths)
+  //       });
+  //       var imgLength = tempFilePaths.length;
+  //       if (imgLength > 0) {
+  //         var newDate = new Date();
+  //         var newDateStr = newDate.toLocaleDateString();
+  //         var j = 0;
+  //         //如果想顺序变更，可以for (var i = imgLength; i > 0; i--)
+  //         for (var i = 0; i < imgLength; i++) {
+  //           var tempFilePath = [tempFilePaths[i]];
+  //           var extension = /\.([^.]*)$/.exec(tempFilePath[0]);
+  //           if (extension) {
+  //             extension = extension[1].toLowerCase();
+  //           }
+  //           var name = newDateStr + "." + extension;//上传的图片的别名 
+  //           wx.uploadFile({
+  //             url: app._server + '/public/api/repair/upload',
+  //             filePath: tempFilePaths[i],
+  //             name: 'upload_repair_pic',
+  //             method: 'POST',
+  //             formData: {
+  //               'imgIndex': i
+  //             },
+  //             header: {
+  //               "Content-Type": "multipart/form-data"
+  //             },
+  //             success: function (res) {
+  //               wx.hideNavigationBarLoading();
+  //               i++; 
+  //               console.log(res.data);
+  //               var data = JSON.parse(res.data);
+  //               console.log(data);
+  //               var url = data.url;
+  //               console.log(url);
+  //               urlArr.push({ url }); 
+  //               that.setData({
+  //                 urlArr: urlArr,
+  //                 loading: true,
+  //                 'formData.ImgUrl': urlArr
+  //               });
 
-              },fail: function(res){
-                wx.showModal({
-                  title: '错误提示',
-                  content: '上传图片失败',
-                  showCancel: false
-                })  
-              }
-            });     
-            // var file = new Bmob.File(name, tempFilePath);
-            // file.save().then(function (res) {
-            //   wx.hideNavigationBarLoading()
-            //   var url = res.url();
-            //   console.log("第" + i + "张Url" + url);
-            //   urlArr.push({ url });
-            //   j++;
-            //   console.log(j, imgLength);
-            //   that.setData({
-            //     urlArr: urlArr,
-            //     loading: true
-            //   });
-            // },
-            //   function (error) {
-            //     console.log(error)
-            //   });
-          }
-        }
-      }
-    })
-    //console.log(that.data.urlArr)
-  },
+  //             },fail: function(res){
+  //               wx.showModal({
+  //                 title: '错误提示',
+  //                 content: '上传图片失败',
+  //                 showCancel: false
+  //               })  
+  //             }
+  //           });     
+  //           // var file = new Bmob.File(name, tempFilePath);
+  //           // file.save().then(function (res) {
+  //           //   wx.hideNavigationBarLoading()
+  //           //   var url = res.url();
+  //           //   console.log("第" + i + "张Url" + url);
+  //           //   urlArr.push({ url });
+  //           //   j++;
+  //           //   console.log(j, imgLength);
+  //           //   that.setData({
+  //           //     urlArr: urlArr,
+  //           //     loading: true
+  //           //   });
+  //           // },
+  //           //   function (error) {
+  //           //     console.log(error)
+  //           //   });
+  //         }
+  //       }
+  //     }
+  //   })
+  //   //console.log(that.data.urlArr)
+  // },
 
   delete: function (e) {
     var _this = this;
@@ -311,7 +340,89 @@ Page({
       images: images,
       urlArr: urlArr
     });
-  }
+  },
+
+  //七牛云上传
+  choosePhoto: function () {
+    var _this = this;
+    wx.showModal({
+      title: '提示',
+      content: '上传图片需要消耗流量，是否继续？',
+      confirmText: '继续',
+      success: function (res) {
+        if (res.confirm) {
+          wx.chooseImage({
+            count: 4,
+            sourceType: ['album', 'camera'],
+            success: function (res) {
+              var tempFilePaths = res.tempFilePaths, imgLen = tempFilePaths.length;
+              _this.setData({
+                uploading: true,
+                imgLen: _this.data.imgLen + imgLen
+              });
+              tempFilePaths.forEach(function (e) {
+                _this.uploadImg(e);
+              });
+            }
+          });
+        }
+      }
+    });
+  },
+  uploadImg: function (path) {
+    var _this = this;
+    if (app.g_status) {
+      app.showErrorModal(app.g_status, '上传失败');
+      return;
+    }
+    wx.showNavigationBarLoading();
+    // 上传图片
+    wx.uploadFile({
+      url: 'https://upload-z2.qiniup.com',
+      header: {
+        'Content-Type': 'multipart/form-data'
+      },
+      filePath: path,
+      name: 'file',
+      formData: {
+        token: _this.data.qiniu
+      },
+      success: function (res) {
+        var data = JSON.parse(res.data);
+        if (data.key) {
+          _this.setData({
+            imgs: _this.data.imgs.concat('http://yibancdn.ohao.ren/' + data.key),
+            'formData.ImgUrl': _this.data.imgs.concat('http://yibancdn.ohao.ren/' + data.key)
+          });
+        }
+        if (_this.data.imgs.length === _this.data.imgLen) {
+          _this.setData({
+            uploading: false
+          });
+        }
+      },
+      fail: function (res) {
+        _this.setData({
+          imgLen: _this.data.imgLen - 1
+        });
+      },
+      complete: function () {
+        wx.hideNavigationBarLoading();
+      }
+    });
+  },
+  previewPhoto: function (e) {
+    var _this = this;
+    //预览图片
+    if (_this.data.uploading) {
+      app.showErrorModal('正在上传图片', '预览失败');
+      return false;
+    }
+    wx.previewImage({
+      current: _this.data.imgs[e.target.dataset.index],
+      urls: _this.data.imgs
+    });
+  },
 
   
 });

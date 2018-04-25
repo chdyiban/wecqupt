@@ -58,7 +58,7 @@
   display: flex;
   justify-content: space-between;
   padding: 25rpx 15rpx 0 5rpx;
-  font-size: 11pt;
+  font-size: 10pt;
   line-height: 150%;
   color: #8b8b8b;
 }

@@ -12,7 +12,7 @@
                 <image class="wave wave-bg" src="/images/more/wave.png" mode="aspectFill"></image>
             </view>
             <view class="bd">
-                <text class="append-title">完善信息</text>
+                <text class="append-title">请继续完善信息</text>
                 <form class="append-form">
                     <view class="input-group">
                         <text class="input-label">寝室楼栋</text>

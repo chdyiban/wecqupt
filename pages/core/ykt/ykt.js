@@ -38,7 +38,7 @@ Page({
   },
   sendRequest: function() {
       var _this = this;
-      if(!app._user.we.ykth){
+      if(!app._user.we.id){
         _this.setData({
             remind: '未绑定'
         });
@@ -79,7 +79,7 @@ Page({
             tapDetail: dict[dict.length-1],
             balance: parseFloat(data[data.length - 1].balance),
             last_time: data[data.length - 1].time.split(' ')[0],
-            ykt_id: app._user.we.ykth,
+            ykt_id: app._user.we.id,
             lineLeft: _this.data.width - _this.data.gridMarginLeft - 1,
             remind: '',
             switchArr: balanceArr, // 将纵坐标的值初始化为余额集合
@@ -123,11 +123,11 @@ Page({
       }
       wx.showNavigationBarLoading();
       wx.request({
-          url: app._server + "/api/get_yktcost.php",
+          url: app._server + "/public/api/portal/yikatong",
           method: 'POST',
           data: app.key({
               openid: app._user.openid,
-              yktID: app._user.we.ykth
+              id: app._user.we.id
           }),
           success: function(res) {
               if(res.data && res.data.status === 200){

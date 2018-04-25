@@ -69,18 +69,18 @@
   background-color: #73b4ef;
 }
 .list-item.yiban{
-  background-color: #9f8bea;
+  background-color: #0167b8;
 }
 .list-item.portal{
   background-color: #73b4ef;
 }
 .list-item.xfjy{
-  background-color: #ffcb63;
+  background-color: #e6212b;
 }
 .list-item.jstz{
   background-color: #e78ab0;
 }
-.list-item.new{
+.list-item.news{
   background-color: #7acfa6;
 }
 .list-item-left{

@@ -96,6 +96,12 @@ App({
                     wx.navigateTo({
                       url: '/pages/more/login'
                     });
+                  }else{
+                    if( !_this._user.we.info.ssh || !_this._user.we.info.sjh){
+                      wx.navigateTo({
+                        url: '/pages/more/append'
+                      });
+                    }
                   }
                   //如果缓存有更新，则执行回调函数
                   if(status){
@@ -182,7 +188,8 @@ App({
   key: function(data){ return this.util.key(data) },
   enCodeBase64:function(data){ return this.util.base64.encode(data)},
   cache: {},
-  _server: 'http://chdliutao.s1.natapp.cc/yibanbx',
+  //_server: 'http://chdliutao.s1.natapp.cc/yibanbx',
+  _server: 'http://chd.mynatapp.cc/fastadmin',
   _user: {
     //微信数据
     wx: {},

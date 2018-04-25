@@ -8,9 +8,8 @@ Page({
       { id: 0, 'type': 'all', name: '头条',storage:[], url: 'news/information', enabled: {guest:false, student:true, teacher:true} },
       { id: 1, 'type': 'yiban', name: '易班',storage:[], url: 'news/yiban', enabled: {guest:false, student:true, teacher:true} },
       { id: 2, 'type': 'portal', name: '门户通知',storage:[], url: 'news/portal', enabled: {guest:false, student:true, teacher:true} },
-      { id: 3, 'type': 'xfjy', name: '先锋家园',storage:[], url: 'news/xfjy', enabled: {guest:false, student:false, teacher:true} },
-      { id: 4, 'type': 'jstz', name: '竞赛通知',storage:[], url: 'news/jstz', enabled: {guest:true, student:true, teacher:true} },
-      { id: 5, 'type': 'new', name: '官网新闻',storage:[], url: 'news/chdnews', enabled: {guest:true, student:true, teacher:true} },
+      { id: 3, 'type': 'xfjy', name: '先锋家园',storage:[], url: 'news/xfjy', enabled: {guest:false, student:true, teacher:true} },
+      { id: 4, 'type': 'new', name: '官网新闻',storage:[], url: 'news/chdnews', enabled: {guest:true, student:true, teacher:true} },
     ],
     'active': {
       id: 0,

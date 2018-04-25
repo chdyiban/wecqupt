@@ -11,9 +11,9 @@ Page({
         { id: 'kb', name: '课表查询', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'cj', name: '成绩查询', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'ks', name: '考试安排', disabled: true, teacher_disabled: false, offline_disabled: false },
-        { id: 'kjs', name: '空教室', disabled: false, teacher_disabled: false, offline_disabled: true },
-        { id: 'xs', name: '学生查询', disabled: false, teacher_disabled: false, offline_disabled: true },
-        { id: 'ykt', name: '一卡通', disabled: true, teacher_disabled: false, offline_disabled: false },
+        { id: 'kjs', name: '空教室', disabled: true, teacher_disabled: false, offline_disabled: true },
+        { id: 'xs', name: '学生查询', disabled: true, teacher_disabled: false, offline_disabled: true },
+        { id: 'ykt', name: '一卡通', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'jy', name: '借阅信息', disabled: true, teacher_disabled: false, offline_disabled: false },
       ]
     ],
@@ -196,13 +196,14 @@ Page({
     //课表渲染
     function kbRender(info){
       var today = parseInt(info.day);
+      //console.log(today);
       var lessons = info.lessons[today===0 ? 6 : today-1], //day为0表示周日(6)，day为1表示周一(0)..
           list = [];
       var time_list = _this.data.card.kb.time_list;
-      console.log(lessons[0]);
+      //console.log(lessons);
 
       for(var i = 0; i < 1; i++){
-        console.log("i:"+i);
+        //console.log("i:"+i);
         for(var j = 0; j < lessons[i].length; j++){
           var lesson = lessons[i][j];
           if(lesson.weeks && lesson.weeks.indexOf(parseInt(info.week)) !== -1){
@@ -261,15 +262,16 @@ Page({
 
     //一卡通渲染
     function yktRender(list){
+      //console.log(list);
       if(list.length > 0){
         var last = list[0],
             last_time = last.time.split(' ')[0],
             now_time = app.util.formatTime(new Date()).split(' ')[0];
         //筛选并计算当日消费（一卡通数据有一定延迟，无法成功获取到今日数据，主页卡片通常不能展示）
-        console.log(last);
+        //console.log(last);
         for(var i = 0, today_cost = [], cost_total = 0; i < list.length; i++){
           if(list[i].time.split(' ')[0] == now_time && list[i].cost.indexOf('-') == 0){
-            var cost_value = Math.abs(parseInt(list[i].cost));
+            var cost_value = Math.abs(list[i].cost);
             today_cost.push(cost_value);
             cost_total += cost_value;
           }
@@ -321,53 +323,6 @@ Page({
         }
       }
     });
-
-    //水电费渲染
-    function sdfRender(info){
-      _this.setData({
-        'card.sdf.data.room': info.room.split('-').join('栋'),
-        'card.sdf.data.record_time': info.record_time.split(' ')[0].split('/').join('-'),
-        'card.sdf.data.cost': info.elec_cost,
-        'card.sdf.data.spend': info.elec_spend,
-        'card.sdf.show': true,
-        'remind': ''
-      });
-    }
-    if(!!app._user.we.room && !!app._user.we.build){
-      //获取水电费数据
-      loadsum++; //新增正在请求连接
-      wx.request({
-        url: app._server + '/api/get_elec.php',
-        method: 'POST',
-        data: app.key({
-          buildingNo: app._user.we.build,
-          floor: app._user.we.room.slice(0,1),
-          room: parseInt(app._user.we.room.slice(1))
-        }),
-        success: function(res) {
-          if(res.data && res.data.status === 200){
-            var info = res.data.data;
-            if(info){
-              //保存水电费缓存
-              app.saveCache('sdf', info);
-              sdfRender(info);
-            }
-          }else{ app.removeCache('sdf'); }
-        },
-        complete: function() {
-          loadsum--; //减少正在请求连接
-          if(!loadsum){
-            if(_this.data.remind){
-              _this.setData({
-                remind: '首页暂无展示'
-              });
-            }
-            wx.hideNavigationBarLoading();
-            wx.stopPullDownRefresh();
-          }
-        }
-      });
-    }
 
     //借阅信息渲染
     function jyRender(info){

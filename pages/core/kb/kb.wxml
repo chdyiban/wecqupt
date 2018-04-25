@@ -27,7 +27,6 @@
                 <view>9</view>
                 <view class="mg-8">10</view>
                 <view>11</view>
-                <view>12</view>
                 <view class="kb-timeline-tri" style="top:{{timelineTop}}rpx"></view>
             </view>
             <scroll-view class="kb-ctn" catchscroll="scrollXHandle" scroll-x="true" scroll-left="{{scroll.left}}" >
@@ -60,7 +59,6 @@
                     <view>9</view>
                     <view class="mg-8">10</view>
                     <view>11</view>
-                    <view>12</view>
                     <view class="kb-timeline-tri" style="top:{{timelineTop}}rpx"></view>
                 </view>
 
@@ -80,8 +78,7 @@
                                 <!-- 循环周数，与当前周相同或当前周为*时显示 -->
                                 <view style="height:{{cards.number==2?cards.number*100:cards.number*100+9}}rpx" data-day="{{day}}" data-wid="{{wid}}" data-cid="{{cid}}" bindtap="showDetail" wx:for="{{cards.weeks}}" wx:key="*this" wx:for-item="iweek" class="mg-8 kb-card-content {{cards.conflictWeeks[iweek] || (week == '*' && cards.klen > 1) ?'k-sec':''}} {{iweek==week || week == '*' ?cards.color:''}}" wx:if="{{iweek==week || week == '*'}}">
                                     <!-- 判断上课地点是数字还是汉字 -->
-                                    <text wx:if="{{cards.place < '99999'}}" class="kb-card-place-num">{{cards.place}}</text>
-                                    <text wx:else class="kb-card-place-words">{{cards.place}}</text>
+                                    <text class="kb-card-place-words">{{cards.place}}</text>
                                     <view class="kb-card-name">
                                         <text class="kb-card-name-text" style="-webkit-line-clamp:{{3*(cards.number-1)}};">{{cards.name}}</text>
                                     </view>
