@@ -1,5 +1,7 @@
 //detail.js (common)
 var app = getApp();
+var WxParse = require('../../../utils/wxParse/wxParse.js');
+var config = require('../../../config');
 module.exports.ipage = {
   data: {
     remind: "加载中",
@@ -59,7 +61,7 @@ module.exports.ipage = {
     });
     options.openid = app._user.openid;
     wx.request({
-      url: app._server + '/public/api/news/detail/',
+      url: config.service.newsDetailUrl,
       data: options,
       success: function(res){
         if(res.data && res.data.status === 200){
@@ -77,10 +79,10 @@ module.exports.ipage = {
             author: info.author || "",     // 发布作者
             reading: info.views || "",    // 阅读量
             title: info.title,            //新闻标题
-            content: _this.convertHtmlToText(info.body),  // 新闻内容
             source: _this.data.sources[options.type],
             remind: ''
           });
+          WxParse.wxParse('article', 'html', info.body, _this, 5);
 
           // 如果存在附件则提取附件里面的信息
           if(info.fjlist && info.fjlist.length){

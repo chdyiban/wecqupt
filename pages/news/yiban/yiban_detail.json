@@ -1,6 +1,6 @@
 {    
-    "navigationBarBackgroundColor": "#9f8bea",
-    "navigationBarTitleText": "教务公告",
-    "backgroundColor": "#9f8bea",
+    "navigationBarBackgroundColor": "#00A5ED",
+    "navigationBarTitleText": "长安大学易班",
+    "backgroundColor": "#00A5ED",
     "enablePullDownRefresh": false
 }

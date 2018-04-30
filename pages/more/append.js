@@ -1,6 +1,7 @@
 //append.js
 //获取应用实例
 var app = getApp();
+var config = require('../../config');
 Page({
   data: {
     remind: '加载中',
@@ -17,23 +18,24 @@ Page({
   },
   onLoad: function(){
     var _this = this;
-    if(app._user.we.build){
+    console.log(app._user);
+    if(app._user.we.info.build){
       _this.data.buildings.forEach(function(e,i){
-        if(e.split("栋")[0] == app._user.we.build){
+        if (e.split("号")[0] == app._user.we.info.build){
           _this.setData({
             ibuilding: i
           });
         }
       });
     }
-    if(app._user.we.room){
+    if (app._user.we.info.room){
       _this.setData({
-        'room': app._user.we.room
+        'room': app._user.we.info.room
       });
     }
-    if(app._user.we.mobile){
+    if(app._user.we.info.mobile){
       _this.setData({
-        'mobile': app._user.we.mobile
+        'mobile': app._user.we.info.mobile
       });
     }
     wx.onAccelerometerChange(function(res) {
@@ -82,7 +84,7 @@ Page({
   },
   mobileInput: function(e){
     this.setData({
-      'moblie': e.detail.value
+      'mobile': e.detail.value
     });
   },
   volunteerHelp:function(){
@@ -99,18 +101,18 @@ Page({
     var data = {
       openid: app._user.openid
     };
-    if (!_this.data.ibuilding || !_this.data.room ){
+    if (!_this.data.ibuilding || !_this.data.room || !_this.data.mobile){
       app.showErrorModal('请填写完整的表单信息', '提醒');
       return false;
     }
     var buildText = _this.data.buildings[_this.data.ibuilding];
-    var build = buildText.split("栋")[0];
+    var build = buildText.split("号")[0];
     data.build = build;
     data.room = _this.data.room;
     data.mobile = _this.data.mobile;
     app.showLoadToast();
     wx.request({
-      url: app._server + '/public/api/wxuser/set_info',
+      url: config.service.appendUrl,
       data: app.key(data),
       method: 'POST',
       success: function(res){

@@ -1,6 +1,7 @@
 //news.js
 //获取应用实例
 var app = getApp();
+var config = require('../../config');
 Page({
   data: {
     page: 0,
@@ -92,7 +93,7 @@ Page({
     });
     wx.showNavigationBarLoading();
     wx.request({
-      url: app._server + '/public/api/' + _this.data.list[typeId].url,
+      url: config.service.api + _this.data.list[typeId].url,
       data: {
         page: _this.data.page + 1,
         openid: app._user.openid

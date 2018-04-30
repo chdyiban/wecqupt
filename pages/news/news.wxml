@@ -7,14 +7,13 @@
       <image wx:else class="filter-item disabled" data-id="{{item.id}}" id="{{item.type}}" bindtap="changeFilterDisabled" src="/images/news/{{item.type}}@gray.png"></image>
     </block>
   </scroll-view>
-  
   <!--新闻列表-->
   <view class="content">
     <view class="loader">
       <image src="/images/index/loading.gif" wx-if="{{loading}}"></image>
     </view>
     <block wx:for="{{active.data}}" wx:key="item.articleid">
-      <navigator url="/pages/news/{{item.type}}/{{item.type}}_detail?type={{item.type}}&id={{item.articleid}}">
+      <navigator url="/pages/news/{{item.type}}/{{item.type}}_detail?type={{item.type}}&id={{item.id}}">
         <view class="list-item {{item.type}}">
           <view class="list-item-left">
             <text class="list-item-title">{{item.title}}</text>

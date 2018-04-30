@@ -20,8 +20,8 @@
             <text class="user-text">性别：{{user.we.more.sex}}</text>
             <!-- <text class="user-text">年级：{{user.we.more.nj}}级</text> -->
             
-            <text class="user-text">宿舍：{{user.we.info.ssh}}</text>
-            <text class="user-text">手机：{{user.we.info.sjh}}</text>
+            <text class="user-text">宿舍：{{user.we.info.build}}#{{user.we.info.room}}</text>
+            <text class="user-text">手机：{{user.we.info.mobile}}</text>
           </view>
           <view class="info-bd-right">
             <text class="user-text">学院：{{user.we.info.yxm}}</text>

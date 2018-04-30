@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 var app = getApp();
+var config = require('../../config');
 Page({
   data: {
     offline: false,
@@ -233,7 +234,7 @@ Page({
     var loadsum = 0; //正在请求连接数
     loadsum++; //新增正在请求连接
     wx.request({
-      url: app._server + '/public/api/portal/kebiao',
+      url: config.service.kebiaoUrl,
       method: 'POST',
       data: app.key(kb_data),
       success: function(res) {
@@ -294,7 +295,7 @@ Page({
     //获取一卡通数据
     loadsum++; //新增正在请求连接
     wx.request({
-      url: app._server + '/public/api/portal/yikatong',
+      url: config.service.yikatongUrl,
       method: 'POST',
       data: app.key({
         //yktID: app._user.we.ykth
@@ -344,7 +345,7 @@ Page({
     //获取借阅信息
     loadsum++; //新增正在请求连接
     wx.request({
-      url: app._server + "/public/api/portal/books",
+      url: config.service.booksUrl,
       method: 'POST',
       data: app.key({
         ykth: app._user.we.ykth

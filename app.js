@@ -1,3 +1,4 @@
+var config = require('./config')
 //app.js
 App({
   version: 'v0.0.1', //版本号
@@ -76,7 +77,7 @@ App({
             //发送code与微信用户信息，获取学生数据
             wx.request({
               method: 'POST',
-              url: _this._server + '/public/api/wxuser/get_info',
+              url: config.service.initUrl,
               data: {
                 code: res.code,
                 key: info.encryptedData,
@@ -97,7 +98,7 @@ App({
                       url: '/pages/more/login'
                     });
                   }else{
-                    if( !_this._user.we.info.ssh || !_this._user.we.info.sjh){
+                    if( !_this._user.we.info.build || !_this._user.we.info.room){
                       wx.navigateTo({
                         url: '/pages/more/append'
                       });
@@ -188,8 +189,7 @@ App({
   key: function(data){ return this.util.key(data) },
   enCodeBase64:function(data){ return this.util.base64.encode(data)},
   cache: {},
-  //_server: 'http://chdliutao.s1.natapp.cc/yibanbx',
-  _server: 'http://chd.mynatapp.cc/fastadmin',
+  _server: config.service.host,
   _user: {
     //微信数据
     wx: {},
