@@ -123,10 +123,11 @@ Page({
             icon: 'success',
             duration: 2000
           });
-          app._user.we.mobile = _this.data.mobile;
-          app._user.we.room = _this.data.room;
-          app._user.we.build = data.build;
+          app._user.we.info.mobile = _this.data.mobile;
+          app._user.we.info.room = _this.data.room;
+          app._user.we.info.build = data.build;
           //app.removeCache('fw');
+          _this.cache = {};
           wx.navigateBack();
         }else{
           wx.hideToast();
