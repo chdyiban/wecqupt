@@ -1,6 +1,7 @@
 //ykt.js
 //获取应用实例
 var app = getApp();
+var config = require('../../../config');
 Page({
   data: {
       remind: '加载中',
@@ -123,7 +124,7 @@ Page({
       }
       wx.showNavigationBarLoading();
       wx.request({
-          url: app._server + "/public/api/portal/yikatong",
+          url:config.service.yikatongUrl,
           method: 'POST',
           data: app.key({
               openid: app._user.openid,

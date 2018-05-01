@@ -93,7 +93,7 @@ Page({
     });
     wx.showNavigationBarLoading();
     wx.request({
-      url: config.service.api + _this.data.list[typeId].url,
+      url: config.service.api + '/' + _this.data.list[typeId].url,
       data: {
         page: _this.data.page + 1,
         openid: app._user.openid

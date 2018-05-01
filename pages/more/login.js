@@ -1,6 +1,7 @@
 //login.js
 //获取应用实例
 var app = getApp();
+var config = require('../../config');
 Page({
   data: {
     remind: '加载中',
@@ -39,6 +40,7 @@ Page({
       app.showErrorModal('账号及密码不能为空', '提醒');
       return false;
     }
+    console.log(app._user);
     if(!app._user.openid){
       app.showErrorModal('未能成功登录', '错误');
       return false;
@@ -46,7 +48,7 @@ Page({
     app.showLoadToast('绑定中');
     wx.request({
       method: 'POST',
-      url: app._server + '/public/api/wxuser/bind',
+      url: config.service.bindUrl,
       data: app.key({
         openid: app._user.openid,
         stuid: _this.data.userid,

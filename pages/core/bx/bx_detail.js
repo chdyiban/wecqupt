@@ -1,6 +1,7 @@
 //bx_detail.js
 //获取应用实例
 var app = getApp();
+var config = require('../../../config');
 Page({
   data: {
     remind: '加载中',
@@ -28,7 +29,8 @@ Page({
     }
     // 发送请求
     wx.request({
-      url: app._server + "/public/api/repair/get_repair_detail", 
+      //url: app._server + "/public/api/repair/get_repair_detail", 
+      url: config.service.repairDetailService,
       method: 'POST',
       data: app.key({
         "openid": app._user.openid,

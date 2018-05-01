@@ -97,12 +97,6 @@ App({
                     wx.navigateTo({
                       url: '/pages/more/login'
                     });
-                  }else{
-                    if( !_this._user.we.info.build || !_this._user.we.info.room){
-                      wx.navigateTo({
-                        url: '/pages/more/append'
-                      });
-                    }
                   }
                   //如果缓存有更新，则执行回调函数
                   if(status){
@@ -141,6 +135,7 @@ App({
   processData: function(key){
     var _this = this;
     var data = JSON.parse(_this.util.base64.decode(key));
+    console.log(data);
     _this._user.is_bind = data.is_bind;
     _this._user.openid = data.user.openid;
     _this._user.teacher = (data.user.type == '教职工');

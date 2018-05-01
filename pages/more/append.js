@@ -101,7 +101,7 @@ Page({
     var data = {
       openid: app._user.openid
     };
-    if (!_this.data.ibuilding || !_this.data.room || !_this.data.mobile){
+    if (!_this.data.ibuilding || !_this.data.room){
       app.showErrorModal('请填写完整的表单信息', '提醒');
       return false;
     }
@@ -126,7 +126,7 @@ Page({
           app._user.we.mobile = _this.data.mobile;
           app._user.we.room = _this.data.room;
           app._user.we.build = data.build;
-          app.removeCache('fw');
+          //app.removeCache('fw');
           wx.navigateBack();
         }else{
           wx.hideToast();

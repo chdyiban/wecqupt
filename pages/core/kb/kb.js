@@ -1,6 +1,7 @@
 //kb.js
 //获取应用实例
 var app = getApp();
+var config = require('../../../config');
 Page({
   data: {
     remind: '加载中',
@@ -372,7 +373,7 @@ Page({
     wx.showNavigationBarLoading();
     //获取课表
     wx.request({
-      url: app._server + "/public/api/course/get_list",
+      url: config.service.kebiaoUrl,
       method: 'POST',
       data: app.key(data),
       success: function(res) {

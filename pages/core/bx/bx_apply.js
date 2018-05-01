@@ -1,6 +1,7 @@
 //bx_apply.js
 //获取应用实例
 var app = getApp();
+var config = require('../../../config');
 Page({
   remind: '加载中',
   data: {
@@ -54,7 +55,8 @@ Page({
   getImgUploadToken:function(){
     var _this = this;
     wx.request({
-      url: app._server + '/public/api/upload/token',
+      //url: app._server + '/public/api/upload/token',
+      url:config.service.uploadTokenUrl,
       method: 'POST',
       data: app.key({
         openid: app._user.openid
@@ -75,7 +77,8 @@ Page({
   getServiceType: function () {
     var _this = this;
     wx.request({
-      url: app._server + '/public/api/repair/get_repair_type',
+      //url: app._server + '/public/api/repair/get_repair_type',
+      url:config.service.repairTypeUrl,
       success: function(res) {
         if(res.data && res.data.status === 200){
           var list = res.data.data, serviceTypeRange = [];
@@ -110,7 +113,8 @@ Page({
   getServiceArea: function () {
     var _this = this;
     wx.request({
-      url: app._server + '/public/api/repair/get_repair_areas',
+      //url: app._server + '/public/api/repair/get_repair_areas',
+      url: config.service.repairAreaUrl,
       success: function(res) {
         if(res.data && res.data.status === 200){
           var list = res.data.data;
@@ -211,7 +215,8 @@ Page({
         if (res.confirm) {
           formData.openid = app._user.openid;
           wx.request({
-            url: app._server + '/public/api/repair/submit',
+            //url: app._server + '/public/api/repair/submit',
+            url: config.service.repairSubmitUrl,
             method: 'POST',
             data: app.key(formData),
             success: function(res) {
@@ -236,97 +241,6 @@ Page({
     });
 
   },
-
-  // //拍照上传
-  // upImg: function () {
-  //   var that = this;
-  //   wx.chooseImage({
-  //     count: 9, // 默认9
-  //     sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-  //     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-  //     success: function (res) {
-
-  //       wx.showNavigationBarLoading()
-  //       that.setData({
-  //         loading: false
-  //       })
-  //       var urlArr = that.data.urlArr;
-  //       // var urlArr={};
-  //       var tempFilePaths = res.tempFilePaths;
-  //       var images = that.data.images;
-
-  //       that.setData({
-  //         images: images.concat(tempFilePaths)
-  //       });
-  //       var imgLength = tempFilePaths.length;
-  //       if (imgLength > 0) {
-  //         var newDate = new Date();
-  //         var newDateStr = newDate.toLocaleDateString();
-  //         var j = 0;
-  //         //如果想顺序变更，可以for (var i = imgLength; i > 0; i--)
-  //         for (var i = 0; i < imgLength; i++) {
-  //           var tempFilePath = [tempFilePaths[i]];
-  //           var extension = /\.([^.]*)$/.exec(tempFilePath[0]);
-  //           if (extension) {
-  //             extension = extension[1].toLowerCase();
-  //           }
-  //           var name = newDateStr + "." + extension;//上传的图片的别名 
-  //           wx.uploadFile({
-  //             url: app._server + '/public/api/repair/upload',
-  //             filePath: tempFilePaths[i],
-  //             name: 'upload_repair_pic',
-  //             method: 'POST',
-  //             formData: {
-  //               'imgIndex': i
-  //             },
-  //             header: {
-  //               "Content-Type": "multipart/form-data"
-  //             },
-  //             success: function (res) {
-  //               wx.hideNavigationBarLoading();
-  //               i++; 
-  //               console.log(res.data);
-  //               var data = JSON.parse(res.data);
-  //               console.log(data);
-  //               var url = data.url;
-  //               console.log(url);
-  //               urlArr.push({ url }); 
-  //               that.setData({
-  //                 urlArr: urlArr,
-  //                 loading: true,
-  //                 'formData.ImgUrl': urlArr
-  //               });
-
-  //             },fail: function(res){
-  //               wx.showModal({
-  //                 title: '错误提示',
-  //                 content: '上传图片失败',
-  //                 showCancel: false
-  //               })  
-  //             }
-  //           });     
-  //           // var file = new Bmob.File(name, tempFilePath);
-  //           // file.save().then(function (res) {
-  //           //   wx.hideNavigationBarLoading()
-  //           //   var url = res.url();
-  //           //   console.log("第" + i + "张Url" + url);
-  //           //   urlArr.push({ url });
-  //           //   j++;
-  //           //   console.log(j, imgLength);
-  //           //   that.setData({
-  //           //     urlArr: urlArr,
-  //           //     loading: true
-  //           //   });
-  //           // },
-  //           //   function (error) {
-  //           //     console.log(error)
-  //           //   });
-  //         }
-  //       }
-  //     }
-  //   })
-  //   //console.log(that.data.urlArr)
-  // },
 
   delete: function (e) {
     var _this = this;

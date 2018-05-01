@@ -1,6 +1,7 @@
 //bx.js
 //获取应用实例
 var app = getApp();
+var config = require('../../../config');
 Page({
   data: {
     remind: '加载中',
@@ -30,9 +31,14 @@ Page({
       });
       return false;
     }
+    if (!app._user.we.info.build || !app._user.we.info.room) {
+      wx.navigateTo({
+        url: '/pages/more/append'
+      });
+    }
     // 发送请求
     wx.request({
-      url: app._server + "/public/api/repair/get_list", 
+      url: config.service.repairListUrl, 
       method: 'POST',
       data: app.key({
         openid: app._user.openid,
