@@ -18,7 +18,6 @@ Page({
   },
   onLoad: function(){
     var _this = this;
-    console.log(app._user);
     if(app._user.we.info.build){
       _this.data.buildings.forEach(function(e,i){
         if (e.split("号")[0] == app._user.we.info.build){
