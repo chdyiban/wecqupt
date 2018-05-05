@@ -25,6 +25,7 @@ var config = {
     repairAreaUrl: `${api}/repair/get_repair_areas`,
     repairSubmitUrl: `${api}/repair/submit`,
     repairDetailService: `${api}/repair/get_repair_detail`,
+    repairRateSubmitUrl: `${api}/repair/submit_rate`,
     //获取课表
     kebiaoUrl: `${api}/course`,
     //获取一卡通

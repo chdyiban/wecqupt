@@ -6,7 +6,20 @@ Page({
   data: {
     remind: '加载中',
     detail: {},   //工单详情
-    state: []     //处理详情(申请-审核-受理-派单-完工-驳回.倒序)
+    state: [],     //处理详情(申请-审核-受理-派单-完工-驳回.倒序)
+    star: 0,
+    starMap: [
+      '非常差',
+      '差',
+      '一般',
+      '好',
+      '非常好',
+    ],
+    formData: {
+      bxID: '',//报修ID
+      star: '',
+      message: '',  
+    },
   },
   //下拉更新
   onPullDownRefresh: function(){
@@ -20,7 +33,6 @@ Page({
   },
   getData: function () {
     var _this = this;
-    console.log(_this.data.bxID);
     if (!app._user.we.id  ||!_this.data.bxID){
       _this.setData({
         remind: '404'
@@ -112,11 +124,62 @@ Page({
       }
     });
   },
+  listenerTextarea: function (e) {
+    this.setData({
+      'formData.message': e.detail.value
+    });
+  },
+  submitRate: function (e) {
+    var _this = this,
+      formData = _this.data.formData;
+    wx.showModal({
+      title: '提示',
+      content: '是否确认提交维修评价？',
+      success: function (res) {
+        if (res.confirm) {
+          formData.openid = app._user.openid;
+          formData.bxID = _this.data.bxID;
+          wx.request({
+            url: config.service.repairRateSubmitUrl,
+            method: 'POST',
+            data: app.key(formData),
+            success: function (res) {
+              if (res.data && res.data.status === 200) {
+                wx.showToast({
+                  title: '提交成功',
+                  icon: 'success',
+                  duration: 2000
+                });
+                wx.navigateBack();
+              } else {
+                var errorMessage = (res.data.data && res.data.data.reason) || res.data.message;
+                app.showErrorModal(errorMessage);
+              }
+            },
+            fail: function (res) {
+              app.showErrorModal(res.errMsg);
+            }
+          });
+        }
+      }
+    });
+  },
   convertHtmlToText: function(inputText){
     var returnText = "" + inputText;
     returnText = returnText.replace(/<\/?[^>]*>/g, '').replace(/[ | ]*\n/g, '\n').replace(/ /ig, '')
                   .replace(/&mdash/gi,'-').replace(/&ldquo/gi,'“').replace(/&rdquo/gi,'”');
     return returnText;
+  },
+
+  myStarChoose(e) {
+    let star = parseInt(e.target.dataset.star) || 0;
+    this.setData({
+      star: star,
+      'formData.star': star
+    });
   }
+
+
+
   
 });
