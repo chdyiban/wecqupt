@@ -1,13 +1,23 @@
 <import src="news_template.wxml" />
 <!--news.wxml-->
 <view class="container">
+  <view class="header">
+    <scroll-view class="sv__container" scroll-x="true">
+      <block wx:for="{{list}}" wx:key="id" wx:if="{{ item.enabled[user_type] }}">
+        <view class="sv__item {{ active.id === item.id ? 'active':'' }}" bindtap="changeFilter" data-id="{{ item.id }}">
+          {{ item.name }}
+        </view>
+      </block>
+    </scroll-view>
+    <image bindtap="manageTabs" class="sv-manager" src="/images/news/template/icon-manage.png"></image>
+  </view>
   <!--新闻分类-->
-   <scroll-view class="filter" scroll-x="true">
+  <!-- <scroll-view class="filter" scroll-x="true">
     <block wx:for="{{list}}" wx:key="id">
       <image wx:if="{{item.enabled[user_type]}}" class="filter-item {{active.type === item.type ? 'active' : ''}}" data-id="{{item.id}}" id="{{item.type}}" bindtap="changeFilter" src="/images/news/{{item.type}}@colour.png"></image>
       <image wx:else class="filter-item disabled" data-id="{{item.id}}" id="{{item.type}}" bindtap="changeFilterDisabled" src="/images/news/{{item.type}}@gray.png"></image>
     </block>
-  </scroll-view> 
+  </scroll-view> -->
   <!--新闻列表-->
   <view class="articles">
     <view class="loader">

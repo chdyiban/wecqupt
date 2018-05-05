@@ -302,7 +302,7 @@ Page({
               _lessons[i][j][k].klen = klen;
               _lessons[i][j][k].xf_num = _lessons[i][j][k].xf ? parseFloat(_lessons[i][j][k].xf).toFixed(1) : '';
               // 为课程上色
-              if (!colorsDic[_lessons[i][j][k].class_id]) { //如果该课还没有被上色
+              if (!colorsDic[_lessons[i][j][k].place]) { //如果该课还没有被上色
                 var iColors = !_colors.length ? colors.slice(0) : _colors.slice(0); // 本课程可选颜色
                 if(!_colors.length){ //未用过的颜色还没用过，就优先使用
                   // 剔除掉其上边和左边的课程的可选颜色，如果i!==0则可剔除左边课程颜色，如果j!==0则可剔除上边课程颜色
@@ -327,14 +327,14 @@ Page({
                   if (!iColors.length) { iColors = colors.slice(0); }
                 }
                 //剩余可选颜色随机/固定上色
-                //var iColor = iColors[Math.floor(Math.random()*iColors.length)];
-                var iColor = iColors[0];
+                var iColor = iColors[Math.floor(Math.random()*iColors.length)];
+                //var iColor = iColors[0];
                 _lessons[i][j][k].color = iColor;
-                colorsDic[_lessons[i][j][k].class_id] = iColor;
+                colorsDic[_lessons[i][j][k].place] = iColor;
                 if(_colors.length){ _colors = removeByValue(_colors, iColor); }
               } else {
                 //该课继续拥有之前所上的色
-                _lessons[i][j][k].color = colorsDic[_lessons[i][j][k].class_id];
+                _lessons[i][j][k].color = colorsDic[_lessons[i][j][k].place];
               }
             }
           }

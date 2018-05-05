@@ -26,7 +26,7 @@ Page({
         id = this.data.id || app._user.we.info.id;
     return {
       title: name + '的考试安排',
-      desc: 'We重邮 - 考试安排',
+      desc: '长大易班 - 考试安排',
       path: '/pages/core/ks/ks?id='+id+'&name='+name
     };
   },
