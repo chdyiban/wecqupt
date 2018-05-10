@@ -288,7 +288,7 @@ Page({
       for( i = 0, ilen = _lessons.length; i < ilen; i++){
         for( j = 0, jlen = _lessons[i].length; j < jlen; j++){
           for( k = 0, klen = _lessons[i][j].length; k < klen; k++){
-            if (_lessons[i][j][k] && _lessons[i][j][k].class_id) {
+            if (_lessons[i][j][k] && _lessons[i][j][k].place) {
               // 找出冲突周数,及课程数
               var conflictWeeks = {};
               _lessons[i][j][k].weeks.forEach(function(e){

@@ -11,9 +11,9 @@
                     <text class="article__time">{{ item.time }}</text>
                     <view class="article__count">
                         <image class="article__icon" src="/images/news/template/icon-comt.png"></image>
-                        <text>{{ item.comment }}</text>
-                        <image class="article__icon" src="/images/news/template/icon-priaze.png"></image>
-                        <text>{{ item.zan }}</text>
+                        <text>{{ item.views }}</text>
+                        <!-- <image class="article__icon" src="/images/news/template/icon-priaze.png"></image>
+                        <text>{{ item.likes }}</text> -->
                     </view>
                 </view>
             </view>

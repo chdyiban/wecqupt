@@ -9,7 +9,8 @@ module.exports.ipage = {
     title: "",    // 新闻标题
     date: "",     // 发布日期
     author: "",   // 发布作者
-    reading: "",   // 阅读量
+    views: 0,   // 阅读量
+    likes: 0,
     content: "",  // 新闻内容
     files_len: 0,  // 附件数量
     files_list: [],
@@ -17,9 +18,7 @@ module.exports.ipage = {
     source: '',   // 附件来源
     sources: {
       'yiban': '长安大学易班',
-      // 'oa': 'OA系统',
-      // 'hy': 'OA系统',
-      // 'jz': 'OA系统',
+      'xfjy':'先锋家园',
       'new': '新闻中心'
     }
   },
@@ -77,7 +76,8 @@ module.exports.ipage = {
           _this.setData({
             date: info.createtime || "",  // 发布日期
             author: info.author || "",     // 发布作者
-            reading: info.views || "",    // 阅读量
+            views: info.views || 0,    // 阅读量
+            likes: info.likes || 0,
             title: info.title,            //新闻标题
             source: _this.data.sources[options.type],
             remind: ''

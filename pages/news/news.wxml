@@ -11,13 +11,6 @@
     </scroll-view>
     <image bindtap="manageTabs" class="sv-manager" src="/images/news/template/icon-manage.png"></image>
   </view>
-  <!--新闻分类-->
-  <!-- <scroll-view class="filter" scroll-x="true">
-    <block wx:for="{{list}}" wx:key="id">
-      <image wx:if="{{item.enabled[user_type]}}" class="filter-item {{active.type === item.type ? 'active' : ''}}" data-id="{{item.id}}" id="{{item.type}}" bindtap="changeFilter" src="/images/news/{{item.type}}@colour.png"></image>
-      <image wx:else class="filter-item disabled" data-id="{{item.id}}" id="{{item.type}}" bindtap="changeFilterDisabled" src="/images/news/{{item.type}}@gray.png"></image>
-    </block>
-  </scroll-view> -->
   <!--新闻列表-->
   <view class="articles">
     <view class="loader">
@@ -26,35 +19,6 @@
     <block wx:for="{{ active.data }}" wx:key="item.articleid">
       <template is="{{ 'newsStyle' + item.style }}" data="{{ item }}" />
     </block>
-    <!-- <block wx:for="{{active.data}}" wx:key="item.articleid">
-      <navigator url="/pages/news/{{item.type}}/{{item.type}}_detail?type={{item.type}}&id={{item.id}}">
-        <view class="list-item {{item.type}}">
-          <view class="list-item-left">
-            <text class="list-item-title">{{item.title}}</text>
-            <text class="list-item-time">{{item.time}}</text>
-          </view>
-          <image class="list-item-icon" src="/images/news/{{item.type}}.png"></image>
-        </view>
-      </navigator>
-    </block> -->
-    <!-- <block wx:for="{{active.data}}" wx:key="item.articleid">
-      <navigator url="/pages/news/{{item.type}}/{{item.type}}_detail?type={{item.type}}&id={{item.id}}">
-        <view class="list-item">
-          <view class="list-main">
-          <view class="list-item-left">
-            <text class="list-item-title">{{item.title}}</text>
-            <view class="list-item-info">
-              <text>资料来源</text>
-              <text>2018-05-22 17:00</text>
-            </view>
-          </view>
-          <view class="list-img">
-          <image src="https://inews.gtimg.com/newsapp_ls/0/3449710702_294195/0?tp=webp"></image>
-          </view>
-          </view>
-        </view>
-      </navigator>
-    </block> -->
   </view>
   <!--提醒消息-->
   <text class="content-ending">{{active.remind}}</text>
