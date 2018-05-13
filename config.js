@@ -19,6 +19,7 @@ var config = {
     api,
     //初始化url
     initUrl: `${api}/wxuser/info`,
+    initUnloginUrl: `${api}/wxuser/init`,
     //维修url
     repairListUrl: `${api}/repair/get_list`,
     repairTypeUrl: `${api}/repair/get_repair_type`,

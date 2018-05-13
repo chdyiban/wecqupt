@@ -19,7 +19,9 @@ module.exports.ipage = {
     sources: {
       'yiban': '长安大学易班',
       'xfjy':'先锋家园',
-      'new': '新闻中心'
+      'new': '新闻中心',
+      'portal':'信息门户',
+      'chdnews':'长安大学新闻网'
     }
   },
   //分享

@@ -2,10 +2,10 @@
 .container{
   padding-bottom: 0;
   background-color: #f0eff5;
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat;
   background-size: 100% auto; 
   background-position: bottom center;
-  background-image: url('https://cdn.ohao.ren/tri.png');
+  background-image: url('https://cdn.ohao.ren/tri.png'); */
 }
 /**功能导航**/
 .main-core{

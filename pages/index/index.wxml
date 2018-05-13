@@ -17,7 +17,7 @@
         <text class="core-item-name">{{item.name}}</text>
       </view>
     </block>
-  </swiper-item >
+  </swiper-item>
   </swiper>
     <view class="fix_tip {{disabledItemTap?'active':''}}">
         <text wx:if="{{remind == '未绑定'}}">请先绑定帐号</text>
@@ -31,6 +31,7 @@
       <navigator wx:if="{{remind == '未绑定'}}" url="/pages/more/login" class="remind-btn">前往绑定</navigator>
     </block>
   </view>
+
   <!--卡片列表-->
   <view wx:else class="main-card">
   
@@ -132,43 +133,6 @@
                 <text class="jy-timing-value">{{item.timing>=0?item.timing:-item.timing}}</text>
                 <text class="jy-timing-text">天</text>
               </view>
-            </view>
-          </view>
-        </view>
-      </navigator>
-    </view>
-
-    <!--水电费-->
-    <view class="main-card-item" id="sdf" wx:if="{{card.sdf.show}}">
-      <navigator url="/pages/core/sdf/sdf">
-        <view class="card-item-hd">
-          <image class="card-item-icon" src="/images/core/sdf.png"></image>
-          <text class="card-item-name">电费查询</text>
-        </view>
-        <view class="card-item-bd">
-          <view class="card-info-hd">
-            <view class="card-info-left">
-              <text class="card-info-name">{{card.sdf.data.room}}</text>
-            </view>
-            <view class="card-info-right">
-              <view>截至时间：{{card.sdf.data.record_time}}</view>
-            </view>
-          </view>
-          <text class="sdf-hd">当月用电：</text>
-          <view class="sdf-bd">
-            <view class="sdf-key">
-              <text class="sdf-value">{{card.sdf.data.spend}}</text>
-              <text class="sdf-text">度</text>
-            </view>
-            <view class="sdf-key" wx:if="{{card.sdf.data.cost<=0}}">
-              <text class="sdf-text">剩余</text>
-              <text class="sdf-value">{{-card.sdf.data.cost}}</text>
-              <text class="sdf-text">元</text>
-            </view>
-            <view class="sdf-key" wx:else>
-              <text class="sdf-text">用超</text>
-              <text class="sdf-value">{{card.sdf.data.cost}}</text>
-              <text class="sdf-text">元</text>
             </view>
           </view>
         </view>
