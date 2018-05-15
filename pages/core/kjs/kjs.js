@@ -1,7 +1,7 @@
 //kjs.js
 //获取应用实例
 var app = getApp();
-
+var config = require('../../../config');
 // 定义常量数据
 var WEEK_DATA = ['', '第一周', '第二周', '第三周', '第四周', '第五周', '第六周', '第七周', '第八周', '第九周', '第十周','十一周', '十二周', '十三周', '十四周', '十五周', '十六周', '十七周', '十八周', '十九周', '二十周'],
     DAY_DATA = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
@@ -89,7 +89,7 @@ Page({
 
     // 发送请求
     wx.request({
-      url: app._server + '/public/api/portal/empty_room', 
+      url: config.service.emptyRoomUrl, 
       method: 'POST',
       data: app.key(requestData),
       success: function(res) {

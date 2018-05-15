@@ -4,7 +4,7 @@
 var system = wx.getSystemInfoSync();
 console.log(system);
 // 此处主机域名修改成腾讯云解决方案分配的域名
-if (system.brand == 'devtools') {
+if (system.brand == 'devtoolss') {
   var host = 'http://localhost/fastadmin';
   var api = host + '/public/api';
 }else{
@@ -33,6 +33,9 @@ var config = {
     yikatongUrl: `${api}/portal/yikatong`,
     //获取图书馆
     booksUrl: `${api}/portal/books`,
+
+    //获取空教室
+    emptyRoomUrl: `${api}/portal/empty_room`,
 
     //新闻详情
     newsDetailUrl: `${api}/news/detail`,
