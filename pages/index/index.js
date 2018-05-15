@@ -299,7 +299,8 @@ Page({
       method: 'POST',
       data: app.key({
         //yktID: app._user.we.ykth
-        id: app._user.we.id
+        id: app._user.we.id,
+        teacher:app_user.teacher
       }),
       success: function(res) {
         if(res.data && res.data.status === 200){
