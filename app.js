@@ -62,23 +62,18 @@ App({
   getUser: function(response) {
     var _this = this;
     wx.showNavigationBarLoading();
-    console.log("app::getUser");
     wx.getSetting({
       success: function (res) {
-        console.log(res)
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
             success: function (res) {
-              console.log("getuserinfo")
-              console.log(res.userInfo)
             }
           })
         }else{
           wx.login({
             success:function(res){
               if(res.code){
-                console.log(res.code)
                 //获取临时code
                 wx.request({
                   method: 'POST',
@@ -89,7 +84,7 @@ App({
                   success: function (res) {
                     if (res.data && res.data.status >= 200 && res.data.status < 400) {
                       var status = false, data = res.data.data;
-                      console.warn(data);
+                      //console.warn(data);
                       //判断缓存是否有更新
                       if (_this.cache.version !== _this.version || _this.cache.userdata !== data) {
                         _this.saveCache('version', _this.version);
@@ -125,7 +120,7 @@ App({
                     }
                     _this.g_status = status;
                     // typeof response == "function" && response(status);
-                    console.warn(status);
+                    //console.warn(status);
                   },
                   complete: function () {
                     wx.hideNavigationBarLoading();
@@ -135,7 +130,7 @@ App({
               
             },
             fail:function(res){
-              console.log("app::getUser::getSetting::login::fail")
+              //console.log("app::getUser::getSetting::login::fail")
               //console.log(res)
             }
           })
@@ -143,7 +138,7 @@ App({
         }
       },
       fail: function(res){
-        console.log("app::getUser::getSetting::fail")
+        //console.log("app::getUser::getSetting::fail")
         //console.log(res)
       }
     })

@@ -32,7 +32,6 @@
           <view class="info-bd-left">
             <text class="user-text">工号：{{user.we.id}}</text>
             <text class="user-text">学院：{{user.we.info.yxm}}</text>
-            <text class="user-text">班级：{{user.we.more.bj}}班</text>
             <text class="user-text" wx:if="{{user.we.more.jysm}}">教研室：{{user.we.more.jysm}} {{user.we.more.zc}}</text>
           </view>
         </view>

@@ -187,7 +187,7 @@ Page({
   getCardData: function(){
     var _this = this;
     //判断并读取缓存
-    if(app.cache.kb){ kbRender(app.cache.kb); }
+    if (app.cache.kb && !app._user.teacher){ kbRender(app.cache.kb); }
     if(app.cache.ykt){ yktRender(app.cache.ykt); }
     if(app.cache.sdf){ sdfRender(app.cache.sdf); }
     if(app.cache.jy){ jyRender(app.cache.jy); }
@@ -197,13 +197,11 @@ Page({
     //课表渲染
     function kbRender(info){
       var today = parseInt(info.day);
-      //console.log(today);
       var lessons = info.lessons[today===0 ? 6 : today-1], //day为0表示周日(6)，day为1表示周一(0)..
           list = [];
       var time_list = _this.data.card.kb.time_list;
-      //console.log(lessons);
 
-      for(var i = 0; i < 1; i++){
+      for(var i = 0; i < 5; i++){
         //console.log("i:"+i);
         for(var j = 0; j < lessons[i].length; j++){
           var lesson = lessons[i][j];
@@ -240,7 +238,7 @@ Page({
       success: function(res) {
         if(res.data && res.data.status === 200){
           var info = res.data.data;
-          if(info){
+          if(info && !app._user.teacher){
             //保存课表缓存
             app.saveCache('kb', info);
             kbRender(info);
@@ -300,7 +298,7 @@ Page({
       data: app.key({
         //yktID: app._user.we.ykth
         id: app._user.we.id,
-        teacher:app_user.teacher
+        teacher:app._user.teacher
       }),
       success: function(res) {
         if(res.data && res.data.status === 200){
