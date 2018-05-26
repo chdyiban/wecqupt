@@ -7,8 +7,8 @@
             <view class="article__info">
                 <view class="article__title article__title__large">{{ item.title }}</view>
                 <view class="article__desc">
-                    <text class="article__source" wx:if="{{ item.tag }}">{{ item.tag }}</text>
-                    <text class="article__time">{{ item.time }}</text>
+                    <text class="article__source" wx:if="{{ item.tags }}">{{ item.tag }}</text>
+                    <text class="article__time">{{ item.create_date }}</text>
                     <view class="article__count">
                         <image class="article__icon" src="/images/news/template/icon-comt.png"></image>
                         <text>{{ item.views }}</text>
@@ -23,20 +23,20 @@
 
 <!--单大图模式-->
 <template name="newsStyle1">
-    <navigator url="/pages/news/{{item.type}}/{{item.type}}_detail?type={{item.type}}&id={{item.id}}">
+    <navigator url="/pages/news/news/news_detail?id={{item.id}}">
     <view class="article__item article__item__cover">
         <view class="article__cover">
             <view class="article__title">{{ item.title }}</view>
-            <image class="article__ad" mode="aspectFill" src="{{ item.icons[0] }}"></image>
+            <image class="article__ad" mode="aspectFill" src="{{ item.image }}"></image>
         </view>
         <view class="article__desc">
-            <text class="article__source" wx:if="{{ item.tag }}">{{ item.tag }}</text>
-            <text class="article__time">{{ item.time }}</text>
+            <text class="article__source" wx:if="{{ item.tags }}">{{ item.tags }}</text>
+            <text class="article__time">{{ item.create_date }}</text>
             <view class="article__count">
                 <image class="article__icon" src="/images/news/template/icon-comt.png"></image>
-                <text>{{ item.comment }}</text>
+                <text>{{ item.comments }}</text>
                 <image class="article__icon" src="/images/news/template/icon-priaze.png"></image>
-                <text>{{ item.zan }}</text>
+                <text>{{ item.likes }}</text>
             </view>
         </view>
     </view>
@@ -48,21 +48,21 @@
     <navigator url="/pages/news/{{item.type}}/{{item.type}}_detail?type={{item.type}}&id={{item.id}}">
     <view class="article__item">
         <view class="article__thumb">
-            <image class="article__image" src="{{ item.icons[0] }}"></image>
+            <image class="article__image" src="{{ item.image }}"></image>
         </view>
         <view class="article__info">
             <view class="article__title article__title__large">{{ item.title }}</view>
+            <!-- <view class="article__desc">
+                {{ item.description }}
+            </view> -->
             <view class="article__desc">
-                {{ item.summary }}
-            </view>
-            <view class="article__desc">
-                <text wx:if="{{ tag }}" class="article__source">{{ item.tag }}</text>
-                <text class="article__time">{{ item.time }}</text>
+                <text wx:if="{{ tags }}" class="article__source">{{ item.tags }}</text>
+                <text class="article__time">{{ item.create_date }}</text>
                 <view class="article__count">
                     <image class="article__icon" src="/images/news/template/icon-comt.png"></image>
-                    <text>{{ item.comment }}</text>
+                    <text>{{ item.comments }}</text>
                     <image class="article__icon" src="/images/news/template/icon-priaze.png"></image>
-                    <text>{{ item.zan }}</text>
+                    <text>{{ item.likes }}</text>
                 </view>
             </view>
         </view>

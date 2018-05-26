@@ -9,15 +9,14 @@
         </view>
       </block>
     </scroll-view>
-    <image bindtap="manageTabs" class="sv-manager" src="/images/news/template/icon-manage.png"></image>
   </view>
   <!--新闻列表-->
   <view class="articles">
     <view class="loader">
       <image src="/images/index/loading.gif" wx-if="{{loading}}"></image>
     </view>
-    <block wx:for="{{ active.data }}" wx:key="item.articleid">
-      <template is="{{ 'newsStyle' + item.style }}" data="{{ item }}" />
+    <block wx:for="{{ active.data }}" wx:key="item.id">
+      <template is="{{ 'newsStyle' + item.model_id }}" data="{{ item }}" />
     </block>
   </view>
   <!--提醒消息-->

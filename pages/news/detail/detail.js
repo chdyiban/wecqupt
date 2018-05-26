@@ -50,7 +50,13 @@ module.exports.ipage = {
   loginHandler: function(options){
     var _this = this;
     
-    if(!options.type || !options.id) {
+    // if(!options.type || !options.id) {
+    //   _this.setData({
+    //     remind: '404'
+    //   });
+    //   return false;
+    // }
+    if (!options.id) {
       _this.setData({
         remind: '404'
       });
@@ -76,15 +82,17 @@ module.exports.ipage = {
           // }
           //console.log(author_info);
           _this.setData({
-            date: info.createtime || "",  // 发布日期
-            author: info.author || "",     // 发布作者
-            views: info.views || 0,    // 阅读量
-            likes: info.likes || 0,
-            title: info.title,            //新闻标题
+            date: info.archivesInfo.acreate_date || "",  // 发布日期
+            author: info.archivesInfo.author || "",     // 发布作者
+            views: info.archivesInfo.views || 0,    // 阅读量
+            likes: info.archivesInfo.likes || 0,
+            title: info.archivesInfo.title,            //新闻标题
+            tags:info.archivesInfo.tags,
             source: _this.data.sources[options.type],
+            commentList:info.commentList,
             remind: ''
           });
-          WxParse.wxParse('article', 'html', info.body, _this, 5);
+          WxParse.wxParse('article', 'html', info.archivesInfo.content, _this, 5);
 
           // 如果存在附件则提取附件里面的信息
           if(info.fjlist && info.fjlist.length){

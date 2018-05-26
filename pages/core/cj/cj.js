@@ -1,6 +1,7 @@
 //cj.js
 //获取应用实例
 var app = getApp();
+var config = require('../../../config');
 Page({
   data: {
     remind: '加载中',
@@ -53,7 +54,7 @@ Page({
     }
     wx.showNavigationBarLoading();
     wx.request({
-      url: app._server + "/public/api/portal/score",
+      url: config.service.scoreUrl,
       method: 'POST',
       data: app.key({
         openid: app._user.openid,

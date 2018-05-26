@@ -270,6 +270,7 @@
 /* 支持多行 */
 
 .article__title__large {
+  white-space:normal;
 }
 
 .article__desc {

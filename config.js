@@ -29,6 +29,8 @@ var config = {
     repairRateSubmitUrl: `${api}/repair/submit_rate`,
     //获取课表
     kebiaoUrl: `${api}/course`,
+    //获取成绩
+    scoreUrl:`${api}/score`,
     //获取一卡通
     yikatongUrl: `${api}/portal/yikatong`,
     //获取图书馆
@@ -38,7 +40,7 @@ var config = {
     emptyRoomUrl: `${api}/portal/empty_room`,
 
     //新闻详情
-    newsDetailUrl: `${api}/news/detail`,
+    newsDetailUrl: `${api}/news/information/detail`,
 
     //门户绑定
     bindUrl: `${api}/wxuser/bind`,
