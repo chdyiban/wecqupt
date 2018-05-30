@@ -3,7 +3,7 @@
 <view class="container">
   <view class="header">
     <scroll-view class="sv__container" scroll-x="true">
-      <block wx:for="{{list}}" wx:key="id" wx:if="{{ item.enabled[user_type] }}">
+      <block wx:for="{{list}}" wx:key="id" wx:if="{{item.enabled[user_type]}}">
         <view class="sv__item {{ active.id === item.id ? 'active':'' }}" bindtap="changeFilter" data-id="{{ item.id }}">
           {{ item.name }}
         </view>

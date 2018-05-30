@@ -5,15 +5,7 @@ var config = require('../../config');
 Page({
   data: {
     page: 0,
-    list: [
-      { id: 0, 'type': 'all', name: '🔥头条',storage:[], url: 'news/information', enabled: {guest:false, student:true, teacher:true} },
-      { id: 1, 'type': 'yiban', name: '易班', storage: [], url: 'news/yiban', enabled: {guest:false, student:true, teacher:true} },
-      { id: 2, 'type': 'portal', name: '门户通知',storage:[], url: 'news/portal', enabled: {guest:false, student:true, teacher:true} },
-      { id: 3, 'type': 'xfjy', name: '先锋家园',storage:[], url: 'news/xfjy', enabled: {guest:false, student:true, teacher:true} },
-      { id: 4, 'type': 'new', name: '官网新闻',storage:[], url: 'news/chdnews', enabled: {guest:true, student:true, teacher:true} },
-      { id: 5, 'type': 'new', name: '竞赛通知', storage: [], url: 'news/chdnews', enabled: { guest: true, student: true, teacher: true } },
-      { id: 6, 'type': 'new', name: '学院新闻', storage: [], url: 'news/chdnews', enabled: { guest: true, student: true, teacher: true } },
-    ],
+    list: [],
     'active': {
       id: 0,
       'type': 'all',
@@ -25,12 +17,13 @@ Page({
     user_type: 'guest',
     disabledRemind: false
   },
-  onLoad: function(){
-    if(app._user.is_bind){
+  onLoad: function () {
+    var _this = this;
+    if (app._user.is_bind) {
       this.setData({
         user_type: !app._user.teacher ? 'student' : 'teacher'
       });
-    }else{
+    } else {
       this.setData({
         user_type: 'guest',
         'active.id': 5,
@@ -44,10 +37,31 @@ Page({
       'active.remind': '上滑加载更多',
       'page': 0
     });
-    this.getNewsList();
+    this.initBar();
+  },
+  initBar:function(){
+    var that = this;
+    wx.request({
+      url: config.service.newsNavUrl,
+      success: function (res) {
+        if (res.data && res.data.status === 200) {
+          if (res.data.data) {
+            that.setData({
+              list:res.data.data,
+            });
+          }
+        }
+      },
+      fail: function (res) {
+        app.showErrorModal(res.message);
+      },
+      complete: function () {
+        that.getNewsList();
+      }
+    });
   },
   //下拉更新
-  onPullDownRefresh: function(){
+  onPullDownRefresh: function () {
     var _this = this;
     _this.setData({
       'loading': true,
@@ -59,16 +73,16 @@ Page({
     _this.getNewsList();
   },
   //上滑加载更多
-  onReachBottom: function(){
+  onReachBottom: function () {
     var _this = this;
-    if(_this.data.active.showMore){
+    if (_this.data.active.showMore) {
       _this.getNewsList();
     }
   },
   //获取新闻列表
-  getNewsList: function(typeId){
+  getNewsList: function (typeId) {
     var _this = this;
-    if(app.g_status){
+    if (app.g_status) {
       _this.setData({
         'active.showMore': false,
         'active.remind': app.g_status,
@@ -78,14 +92,14 @@ Page({
       return;
     }
     typeId = typeId || _this.data.active.id;
-    if (_this.data.page >= 5){
+    if (_this.data.page >= 5) {
       _this.setData({
         'active.showMore': false,
         'active.remind': '没有更多啦'
       });
       return false;
     }
-    if(!_this.data.page){
+    if (!_this.data.page) {
       _this.setData({
         'active.data': _this.data.list[typeId].storage
       });
@@ -95,33 +109,34 @@ Page({
     });
     wx.showNavigationBarLoading();
     wx.request({
-      url: config.service.api + '/' + _this.data.list[typeId].url,
+      url: config.service.newsListUrl,
       data: {
         page: _this.data.page + 1,
-        openid: app._user.openid
+        openid: app._user.openid,
+        channel: _this.data.list[typeId].channel,
       },
-      success: function(res){
-        if(res.data && res.data.status === 200){
-          if(_this.data.active.id != typeId){ return false; }
-          if(res.data.data){
-            if(!_this.data.page){
-              if(!_this.data.list[typeId].storage.length || app.util.md5(JSON.stringify(res.data.data)) != app.util.md5(JSON.stringify(_this.data.list[typeId].storage))){
+      success: function (res) {
+        if (res.data && res.data.status === 200) {
+          if (_this.data.active.id != typeId) { return false; }
+          if (res.data.data) {
+            if (!_this.data.page) {
+              if (!_this.data.list[typeId].storage.length || app.util.md5(JSON.stringify(res.data.data)) != app.util.md5(JSON.stringify(_this.data.list[typeId].storage))) {
                 var data = {
                   'page': _this.data.page + 1,
                   'active.data': res.data.data,
                   'active.showMore': true,
                   'active.remind': '上滑加载更多',
                 };
-                data['list['+typeId+'].storage'] = res.data.data;
+                data['list[' + typeId + '].storage'] = res.data.data;
                 _this.setData(data);
-              }else{
+              } else {
                 _this.setData({
                   'page': _this.data.page + 1,
                   'active.showMore': true,
                   'active.remind': '上滑加载更多'
                 });
               }
-            }else{
+            } else {
               _this.setData({
                 'page': _this.data.page + 1,
                 'active.data': _this.data.active.data.concat(res.data.data),
@@ -129,26 +144,26 @@ Page({
                 'active.remind': '上滑加载更多',
               });
             }
-          }else{
+          } else {
             _this.setData({
               'active.showMore': false,
               'active.remind': '没有更多啦'
             });
           }
-        }else{
+        } else {
           app.showErrorModal(res.data.message);
           _this.setData({
             'active.remind': '加载失败'
           });
         }
       },
-      fail: function(res){
+      fail: function (res) {
         app.showErrorModal(res.errMsg);
         _this.setData({
           'active.remind': '网络错误'
         });
       },
-      complete: function(){
+      complete: function () {
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();
         _this.setData({
@@ -158,7 +173,7 @@ Page({
     });
   },
   //获取焦点
-  changeFilter: function(e){
+  changeFilter: function (e) {
     //console.log(e.target);
     this.setData({
       'active': {
@@ -173,13 +188,13 @@ Page({
     this.getNewsList(e.target.dataset.id);
   },
   //无权限查询
-  changeFilterDisabled: function(){
+  changeFilterDisabled: function () {
     var _this = this;
-    if(!_this.data.disabledRemind){
+    if (!_this.data.disabledRemind) {
       _this.setData({
         disabledRemind: true
       });
-      setTimeout(function(){
+      setTimeout(function () {
         _this.setData({
           disabledRemind: false
         });

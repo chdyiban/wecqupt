@@ -39,6 +39,10 @@ var config = {
     //获取空教室
     emptyRoomUrl: `${api}/portal/empty_room`,
 
+    //新闻栏目导航
+    newsNavUrl: `${api}/news/information/nav`,
+    //新闻列表
+    newsListUrl: `${api}/news/information/`,
     //新闻详情
     newsDetailUrl: `${api}/news/information/detail`,
 
