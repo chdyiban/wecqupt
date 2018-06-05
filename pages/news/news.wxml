@@ -16,7 +16,7 @@
       <image src="/images/index/loading.gif" wx-if="{{loading}}"></image>
     </view>
     <block wx:for="{{ active.data }}" wx:key="item.id">
-      <template is="{{ 'newsStyle' + item.model_id }}" data="{{ item }}" />
+      <template is="{{ 'newsStyle' + item.style_id }}" data="{{ item }}" />
     </block>
   </view>
   <!--提醒消息-->

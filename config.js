@@ -30,7 +30,7 @@ var config = {
     //获取课表
     kebiaoUrl: `${api}/course`,
     //获取成绩
-    scoreUrl:`${api}/score`,
+    scoreUrl:`${api}/portal/score`,
     //获取一卡通
     yikatongUrl: `${api}/portal/yikatong`,
     //获取图书馆
