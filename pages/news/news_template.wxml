@@ -7,7 +7,7 @@
             <view class="article__info">
                 <view class="article__title article__title__large">{{ item.title }}</view>
                 <view class="article__desc">
-                    <text class="article__source" wx:if="{{ item.tags }}">{{ item.tag }}</text>
+                    <text class="article__source" wx:if="{{ item.tags }}">{{ item.tags }}</text>
                     <text class="article__time">{{ item.create_date }}</text>
                     <view class="article__count">
                         <image class="article__icon" src="/images/news/template/icon-comt.png"></image>
@@ -56,7 +56,7 @@
                 {{ item.description }}
             </view> -->
             <view class="article__desc">
-                <text wx:if="{{ tags }}" class="article__source">{{ item.tags }}</text>
+                <text wx:if="{{ item.tags }}" class="article__source">{{ item.tags }}</text>
                 <text class="article__time">{{ item.create_date }}</text>
                 <view class="article__count">
                     <image class="article__icon" src="/images/news/template/icon-comt.png"></image>
