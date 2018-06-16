@@ -2,7 +2,7 @@
 
 <!--无图模式-->
 <template name="newsStyle0">
-    <navigator url="/pages/news/{{item.type}}/{{item.type}}_detail?type={{item.type}}&id={{item.id}}">
+    <navigator url="/pages/news/news/news_detail?id={{item.id}}">
         <view class="article__item">
             <view class="article__info">
                 <view class="article__title article__title__large">{{ item.title }}</view>
@@ -45,7 +45,7 @@
 
 <!--普通模式-->
 <template name="newsStyle2">
-    <navigator url="/pages/news/{{item.type}}/{{item.type}}_detail?type={{item.type}}&id={{item.id}}">
+    <navigator url="/pages/news/news/news_detail?id={{item.id}}">
     <view class="article__item">
         <view class="article__thumb">
             <image class="article__image" src="{{ item.image }}"></image>
@@ -72,7 +72,7 @@
 
 <!--三图模式-->
 <template name="newsStyle3">
-    <navigator url="/pages/news/{{item.type}}/{{item.type}}_detail?type={{item.type}}&id={{item.id}}">
+    <navigator url="/pages/news/news/news_detail?id={{item.id}}">
     <view class="article__item">
         <view class="article__info">
             <view class="article__title">{{ item.title }}</view>
