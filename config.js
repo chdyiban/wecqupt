@@ -9,7 +9,7 @@ if (system.brand == 'devtools') {
   var host = 'http://localhost:8080/yibanbx';
   var api = host + '/public/api';
 }else{
-  var host = 'http://service.knocks.tech';
+  var host = 'https://service.knocks.tech';
   var api = host + '/?s=api';
 }
 
