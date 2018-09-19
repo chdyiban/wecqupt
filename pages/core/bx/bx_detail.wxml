@@ -78,7 +78,7 @@
         </view>
       </view>
     </view>
-
+    <view wx:if="{{detail.wx_wxztm === 'finished'}}">
     <view class="work-sheet-panel" wx:if="{{detail.comment.status}}">
       <text class="work-sheet-title">服务评价(已评价)</text>
       <view class="work-sheet">
@@ -122,6 +122,7 @@
           </view>
         </view>
       </view>
+    </view>
     </view>
     
 

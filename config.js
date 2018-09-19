@@ -4,12 +4,11 @@
 var system = wx.getSystemInfoSync();
 console.log(system);
 // 此处主机域名修改成腾讯云解决方案分配的域名
-if (system.brand == 'devtools') {
-  //var host = 'http://localhost/fastadmin';
-  var host = 'http://localhost:8080/yibanbx';
+if (system.brand == 'devtoolss') {
+  var host = 'http://localhost/fastadmin';
   var api = host + '/public/api';
 }else{
-  var host = 'http://service.knocks.tech';
+  var host = 'https://service.knocks.tech';
   var api = host + '/?s=api';
 }
 

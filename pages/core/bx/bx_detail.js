@@ -59,12 +59,19 @@ Page({
           var state = [{
             'type': 'refused',
             name: '驳回',
-            status: info.wx_wxztm == '驳回',
+            status: info.wx_wxztm = '驳回',
             list: {}
           },{
             'type': 'finished',
             name: '完工',
-            status: info.wx_wxztm == '已完工',
+            status: info.wx_wxztm = '已完工',
+            list: {
+              '用时': info.wx_ysfz + '分钟'
+            }
+          },{
+            'type': 'distributed',
+            name: '派工',
+            status: info.wx_wxztm = '已派工',
             list: {
               '用时': info.wx_ysfz + '分钟'
             }
