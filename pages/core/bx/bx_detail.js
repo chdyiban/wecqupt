@@ -59,28 +59,24 @@ Page({
           var state = [{
             'type': 'refused',
             name: '驳回',
-            status: info.wx_wxztm = '驳回',
-            list: {}
+            status: info.wx_wxztm == 'refused',
+            list: {
+              '原因': info.wx_jjyy
+            }
           },{
             'type': 'finished',
             name: '完工',
-            status: info.wx_wxztm = '已完工',
+            status: info.wx_wxztm == 'finished',
             list: {
-              '用时': info.wx_ysfz + '分钟'
-            }
-          },{
-            'type': 'distributed',
-            name: '派工',
-            status: info.wx_wxztm = '已派工',
-            list: {
-              '用时': info.wx_ysfz + '分钟'
+              '用时': info.wx_wgsj
             }
           },{
             'type': 'dispatched',
             name: '派单',
             status: !!info.wx_wxgm.trim(),
             list: {
-              '承修人': info.wx_wxgm
+              '承修人': info.wx_wxgm,
+              '联系电话': info.wx_wxgdh,//维修工联系电话
             }
           },{
             'type': 'accepted',
@@ -88,8 +84,7 @@ Page({
             status: !!info.wx_slr.trim(),
             list: {
               '受理人': info.wx_slr,
-              '承修部门': info.wx_cxbmm,
-              '响应时间': info.xysj=='120分钟以上响应'?'未响应':info.xysj
+              '响应时间': info.wx_xysj
             }
           },{
             'type': 'waited',
@@ -107,6 +102,7 @@ Page({
               '申报时间': info.wx_bxsj
             }
           }];
+          console.log(state);
           _this.setData({
             'detail': info,
             'state': state.filter(function(e,i){
@@ -184,7 +180,15 @@ Page({
       star: star,
       'formData.star': star
     });
-  }
+  },
+  previewPhoto: function (e) {
+    var _this = this;
+    console.log(_this.data);
+    wx.previewImage({
+      current: _this.data.detail.wx_wxzp[e.target.dataset.index],
+      urls: _this.data.detail.wx_wxzp
+    });
+  },
 
 
 

@@ -15,22 +15,24 @@ Page({
     },
     loading: false,
     user_type: 'guest',
-    disabledRemind: false
+    disabledRemind: false,
+    scrollTop: 0,
+    headerStyle: 'relative',
   },
   onLoad: function () {
     var _this = this;
     if (app._user.is_bind) {
-      this.setData({
+      _this.setData({
         user_type: !app._user.teacher ? 'student' : 'teacher'
       });
     } else {
-      this.setData({
+      _this.setData({
         user_type: 'guest',
         'active.id': 5,
         'active.type': 'new'
       });
     }
-    this.setData({
+    _this.setData({
       'loading': true,
       'active.data': [],
       'active.showMore': true,
@@ -59,6 +61,11 @@ Page({
         that.getNewsList();
       }
     });
+  },
+  wxSearchTab: function () {
+    wx.navigateTo({
+      url: './search/search'
+    })
   },
   //下拉更新
   onPullDownRefresh: function () {
@@ -200,5 +207,23 @@ Page({
         });
       }, 2000);
     }
+  },
+  onPageScroll:function(ev){
+    var _this = this;
+    //当滚动的top值最大或最小时，为什么要做这一步是因为在手机实测小程序的时候会发生滚动条回弹，所以为了处理回弹，设置默认最大最小值
+    if (ev.scrollTop <= 0) {
+      ev.scrollTop = 0;
+      console.log('chufa');
+      _this.setData({
+        headerStyle: 'relative',
+      });
+    } else if (ev.scrollTop > wx.getSystemInfoSync().windowHeight) {
+      ev.scrollTop = wx.getSystemInfoSync().windowHeight;
+    } else if(ev.scrollTop > 40){
+      _this.setData({
+        headerStyle: 'fixed',
+      });
+    }
+    
   }
 });

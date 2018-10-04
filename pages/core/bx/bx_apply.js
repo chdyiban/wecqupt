@@ -22,7 +22,8 @@ Page({
         Phone:  '',     //报修用户电话
         AddressId:  '', //报修区域id
         Address: '',    //报修地点
-        Content: ''     //报修内容
+        Content: '',     //报修内容
+        ImgUrl: ''
     },
     showError: false,
     // images: [],
@@ -43,9 +44,12 @@ Page({
       });
       return false;
     }
+    console.log(app._user.we);
     this.setData({
       'formData.Id': app._user.we.id,
-      'formData.Name': app._user.we.name
+      'formData.Name': app._user.we.name,
+      'formData.Phone': app._user.we.info.mobile,
+      'formData.Address': app._user.we.info.room
     });
     // 发送请求
     this.getServiceType();
@@ -214,6 +218,7 @@ Page({
       success: function(res) {
         if (res.confirm) {
           formData.openid = app._user.openid;
+          formData.ImgUrl = _this.data.imgs;
           wx.request({
             //url: app._server + '/public/api/repair/submit',
             url: config.service.repairSubmitUrl,

@@ -57,6 +57,10 @@
   background: #e78ab0;
 }
 
+.repair-state-icon-distributed {
+  background: #e78ab0;
+}
+
 .repair-state-icon-finished {
   background: #9f8bea;
 }
@@ -181,4 +185,31 @@ textarea {
   background-color: #7acfa6;
   color: #fff;
   font-size: 12pt;
+}
+.issues-img-panel{
+    display: flex;
+    flex-wrap: wrap;
+}
+.issues-photo-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    margin: 20rpx;
+    margin-right: 0;
+    width: 135rpx;
+    height: 135rpx;
+    border: 1rpx solid #e5e5e5;
+    border-radius: 5rpx;
+}
+.issues-photo-item:active{
+    opacity: .8;
+}
+.issues-photo-item .remind-img{
+    padding: 0;
+}
+.issues-photo-item image{
+    width: 100%;
+    height: 100%;
 }

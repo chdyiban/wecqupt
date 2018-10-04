@@ -1,7 +1,16 @@
 <import src="news_template.wxml" />
 <!--news.wxml-->
+
 <view class="container">
-  <view class="header">
+<view class="weui-search-bar">
+  <view class="weui-search-bar__form">
+    <view class="weui-search-bar__box">
+      <icon class="weui-icon-search_in-box" type="search" size="12"></icon>
+      <input type="text" class="weui-search-bar__input"  disabled='true' placeholder="搜索信息" bindtap="wxSearchTab"/>
+    </view>
+  </view>
+</view>
+  <view class="header {{headerStyle}}">
     <scroll-view class="sv__container" scroll-x="true">
       <block wx:for="{{list}}" wx:key="id" wx:if="{{item.enabled[user_type]}}">
         <view class="sv__item {{ active.id === item.id ? 'active':'' }}" bindtap="changeFilter" data-id="{{ item.id }}">
@@ -12,9 +21,9 @@
   </view>
   <!--新闻列表-->
   <view class="articles">
-    <view class="loader">
+    <!-- <view class="loader">
       <image src="/images/index/loading.gif" wx-if="{{loading}}"></image>
-    </view>
+    </view> -->
     <block wx:for="{{ active.data }}" wx:key="item.id">
       <template is="{{ 'newsStyle' + item.style_id }}" data="{{ item }}" />
     </block>

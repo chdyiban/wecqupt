@@ -6,6 +6,7 @@
     "pages/news/xfjy/xfjy_detail",
     "pages/news/portal/portal_detail",
     "pages/news/news/news_detail",
+    "pages/news/search/search",
     "pages/more/login",
     "pages/more/append",
     "pages/more/more",

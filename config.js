@@ -7,9 +7,14 @@ console.log(system);
 if (system.brand == 'devtoolss') {
   var host = 'http://localhost/fastadmin';
   var api = host + '/public/api';
-}else{
-  var host = 'https://service.knocks.tech';
-  var api = host + '/?s=api';
+}
+// else{
+//   var host = 'https://service.knocks.tech';
+//   var api = host + '/?s=api';
+// }
+else {
+  var host = 'https://yiban.chd.edu.cn';
+  var api = host + '/api';
 }
 
 var config = {

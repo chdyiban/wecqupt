@@ -64,13 +64,13 @@
       <view class="reporter-tel reporter-detail-item {{(showError&&!formData.Phone)?'error':''}}">
         <text class="reporter-detail-name">联系电话</text>
         <view class="reporter-detail-input">
-          <input type="number" maxlength="11" placeholder="请输入联系电话" bindinput="listenerTel" />
+          <input type="number" value="{{formData.Phone}}" maxlength="11" placeholder="请输入联系电话" bindinput="listenerTel" />
         </view>
       </view>
       <view class="reporter-address reporter-detail-item {{(showError&&!formData.Address)?'error':''}}">
         <text class="reporter-detail-name">报修地址</text>
         <view class="reporter-detail-input">
-          <input type="text" placeholder="请输入地址" bindinput="listenerAddress" />
+          <input type="text" placeholder="请输入地址" bindinput="listenerAddress" value="{{formData.Address}}" />
         </view>
       </view>
     </view>

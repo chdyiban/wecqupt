@@ -196,13 +196,12 @@ Page({
 
     //课表渲染
     function kbRender(info){
-      var today = parseInt(info.day);
+      //var today = parseInt(info.day);
+      var today = new Date().getDay();//若从缓存中获取，有可能出现日期滞后的情况
       var lessons = info.lessons[today===0 ? 6 : today-1], //day为0表示周日(6)，day为1表示周一(0)..
           list = [];
       var time_list = _this.data.card.kb.time_list;
-
       for(var i = 0; i < 5; i++){
-        //console.log("i:"+i);
         for(var j = 0; j < lessons[i].length; j++){
           var lesson = lessons[i][j];
           if(lesson.weeks && lesson.weeks.indexOf(parseInt(info.week)) !== -1){

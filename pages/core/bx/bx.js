@@ -11,7 +11,7 @@ Page({
       '未审核': 'waited',
       '未受理': 'waited',
       '已受理': 'accepted',
-      '已派出': 'dispatched',
+      '已指派': 'dispatched',
       '已完工': 'finished',
       '驳回': 'refused'
     }

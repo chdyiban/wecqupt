@@ -67,12 +67,12 @@
 .main-card-item#kb{
   /*background-image: url('/images/index/kb-bg.png');*/
   /*微信暂不支持静态bgimg文件，改用服务器url*/
-  background-image: url('https://we.cqu.pt/app/images/index/kb-bg.png');
+  /*background-image: url('https://we.cqu.pt/app/images/index/kb-bg.png');*/
 }
 .main-card-item#ykt{
   /*background-image: url('/images/index/ykt-bg.png');*/
   /*微信暂不支持静态bgimg文件，改用服务器url*/
-  background-image: url('https://we.cqu.pt/app/images/index/ykt-bg.png');
+  /*background-image: url('https://we.cqu.pt/app/images/index/ykt-bg.png');*/
 }
 .main-card-item#jy{
   /*background-image: url('/images/index/jy-bg.png');*/

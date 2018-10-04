@@ -21,6 +21,14 @@
                     </view>
                 </view>
                 <view class="process-bd">
+                  <view class="process-item">
+                        <view class="process-item-bd">
+                            <text class="process-item-name">工单ID</text>
+                        </view>
+                        <view class="process-item-ft">
+                            <text class="process-item-info">{{item.bxID}}</text>
+                        </view>
+                    </view>
                     <view class="process-item">
                         <view class="process-item-bd">
                             <text class="process-item-name">服务类型</text>
@@ -42,7 +50,7 @@
                             <text class="process-item-name">响应时间</text>
                         </view>
                         <view class="process-item-ft">
-                            <text class="process-item-info">{{item.xysj=='120分钟以上响应'?'未响应':item.xysj}}</text>
+                            <text class="process-item-info">{{item.wx_xysj=='120分钟以上响应'?'未响应':item.wx_xysj}}</text>
                         </view>
                     </view>
                 </view> 
