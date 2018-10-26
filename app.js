@@ -62,15 +62,45 @@ App({
   getUser: function(response) {
     var _this = this;
     wx.showNavigationBarLoading();
+    //forked from https://github.com/aqingyang/mplogin/blob/master/pages/login/login.js
+    //  支持getsetting 1.2.0
+    // if (wx.getSetting){
+    //   wx.getSetting({
+    //     success: function(res){
+    //       //  用户已经授权 1.2.0基础库
+    //       if (res.authSetting['scope.userInfo']) {
+    //         wx.getUserInfo({
+    //           success: function (UserInfo) {
+    //             console.log(UserInfo);
+    //           }
+    //         })
+    //         // 用户未授权
+    //       } else {
+
+    //       }
+    //     },
+    //     fail: function(err){
+
+    //     }
+    //   })
+    // }
+    // else{
+
+    // }
+
+    // forked end
+
     wx.getSetting({
       success: function (res) {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          wx.getUserInfo({
-            success: function (res) {
-            }
-          })
-        }else{
+        console.log(res.authSetting);
+        // if (res.authSetting['scope.userInfo']) {
+        //   // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+        //   wx.getUserInfo({
+        //     success: function (res) {
+        //       console.log(UserInfo);
+        //     }
+        //   })
+        // }else{
           wx.login({
             success:function(res){
               if(res.code){
@@ -84,7 +114,6 @@ App({
                   success: function (res) {
                     if (res.data && res.data.status >= 200 && res.data.status < 400) {
                       var status = false, data = res.data.data;
-                      //console.warn(data);
                       //判断缓存是否有更新
                       if (_this.cache.version !== _this.version || _this.cache.userdata !== data) {
                         _this.saveCache('version', _this.version);
@@ -135,7 +164,7 @@ App({
             }
           })
 
-        }
+        // }
       },
       fail: function(res){
         //console.log("app::getUser::getSetting::fail")
@@ -220,7 +249,7 @@ App({
   processData: function(key){
     var _this = this;
     var data = JSON.parse(_this.util.base64.decode(key));
-    //console.log(data);
+    console.log(data);
     _this._user.is_bind = data.is_bind;
     _this._user.openid = data.user.openid;
     _this._user.teacher = (data.user.type == '教职工');

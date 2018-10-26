@@ -1,7 +1,7 @@
 // pages/news/search/search.js
 
 var WxSearch = require('../../../utils/wxSearchView/wxSearchView.js');
-
+var config = require('../../../config');
 Page({
 
   /**
@@ -26,19 +26,47 @@ Page({
   },
 
   // 转发函数,固定部分
-  wxSearchInput: WxSearch.wxSearchInput,  // 输入变化时的操作
+  //wxSearchInput: WxSearch.wxSearchInput,  // 输入变化时的操作
   wxSearchKeyTap: WxSearch.wxSearchKeyTap,  // 点击提示或者关键字、历史记录时的操作
   wxSearchDeleteAll: WxSearch.wxSearchDeleteAll, // 删除所有的历史记录
   wxSearchConfirm: WxSearch.wxSearchConfirm,  // 搜索函数
   wxSearchClear: WxSearch.wxSearchClear,  // 清空函数
 
+  wxSearchInput: function(e){
+    var _this = this;
+    
+    var temData = {};
+    //console.log(_this.data.wxSearchData);
+
+    wx.request({
+      method: 'POST',
+      url: config.service.newsSearch,
+      data: {
+        words: e.detail.value,
+      },
+      success: function (res) {
+        temData.tipKeys = res.data;
+        temData.value = e.detail.value;
+        // 更新视图
+        _this.setData({
+          wxSearchData: temData
+        });
+      },
+      fail: function (res) {
+        console.warn("suggest error");
+      },
+      complete: function () {
+      }
+    });
+  },
+
   // 搜索回调函数  
   mySearchFunction: function (value) {
     // do your job here
-    console.log(value);
+    //console.log(value);
     // 跳转
     wx.redirectTo({
-      url: '../news?searchValue=' + value
+      url: '/pages/news/news/news_detail?id=' + value
     })
   },
 

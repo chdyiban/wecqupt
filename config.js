@@ -50,6 +50,9 @@ var config = {
     newsListUrl: `${api}/news/information/`,
     //新闻详情
     newsDetailUrl: `${api}/news/information/detail`,
+    //新闻模块-搜索提示
+    newsSearchSuggest: `${api}/news/search/chssuggest`,
+    newsSearch: `${api}/news/search/query`,
 
     //门户绑定
     bindUrl: `${api}/wxuser/bind`,

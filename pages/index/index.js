@@ -9,12 +9,12 @@ Page({
     cores: [
       [
         { id: 'bx', name: '物业报修', disabled: false, teacher_disabled: false, offline_disabled: true },
-        { id: 'kb', name: '课表查询', disabled: false, teacher_disabled: false, offline_disabled: false },
-        { id: 'cj', name: '成绩查询', disabled: false, teacher_disabled: false, offline_disabled: false },
+        { id: 'ykt', name: '一卡通', disabled: false, teacher_disabled: false, offline_disabled: false },
+        { id: 'kb', name: '课表查询', disabled: false, teacher_disabled: true, offline_disabled: false },
+        { id: 'cj', name: '成绩查询', disabled: false, teacher_disabled: true, offline_disabled: false },
         { id: 'ks', name: '考试安排', disabled: true, teacher_disabled: false, offline_disabled: false },
         { id: 'kjs', name: '空教室', disabled: true, teacher_disabled: false, offline_disabled: true },
         { id: 'xs', name: '学生查询', disabled: true, teacher_disabled: false, offline_disabled: true },
-        { id: 'ykt', name: '一卡通', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'jy', name: '借阅信息', disabled: true, teacher_disabled: false, offline_disabled: false },
       ]
     ],
