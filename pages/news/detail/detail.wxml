@@ -9,8 +9,8 @@
     </block>
   </view>
   <block wx:else>
-    <view class="title">
-      <text>{{title}}</text>
+    <view class="title" bindtap="testTitle">
+      <text selectable="true">{{title}}</text>
     </view>
     <view class="info">
       <text wx:if="{{date}}">发布时间：{{date}}</text>

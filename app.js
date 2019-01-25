@@ -1,7 +1,7 @@
 var config = require('./config')
 //app.js
 App({
-  version: 'v0.0.1', //版本号
+  version: 'v0.1.8', //版本号
   onLaunch: function() {
     var _this = this;
     //读取缓存
@@ -92,7 +92,7 @@ App({
 
     wx.getSetting({
       success: function (res) {
-        console.log(res.authSetting);
+        //console.log(res.authSetting);
         // if (res.authSetting['scope.userInfo']) {
         //   // 已经授权，可以直接调用 getUserInfo 获取头像昵称
         //   wx.getUserInfo({
@@ -249,7 +249,7 @@ App({
   processData: function(key){
     var _this = this;
     var data = JSON.parse(_this.util.base64.decode(key));
-    console.log(data);
+    //console.log(data);
     _this._user.is_bind = data.is_bind;
     _this._user.openid = data.user.openid;
     _this._user.teacher = (data.user.type == '教职工');

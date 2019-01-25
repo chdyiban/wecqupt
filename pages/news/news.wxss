@@ -28,6 +28,10 @@
   vertical-align: center;
 }
 
+.tags-more image{
+  width: 30rpx;
+  height: 30rpx;
+}
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -286,6 +290,8 @@
   font-size: 30rpx;
   line-height: 1.2;
   width: 100%;
+  display:flex;
+  justify-content:space-between;
 }
 
 .article__item__cover {
@@ -320,6 +326,8 @@
 }
 
 .article__time {
+  display: flex;
+  align-items: center;
   margin-right: 10rpx;
 }
 
@@ -327,7 +335,7 @@
   float: right;
   display: flex;
   align-items: center;
-  color: #333;
+  /* color: #333; */
   font-size: 26rpx;
 }
 
@@ -448,4 +456,94 @@
   color: #09bb07;
   white-space: nowrap;
 }
+
+/*common list  for  index  list page */
+
+.common-list {
+  margin-bottom: 24rpx;
+  padding: 0 24rpx;
+}
+
+.common-list .list-item {
+  position: relative;
+  border-bottom: 1px solid #eee;
+  padding: 24rpx;
+  min-height: 150rpx;
+  overflow: hidden;
+}
+
+.common-list .list-item.has-img image.cover {
+  position: absolute;
+  left: 0rpx;
+  top: 24rpx;
+  width: 200rpx;
+  height: 150rpx;
+  border-radius: 8rpx;
+}
+
+.common-list .list-item.has-img .content-title {
+  margin-left: 200rpx;
+  height: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.common-list .list-item.has-no-img .content-title {
+  /* margin-left: 200rpx; */
+  height: 80rpx;
+  margin-bottom: 20rpx;
+}
+.common-list .list-item .content-title text {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 30rpx;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #3a4040;
+}
+
+.common-list .list-item .content-date {
+  margin-left: 200rpx;
+}
+
+.common-list .list-item .content-date image {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 10rpx;
+  vertical-align: middle;
+}
+
+.common-list .list-item .content-date text {
+  color: #959595;
+  margin-right: 32rpx;
+  font-size: 20rpx;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+.common-list .list-item .content-date-nopic{
+  display: flex;
+  align-items:center;
+  justify-content:flex-end;
+}
+
+.common-list .list-item .content-date-nopic image {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 10rpx;
+  vertical-align: middle;
+}
+
+.common-list .list-item .content-date-nopic text {
+  color: #959595;
+  margin-right: 32rpx;
+  font-size: 20rpx;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+/*common list end */
 

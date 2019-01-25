@@ -1,0 +1,41 @@
+<view class="container home">
+  <view class="xc">
+    <picker bindchange="bindPickerChange" value="{{line}}" range="{{array}}">
+      <view class="picker">
+        {{array[line]}}
+        <image class="btn-change-img" src="/images/core/common/down.png"></image>
+      </view>
+    </picker>
+
+  </view>
+  <!-- 顶部导航栏  -->
+  <view class="navTab">
+    <view bindtap="changeDay" class="{{ day === '1' ? 'selected':'' }}" data-id="1">周一</view>
+    <view bindtap="changeDay" class="{{ day === '2' ? 'selected':'' }}" data-id="2">周二</view>
+    <view bindtap="changeDay" class="{{ day === '3' ? 'selected':'' }}" data-id="3">周三</view>
+    <view bindtap="changeDay" class="{{ day === '4' ? 'selected':'' }}" data-id="4">周四</view>
+    <view bindtap="changeDay" class="{{ day === '5' ? 'selected':'' }}" data-id="5">周五</view>
+    <view bindtap="changeDay" class="{{ day === '6' ? 'selected':'' }}" data-id="6">周六</view>
+    <view bindtap="changeDay" class="{{ day === '0' ? 'selected':'' }}" data-id="0">周日</view>
+  </view>
+
+  <view class="time-list">
+    <view class="time-item" wx:for="{{ lineData }}" wx:key="item.id">
+      <view class="time-title">
+        <span>{{item.start_time}}</span> 发车
+        <view wx:if="{{item.extra}}">{{item.extra}}</view>
+      </view>
+      <view class="time-info">
+        <view class="time-start">
+          <image class="time-icon" src="/images/core/xc/start.png"></image>
+          {{item.start_pos}}
+        </view>
+        <view class="time-end">
+          <image class="time-icon" src="/images/core/xc/end.png"></image>
+          {{item.end_pos}}
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>

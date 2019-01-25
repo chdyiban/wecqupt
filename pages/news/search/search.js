@@ -63,7 +63,7 @@ Page({
   // 搜索回调函数  
   mySearchFunction: function (value) {
     // do your job here
-    //console.log(value);
+    console.log(value);
     // 跳转
     wx.redirectTo({
       url: '/pages/news/news/news_detail?id=' + value

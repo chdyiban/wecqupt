@@ -1,0 +1,53 @@
+  <view class="container">
+    <view class="title">
+      <view>我的栏目</view>
+      <view bindtap="activeHandle" class="edit {{active ?  'active' : ''}}">
+        <view wx:if="{{active}}">完成
+        </view>
+        <view wx:else>编辑</view>
+      </view>
+    </view>
+    <view class="items">
+      <view class="item all">推荐</view>
+      <block wx:for="{{choose}}" wx:key="id">
+        <view bindtap="deleteTag" class="item all" data-name="{{item.name}}" data-type="{{item.type}}">
+            <image wx:if="{{active}}" src="/images/news/delete.png" class="tag-icon"></image>
+          <view class="name">{{item.name}}</view>
+        </view>
+      </block>
+    </view>
+    
+    <view class="title">
+      重要主题
+    </view>
+    <view class="items">
+      <block wx:for="{{topic}}" wx:key="{{index}}">
+        <view bindtap="addTag" class="item" data-name="{{item.name}}" data-type="topic">
+          <image wx:if="{{active}}" src="/images/news/add.png" class="tag-icon"></image>
+          <view class="name">{{item.name}}</view>
+        </view>
+      </block>
+    </view>
+    <view class="title">
+      共青团
+    </view>
+    <view class="items">
+      <block wx:for="{{tuan}}" wx:key="{{index}}">
+        <view bindtap="addTag" class="item" data-name="{{item.name}}" data-type="tuan">
+          <image wx:if="{{active}}" src="/images/news/add.png" class="tag-icon"></image>
+          <view class="name">{{item.name}}</view>
+        </view>
+      </block>
+    </view>
+    <!-- <view class="title">
+      学院
+    </view>
+    <view class="items">
+      <block wx:for="{{college}}" wx:key="{{index}}">
+        <view bindtap="add({{item}},college)" class="item">
+          <image wx:if="{{active}}" src="/images/news/add.png" class="tag-icon"></image>
+          <view class="name">{{item}}</view>
+        </view>
+      </block>
+    </view> -->
+  </view>

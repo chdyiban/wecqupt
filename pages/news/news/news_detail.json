@@ -1,6 +1,9 @@
 {    
     "navigationBarBackgroundColor": "#0a5cad",
-    "navigationBarTitleText": "官网新闻",
+    "navigationBarTitleText": "长大易班-信息详情",
     "backgroundColor": "#0a5cad",
-    "enablePullDownRefresh": false
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+      "canvasdrawer": "/utils/canvasdrawer/canvasdrawer"
+    }
 }

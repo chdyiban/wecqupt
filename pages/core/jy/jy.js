@@ -21,8 +21,8 @@ Page({
   },
   getData: function() {
     var _this = this;
-    if(!app._user.we.info.id || !app._user.we.info.name){
-      _this.setData({
+    if (!app._user.we.id) {
+      that.setData({
         remind: '未绑定'
       });
       return false;
@@ -56,11 +56,11 @@ Page({
     }
     wx.showNavigationBarLoading();
     wx.request({
-      url: app._server + "/api/get_books.php",
+      url: app._server + "/api/portal/books",
       method: 'POST',
       data: app.key({
         openid: app._user.openid,
-        ykth: app._user.we.ykth
+        id: app._user.we.id
       }),
       success: function(res) {
         if(res.data && res.data.status === 200) {
@@ -68,7 +68,7 @@ Page({
           if(info) {
             //保存借阅缓存
             app.saveCache('jy', info);
-            jyRender(info);
+            jyRender(info);          
           }else{ _this.setData({ remind: '暂无数据' }); }
 
         }else{

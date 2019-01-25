@@ -5,6 +5,8 @@ var config = require('../../config');
 Page({
   data: {
     remind: '加载中',
+    campus:['渭水校区'],
+    icampus: false,
     building_list: ['1','2','3','4','5','6','8','9',
       '10','11','12','15','16','17','18','19'
     ],  //寝室楼栋
@@ -22,6 +24,7 @@ Page({
       _this.data.buildings.forEach(function(e,i){
         if (e.split("号")[0] == app._user.we.info.build){
           _this.setData({
+            icampus:0,
             ibuilding: i
           });
         }

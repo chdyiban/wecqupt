@@ -1,0 +1,59 @@
+.container {
+  background-color: #fff;
+  padding: 0 20rpx 20rpx 20rpx;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #555;
+  font-size: 28rpx;
+  margin-top: 30rpx;
+}
+
+.edit {
+  display: flex;
+  color: #0167b8;
+  border: 2rpx solid #0167b8;
+  padding: 4rpx 8rpx;
+  border-radius: 4rpx;
+  font-size: 24rpx;
+}
+.title .active {
+  background: #0167b8;
+  color: #fff;
+}
+
+.items {
+  display: flex;
+  flex-wrap:wrap;
+}
+.items .item {
+  color: #333;
+  border: 2rpx solid #ddd;
+  padding: 8rpx 30rpx;
+  border-radius: 30rpx;
+  margin-right: 20rpx;
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.items .all{
+  color: #0167b8;
+  border: 2rpx solid #0167b8;
+}
+
+.item .name{
+  display: flex;
+}
+.item .tag-icon{
+  display: flex;
+  width:28rpx;
+  height: 28rpx;
+  margin-right: 5rpx;
+}
+
+.item .all {
+  color: red;
+}

@@ -21,7 +21,10 @@
     <view class="wxSearchMindKey">
       <view class="wxSearchMindKeyList">
         <block wx:for="{{wxSearchData.tipKeys}}">
-          <view class="wxSearchMindKeyItem" bindtap="wxSearchKeyTap" data-key="{{item.id}}">[{{item.author}}] {{item.title}}</view>
+          <view class="wxSearchMindKeyItem" bindtap="wxSearchKeyTap" data-key="{{item.id}}" wx:if="{{item.author}}">
+         {{item.author}} : {{item.title}}
+          </view>
+          <view class="wxSearchMindKeyItem" bindtap="wxSearchKeyTap" data-key="{{item.id}}" wx:else>{{item.title}}</view>
         </block>
       </view>
     </view>

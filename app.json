@@ -2,9 +2,6 @@
   "pages": [
     "pages/index/index",
     "pages/news/news",
-    "pages/news/yiban/yiban_detail",
-    "pages/news/xfjy/xfjy_detail",
-    "pages/news/portal/portal_detail",
     "pages/news/news/news_detail",
     "pages/news/search/search",
     "pages/more/login",
@@ -24,10 +21,10 @@
     "pages/core/bx/bx",
     "pages/core/bx/bx_apply",
     "pages/core/bx/bx_detail",
-    "pages/core/cet/cet",
-    "pages/core/cet/result",
+    "pages/core/xc/xc",
     "pages/core/fw/fw",
-    "pages/more/help/volunteerHelp"
+    "pages/more/help/volunteerHelp",
+    "pages/news/tags/tags"
   ],
   "window": {
     "navigationBarBackgroundColor": "#0167b8",

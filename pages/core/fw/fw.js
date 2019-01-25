@@ -14,23 +14,23 @@ Page({
   },
   onLoad:function(){
     var _this = this;
-    if (!app._user.we.info.name || !app._user.we.info.id) {
-      _this.setData({
-        remind: '未绑定帐号'
-      });
-      return false;
-    }
-    if (!app._user.we.volunteer_uid) {
-      _this.setData({
-        remind: '未完善志愿者信息'
-      });
-      return false;
-    }
+    // if (!app._user.we.info.name || !app._user.we.info.id) {
+    //   _this.setData({
+    //     remind: '未绑定帐号'
+    //   });
+    //   return false;
+    // }
+    // if (!app._user.we.volunteer_uid) {
+    //   _this.setData({
+    //     remind: '未完善志愿者信息'
+    //   });
+    //   return false;
+    // }
     //判断并读取缓存
     if (app.cache.fw) { _this.renderRecord(app.cache.fw); }
     wx.showNavigationBarLoading();
     wx.request({
-      url: 'https://we.cqu.pt/api/get_volunteer_info.php',
+      url: '',
       method:'post',
       data:app.key({
         openid: app._user.openid,

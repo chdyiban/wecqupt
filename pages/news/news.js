@@ -86,6 +86,9 @@ Page({
       _this.getNewsList();
     }
   },
+  chooseTags: function(){
+    
+  },
   //获取新闻列表
   getNewsList: function (typeId) {
     var _this = this;
@@ -99,13 +102,13 @@ Page({
       return;
     }
     typeId = typeId || _this.data.active.id;
-    if (_this.data.page >= 5) {
-      _this.setData({
-        'active.showMore': false,
-        'active.remind': '没有更多啦'
-      });
-      return false;
-    }
+    // if (_this.data.page >= 100) {
+    //   _this.setData({
+    //     'active.showMore': false,
+    //     'active.remind': '没有更多啦'
+    //   });
+    //   return false;
+    // }
     if (!_this.data.page) {
       _this.setData({
         'active.data': _this.data.list[typeId].storage
@@ -213,7 +216,6 @@ Page({
     //当滚动的top值最大或最小时，为什么要做这一步是因为在手机实测小程序的时候会发生滚动条回弹，所以为了处理回弹，设置默认最大最小值
     if (ev.scrollTop <= 0) {
       ev.scrollTop = 0;
-      console.log('chufa');
       _this.setData({
         headerStyle: 'relative',
       });

@@ -8,7 +8,7 @@
   top: 30rpx;
   width: 100%;
   color: #777;
-  font-size: 22pt;
+  font-size: 40rpx;
   line-height: 200%;
   text-align: center;
 }
@@ -16,7 +16,7 @@
   margin-top: 0;
 }
 .append-form {
-  padding: 150rpx 0 30rpx;
+  padding: 15rpx 0 30rpx;
 }
 .append-form .input-group {
   padding: 20rpx 8rpx;

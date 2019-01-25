@@ -1,2 +1,12 @@
 <!--new_detail.wxml-->
+
 <include src="../detail/detail.wxml" />
+
+<button class="shareButton" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">生成分享卡片</button>
+
+<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modalDlg" wx:if="{{showModal}}">
+  <image src="{{shareImage}}" class="share-image"></image>
+  <button bindtap="eventSave">下载到本地</button>
+</view>
+<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"/>

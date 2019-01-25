@@ -14,7 +14,8 @@ Page({
       '已指派': 'dispatched',
       '已完工': 'finished',
       '驳回': 'refused'
-    }
+    },
+    showLog: true,
   },
   //下拉更新
   onPullDownRefresh: function(){
@@ -87,6 +88,11 @@ Page({
     returnText = returnText.replace(/<\/?[^>]*>/g, '').replace(/[ | ]*\n/g, '\n').replace(/ /ig, '')
                   .replace(/&mdash/gi,'-').replace(/&ldquo/gi,'“').replace(/&rdquo/gi,'”');
     return returnText;
+  },
+  contact: function() {
+    this.setData({
+      showLog: !this.data.showLog
+    });
   }
   
 });

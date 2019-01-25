@@ -2,96 +2,122 @@
 
 <!--无图模式-->
 <template name="newsStyle0">
-    <navigator url="/pages/news/news/news_detail?id={{item.id}}">
-        <view class="article__item">
-            <view class="article__info">
-                <view class="article__title article__title__large">{{ item.title }}</view>
-                <view class="article__desc">
-                    <text class="article__source" wx:if="{{ item.tags }}">{{ item.tags }}</text>
-                    <text class="article__time">{{ item.create_date }}</text>
-                    <view class="article__count">
-                        <image class="article__icon" src="/images/news/template/icon-comt.png"></image>
-                        <text>{{ item.views }}</text>
-                        <!-- <image class="article__icon" src="/images/news/template/icon-priaze.png"></image>
-                        <text>{{ item.likes }}</text> -->
-                    </view>
-                </view>
-            </view>
+  <navigator url="/pages/news/news/news_detail?id={{item.id}}">
+    <view class="article__item">
+      <view class="article__info">
+        <view class="article__title article__title__large">{{ item.title }}</view>
+        <view class="article__desc">
+          <!-- <text class="article__source" wx:if="{{ item.tags }}">{{ item.tags }}</text> -->
+          <view class="article__time">
+            <image class="article__icon" src="/images/news/template/calendar.png"></image>
+            {{ item.create_date }}
+          </view>
+          <view class="article__count">
+            <image class="article__icon" src="/images/news/template/pageviews.png"></image>
+            <text>{{ item.views }}</text>
+            <image class="article__icon" src="/images/news/template/home-like.png"></image>
+            <text>{{ item.likes }}</text>
+          </view>
         </view>
-    </navigator>
+      </view>
+    </view>
+  </navigator>
 </template>
 
 <!--单大图模式-->
 <template name="newsStyle1">
-    <navigator url="/pages/news/news/news_detail?id={{item.id}}">
+  <navigator url="/pages/news/news/news_detail?id={{item.id}}">
     <view class="article__item article__item__cover">
-        <view class="article__cover">
-            <view class="article__title">{{ item.title }}</view>
-            <image class="article__ad" mode="aspectFill" src="{{ item.image }}"></image>
+      <view class="article__cover">
+        <view class="article__title">{{ item.title }}</view>
+        <image class="article__ad" mode="aspectFill" src="{{ item.image }}"></image>
+      </view>
+      <view class="article__desc">
+        <text class="article__source" wx:if="{{ item.tags }}">{{ item.tags }}</text>
+        <text class="article__time">{{ item.create_date }}</text>
+        <view class="article__count">
+          <image class="article__icon" src="/images/news/template/icon-comt.png"></image>
+          <text>{{ item.comments }}</text>
+          <image class="article__icon" src="/images/news/template/icon-priaze.png"></image>
+          <text>{{ item.likes }}</text>
         </view>
-        <view class="article__desc">
-            <text class="article__source" wx:if="{{ item.tags }}">{{ item.tags }}</text>
-            <text class="article__time">{{ item.create_date }}</text>
-            <view class="article__count">
-                <image class="article__icon" src="/images/news/template/icon-comt.png"></image>
-                <text>{{ item.comments }}</text>
-                <image class="article__icon" src="/images/news/template/icon-priaze.png"></image>
-                <text>{{ item.likes }}</text>
-            </view>
-        </view>
+      </view>
     </view>
-    </navigator>
+  </navigator>
 </template>
 
 <!--普通模式-->
-<template name="newsStyle2">
-    <navigator url="/pages/news/news/news_detail?id={{item.id}}">
+<template name="newsStyle4">
+  <navigator url="/pages/news/news/news_detail?id={{item.id}}">
     <view class="article__item">
-        <view class="article__thumb">
-            <image class="article__image" src="{{ item.image }}"></image>
-        </view>
-        <view class="article__info">
-            <view class="article__title article__title__large">{{ item.title }}</view>
-            <!-- <view class="article__desc">
+      <view class="article__thumb">
+        <image class="article__image" src="{{ item.image }}"></image>
+      </view>
+      <view class="article__info">
+        <view class="article__title article__title__large">{{ item.title }}</view>
+        <!-- <view class="article__desc">
                 {{ item.description }}
             </view> -->
-            <view class="article__desc">
-                <text wx:if="{{ item.tags }}" class="article__source">{{ item.tags }}</text>
-                <text class="article__time">{{ item.create_date }}</text>
-                <view class="article__count">
-                    <image class="article__icon" src="/images/news/template/icon-comt.png"></image>
-                    <text>{{ item.comments }}</text>
-                    <image class="article__icon" src="/images/news/template/icon-priaze.png"></image>
-                    <text>{{ item.likes }}</text>
-                </view>
-            </view>
+        <view class="article__desc">
+          <text wx:if="{{ item.tags }}" class="article__source">{{ item.tags }}</text>
+          <text class="article__time">{{ item.create_date }}</text>
+          <view class="article__count">
+            <image class="article__icon" src="/images/news/template/icon-comt.png"></image>
+            <text>{{ item.comments }}</text>
+            <image class="article__icon" src="/images/news/template/icon-priaze.png"></image>
+            <text>{{ item.likes }}</text>
+          </view>
         </view>
+      </view>
     </view>
-    </navigator>
+  </navigator>
 </template>
 
 <!--三图模式-->
 <template name="newsStyle3">
-    <navigator url="/pages/news/news/news_detail?id={{item.id}}">
+  <navigator url="/pages/news/news/news_detail?id={{item.id}}">
     <view class="article__item">
-        <view class="article__info">
-            <view class="article__title">{{ item.title }}</view>
-            <view class="article__images">
-                <image class="article__imgview" src="{{ item.icons[0] }}"></image>
-                <image class="article__imgview" src="{{ item.icons[1] }}"></image>
-                <image class="article__imgview" src="{{ item.icons[2] }}"></image>
-            </view>
-            <view class="article__desc">
-                <text class="article__source" wx:if="{{ item.tag }}">{{ item.tag }}</text>
-                <text class="article__time">{{ item.time }}</text>
-                <view class="article__count">
-                    <image class="article__icon" src="/images/news/template/icon-comt.png"></image>
-                    <text>{{ item.comment }}</text>
-                    <image class="article__icon" src="/images/news/template/icon-priaze.png"></image>
-                    <text>{{ item.zan }}</text>
-                </view>
-            </view>
+      <view class="article__info">
+        <view class="article__title">{{ item.title }}</view>
+        <view class="article__images">
+          <image class="article__imgview" src="{{ item.icons[0] }}"></image>
+          <image class="article__imgview" src="{{ item.icons[1] }}"></image>
+          <image class="article__imgview" src="{{ item.icons[2] }}"></image>
+        </view>
+        <view class="article__desc">
+          <text class="article__source" wx:if="{{ item.tag }}">{{ item.tag }}</text>
+          <text class="article__time">{{ item.time }}</text>
+          <view class="article__count">
+            <image class="article__icon" src="/images/news/template/icon-comt.png"></image>
+            <text>{{ item.comments }}</text>
+            <image class="article__icon" src="/images/news/template/icon-priaze.png"></image>
+            <text>{{ item.likes }}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </navigator>
+</template>
+
+<template name="newsStyle2">
+  <navigator url="/pages/news/news/news_detail?id={{item.id}}">
+    <view class="common-list">
+        <view class="list-item has-img" index="{{index}}" id="{{item.id}}" bindtap="redictDetail">
+          <view class="content-title">
+            <text>{{ item.title }}</text>
+          </view>
+          <view class="content-date">
+            <image src="/images/news/template/calendar.png"></image>
+            <text>{{item.create_date}}</text>
+            <image src="/images/news/template/comments.png"></image>
+            <text class="">{{item.comments}}</text>
+            <image src="/images/news/template/pageviews.png"></image>
+            <text class="">{{item.views}}</text>
+            <image src="/images/news/template/home-like.png"></image>
+            <text class="">{{item.likes}}</text>
+          </view>
+          <image src="{{item.image}}" mode="aspectFill" class="cover"></image>
         </view>
     </view>
-    </navigator>
+  </navigator>
 </template>

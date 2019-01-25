@@ -2,7 +2,6 @@
  * 小程序配置文件
  */
 var system = wx.getSystemInfoSync();
-console.log(system);
 // 此处主机域名修改成腾讯云解决方案分配的域名
 if (system.brand == 'devtoolss') {
   var host = 'http://localhost/fastadmin';
@@ -53,6 +52,7 @@ var config = {
     //新闻模块-搜索提示
     newsSearchSuggest: `${api}/news/search/chssuggest`,
     newsSearch: `${api}/news/search/query`,
+    newsShareQrCode: `${api}/Wxcode/getWXACodeUnlimit`,
 
     //门户绑定
     bindUrl: `${api}/wxuser/bind`,

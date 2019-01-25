@@ -18,6 +18,9 @@
         </view>
       </block>
     </scroll-view>
+    <navigator class="tags-more" url="tags/tags">
+     <image src="/images/news/more.png"></image>
+    </navigator>
   </view>
   <!--新闻列表-->
   <view class="articles">
