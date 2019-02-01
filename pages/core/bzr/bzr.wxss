@@ -1,0 +1,14 @@
+/**xf.wxss**/
+@import "/utils/ColorUI/icon.wxss";
+@import "/utils/ColorUI/colorui.wxss";
+
+.rate-star{
+  color:orange;
+}
+
+.footer-button{
+  z-index: 999;
+  position:fixed;
+  bottom:0px;
+  width:100%;
+}

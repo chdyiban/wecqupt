@@ -46,12 +46,17 @@
             <text class="desc-time">2018.10.24</text>
           </view>
           <text class="desc-content">“长大易班”小程序开启全面公测，物业报修已经正式启用。新闻</text>
+          <view class="desc-title">
+            <text class="desc-v">v0.2.0</text>
+            <text class="desc-time">2019.02.01</text>
+          </view>
+          <text class="desc-content">班主任评价模块上线</text>
       </view>
     </view>
   </view>
   <view class="footer">
     <view class="footer-lanshan">
-        <image src="/images/more/lanshan.png"></image>
+        <image src="/images/more/logo.png"></image>
         <text>长安大学易班工作站</text>
     </view>
     <text>长安大学学生工作部（处）</text>

@@ -43,6 +43,11 @@ var config = {
     //获取空教室
     emptyRoomUrl: `${api}/portal/empty_room`,
 
+    //班主任评价
+    adviserUrl: `${api}/adviser/index`,
+    //班主任提交评价
+    adviserSubmitUrl: `${api}/adviser/submit`,
+
     //新闻栏目导航
     newsNavUrl: `${api}/news/information/nav`,
     //新闻列表

@@ -1,7 +1,7 @@
 var config = require('./config')
 //app.js
 App({
-  version: 'v0.1.8', //版本号
+  version: 'v0.2.0', //版本号
   onLaunch: function() {
     var _this = this;
     //读取缓存
@@ -18,7 +18,8 @@ App({
           _this.cache = {};
           wx.clearStorage();
         } else {
-          _this._user.wx = _this.cache.userinfo.userInfo || {};
+          //_this.cache.userinfo不存在，获取不到，会报错。
+          //_this._user.wx = _this.cache.userinfo.userInfo || {};
           _this.processData(_this.cache.userdata);
         }
       }

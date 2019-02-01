@@ -1,6 +1,3 @@
-{    
-    "navigationBarBackgroundColor": "#9f8bea",
-    "navigationBarTitleText": "学费查询",
-    "backgroundColor": "#9f8bea",
-    "enablePullDownRefresh": false
+{
+  "usingComponents": {}
 }

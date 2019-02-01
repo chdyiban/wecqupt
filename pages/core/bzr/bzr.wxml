@@ -1,0 +1,99 @@
+<view class="cu-bar solid-bottom">
+  <view class='action'>
+    <text class='icon-titles text-orange '></text> 我的班主任
+  </view>
+</view>
+<view class="cu-card dynamic" wx:if="{{step === 0}}">
+  <view class="cu-item shadow">
+    <view class='solids-bottom padding-xs flex align-center'>
+      <view class='flex-sub text-center'>
+        <view class='solid-bottom text-xsl padding'>
+          <view class="cu-avatar xl round margin-left" style="background-image:url('https://yibancdn.ohao.ren/who.jpg');"></view>
+        </view>
+        <view class='padding'>{{rate.msg}}</view>
+        <view class='padding'>请联系客服QQ群：467498640</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-card dynamic" wx:else>
+  <view class="cu-item shadow">
+    <view class=" cu-list menu menu-avatar ">
+      <view class="cu-item ">
+        <view class="cu-avatar round lg" style="background-image:url(https://image.weilanwl.com/img/square-1.jpg); "></view>
+        <view class='content flex-sub'>
+          <view>{{adviser.adviser_name}} - {{adviser.adviser_college}}</view>
+          <view class='text-gray text-sm flex justify-between'>
+            {{adviser.adviser_class}}班班主任
+          </view>
+        </view>
+        <view class='content flex-sub'>
+          <view class="padding flex justify-end">
+
+            <view wx:if="{{step === 1}}" class='cu-tag bg-green round'>{{rate.msg}}</view>
+            <view wx:if="{{step === 3 || step === 2}}" class='cu-tag line-green round'>{{rate.msg}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="text-content" wx:if="{{step === 2}}">
+      班主任尚未上传<view class='cu-tag bg-blue light sm round'>工作日志</view>，暂时不能评价,请等待。
+    </view>
+    <view class="text-content" wx:else>
+      在2018-2019年班主任工作中，共参加班级集体活动
+      <view class='cu-tag bg-red light sm round'>{{adviser.working_logs.input1}}</view>次，参加班会
+      <view class='cu-tag bg-red light sm round'>{{adviser.working_logs.input2}}</view>次，单独辅导学生
+      <view class='cu-tag bg-red light sm round'>{{adviser.working_logs.input3}}</view>人次。
+    </view>
+  </view>
+</view>
+
+<view class="cu-bar solid-bottom" wx:if="{{step === 1}}">
+  <view class='action'>
+    <text class='icon-title text-orange '></text> {{mainTitle}}
+  </view>
+</view>
+<view class='padding' wx:if="{{step === 1}}">
+  <view wx:for="{{questionnaire}}" wx:key="index" wx:for-item="i">
+    <view class="padding-lr bg-white {{index? 'margin-top' :''}}">
+      <view class='solid-bottom padding'>
+        <text class='text'>{{index+1}}.{{i.title}}</text>
+        <text wx:if="{{i.type === '3'}}" class='text'>{{starMap[star-1]}}</text>
+      </view>
+      <view class='padding'>
+        <view wx:if="{{i.type == 3}}">
+          <view class="rate-star" data-index="{{index}}" bindtap="myStarChoose">
+            <block wx:key="key" wx:for="{{starMap}}">
+              <text wx:if="{{star>=index+1}}" style="padding-right: .5em" class="zan-c-red" data-star="{{index+1}}">★</text>
+              <text wx:if="{{star<index+1}}" style="padding-right: .5em" class="zan-c-gray-dark" data-star="{{index+1}}">☆</text>
+            </block>
+          </view>
+        </view>
+        <view wx:else>
+          <radio-group class="block" data-index="{{index}}" bindchange="radioChange">
+            <label class="radio" wx:for="{{i.options}}" wx:key="index" wx:for-item="k">
+              <radio value="{{index}}" />{{k}}
+            </label>
+          </radio-group>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='bg-white padding-lr' wx:if="{{step === 3}}">
+  <view class='padding-xs flex align-center'>
+    <view class='flex-sub text-center'>
+      <view class='solid-bottom text-xsl padding'>
+        <text class=' icon-roundcheckfill text-green'></text>
+      </view>
+      <view class='padding'>已完成评价!</view>
+    </view>
+  </view>
+</view>
+<view style="margin-bottom:150rpx"></view>
+<view class="bg-white text-center footer-button">
+  <view class="padding flex flex-direction">
+    <button wx:if="{{step === 1}}" class='cu-btn bg-green lg shadow-blur bg-green' bindtap="submit">提交评价</button>
+    <button wx:if="{{step === 3}}" class='cu-btn bg-green lg shadow-blur bg-green' disabled bindtap="submit">已完成评价</button>
+  </view>
+</view>

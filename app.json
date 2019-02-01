@@ -22,6 +22,7 @@
     "pages/core/bx/bx_apply",
     "pages/core/bx/bx_detail",
     "pages/core/xc/xc",
+    "pages/core/bzr/bzr",
     "pages/core/fw/fw",
     "pages/more/help/volunteerHelp",
     "pages/news/tags/tags"
