@@ -1,5 +1,24 @@
 <!--bx.wxml-->
 <view class="container">
+  <view class="bx-head">
+    <view class="bx-title">
+      <text class="title-name">宿舍报修</text>
+      <text class="bx-text">试运行</text>
+    </view>
+    <view bindtap="contact">
+      <text class="bx-right">公告</text>
+    </view>
+  </view>
+  <view class="describe" wx:if="{{!showLog}}">
+    <text class="desc-title"></text>
+    <text class="desc-content">宿舍报修正在试运行阶段，目前仅支持渭水校区9号及10号公寓使用，其他公寓将陆续开放在线报修。</text>
+    <text class="desc-content">紧急报修联系方式:</text>
+    <view class="desc-list">
+      <text class="desc-list-item">网络报修:83135126</text>
+      <text class="desc-list-item">暖气报修:62805090</text>
+      <text class="desc-list-item">空调报修:87575213 / 61859786</text>
+    </view>
+  </view>
   <view wx:if="{{remind}}" class="remind-box">
     <image wx:if="{{remind == '加载中'}}" class="remind-img" src="/images/index/loading.gif"></image>
     <block wx:else>
@@ -8,25 +27,6 @@
     </block>
   </view>
   <block wx:else>
-    <view class="bx-head">
-      <view class="bx-title">
-        <text class="title-name">宿舍报修</text>
-        <text class="bx-text">试运行</text>
-      </view>
-      <view bindtap="contact">
-        <text class="bx-right">公告</text>
-      </view>
-    </view>
-    <view class="describe" wx:if="{{!showLog}}">
-      <text class="desc-title"></text>
-      <text class="desc-content">宿舍报修正在试运行阶段，目前仅支持渭水校区9号及10号公寓使用，其他公寓将陆续开放在线报修。</text>
-      <text class="desc-content">紧急报修联系方式:</text>
-      <view class="desc-list">
-        <text class="desc-list-item">网络报修:83135126</text>
-        <text class="desc-list-item">暖气报修:62805090</text>
-        <text class="desc-list-item">空调报修:87575213 / 61859786</text>
-      </view>
-    </view>
     <text class="service-process-title">申报记录（{{count}}条）</text>
     <block wx:for="{{list}}" wx:key="wx_djh">
       <view class="process review-process">
