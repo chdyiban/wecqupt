@@ -1,90 +1,98 @@
 <!--more.wxml-->
-<view class="container">
+<view class="padding ucenter-bg">
+  <view class="padding radius shadow-lg bg-white">
+      <block wx:if="{{is_bind}}">
+          <view class="info-hd">
+            <view class="user-avatar">
+              <open-data type="userAvatarUrl"></open-data>
+            </view>
+            <view class="user-title">
+              <view class="user-name">
+                <text>{{user.we.name}}</text>
+                <text wx:if="{{user.we.more.sex === '男'}}" class="icon-male text-blue"></text>
+                <text wx:elif="{{user.we.more.sex === '女'}}" class="icon-female text-pink"></text>
+              </view>
+              <text class="user-id">{{user.we.id}}</text>
+            </view>
+            <view class="time-box">
+              <text class="time-term">{{time.term}}</text>
+              <text class="time-now">第{{time.week}}周 - 星期{{time.day}}</text>
+            </view>
+          </view>
+          <view class="info-bd" wx:if="{{!user.teacher}}">
+            <view class="info-bd-left">
+              <!-- <text class="user-text">年级：{{user.we.more.nj}}级</text> -->
 
-  <view class="user-info-box">
-    <block wx:if="{{is_bind}}">
-      <view class="user-info">
+              <text class="user-text">宿舍：{{user.we.info.build}}#{{user.we.info.room}}</text>
+              <text class="user-text">手机：{{user.we.info.mobile}}</text>
+            </view>
+            <view class="info-bd-right">
+              <text class="user-text">学院：{{user.we.info.yxm}}</text>
+              <text class="user-text">专业：{{user.we.more.zym}}</text>
+            </view>
+          </view>
+          <view class="info-bd" wx:else>
+            <view class="info-bd-left">
+              <text class="user-text">工号：{{user.we.id}}</text>
+              <text class="user-text">学院：{{user.we.info.yxm}}</text>
+              <text class="user-text" wx:if="{{user.we.more.jysm}}">教研室：{{user.we.more.jysm}} {{user.we.more.zc}}</text>
+            </view>
+          </view>
+        
+      </block>
+      <navigator url="/pages/more/login" wx:else>
         <view class="info-hd">
-          <open-data class="user-avatar" type="userAvatarUrl"></open-data>
+          <image class="user-avatar" src="{{user.wx.avatarUrl}}"></image>
           <view class="user-title">
-            <text class="user-name">{{user.we.name}}</text>
-            <text class="user-id">{{user.we.id}}</text>
+            <text class="user-name">{{user.wx.nickName}}</text>
+            <text class="user-id">未绑定</text>
           </view>
-          <view class="time-box">
-            <text class="time-term">{{time.term}}</text>
-            <text class="time-now">第{{time.week}}周 - 星期{{time.day}}</text>
-          </view>
-        </view>
-        <view class="info-bd" wx:if="{{!user.teacher}}">
-          <view class="info-bd-left">
-            <text class="user-text">性别：{{user.we.more.sex}}</text>
-            <!-- <text class="user-text">年级：{{user.we.more.nj}}级</text> -->
-            
-            <text class="user-text">宿舍：{{user.we.info.build}}#{{user.we.info.room}}</text>
-            <text class="user-text">手机：{{user.we.info.mobile}}</text>
-          </view>
-          <view class="info-bd-right">
-            <text class="user-text">学院：{{user.we.info.yxm}}</text>
-            <text class="user-text">专业：{{user.we.more.zym}}</text>
-          </view>
-        </view>
-        <view class="info-bd" wx:else>
-          <view class="info-bd-left">
-            <text class="user-text">工号：{{user.we.id}}</text>
-            <text class="user-text">学院：{{user.we.info.yxm}}</text>
-            <text class="user-text" wx:if="{{user.we.more.jysm}}">教研室：{{user.we.more.jysm}} {{user.we.more.zc}}</text>
-          </view>
-        </view>
-      </view>
-      <navigator url="append" class="append-link" wx:if="{{!user.teacher}}">
-        <view class="more-btn">
-          <image class="btn-icon" src="/images/more/append.png"></image>
-          <text class="btn-text">完善信息</text>
+          <text class="bind-btn">前往绑定</text>
           <view class="btn-open">
             <image class="btn-enter" src="/images/more/enter.png"></image>
           </view>
         </view>
       </navigator>
-    </block>
-    <navigator url="/pages/more/login" class="user-info" wx:else>
-      <view class="info-hd">
-        <image class="user-avatar" src="{{user.wx.avatarUrl}}"></image>
-        <view class="user-title">
-          <text class="user-name">{{user.wx.nickName}}</text>
-          <text class="user-id">未绑定</text>
-        </view>
-        <text class="bind-btn">前往绑定</text>
-        <view class="btn-open">
-          <image class="btn-enter" src="/images/more/enter.png"></image>
-        </view>
-      </view>
+  </view>
+</view>
+<view wx:if="{{is_bind}}" class="cu-list menu sm-border">
+  <view class="cu-item arrow" wx:if="{{!user.teacher}}">
+    <navigator class="content" url="append" hover-class="none">
+      <text class='icon-formfill'></text>
+      <text class='text-grey'>完善信息</text>
     </navigator>
   </view>
-
-  <view class="more-list">
-    <navigator url="/pages/more/issues" class="issue-link">
-      <view class="more-btn">
-        <image class="btn-icon" src="/images/more/issue.png"></image>
-        <text class="btn-text">反馈</text>
-        <view class="btn-open">
-          <image class="btn-enter" src="/images/more/enter.png"></image>
-        </view>
-      </view>
-    </navigator>
-    <navigator url="about" class="about-link">
-      <view class="more-btn">
-        <image class="btn-icon" src="/images/more/about.png"></image>
-        <text class="btn-text">关于</text>
-        <view class="btn-open">
-            <image class="btn-enter" src="/images/more/enter.png"></image>
-        </view>
-      </view>
+  <view class="cu-item arrow">
+    <button class='cu-btn content' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+      <text class='icon-mobile'></text>
+      <text class='text-grey'>绑定手机</text>
+    </button>
+  </view>
+</view>
+<view class="cu-list menu sm-border">
+  <view class="cu-item arrow">
+    <button class='cu-btn content' open-type='contact'>
+      <text class='icon-service text-yellow'></text>
+      <text class='text-grey'>智能客服</text>
+    </button>
+  </view>
+  <view class="cu-item arrow">
+    <button class='cu-btn content' open-type='feedback'>
+      <text class='icon-writefill text-cyan'></text>
+      <text class='text-grey'>意见反馈</text>
+    </button>
+  </view>
+  <view class="cu-item arrow">
+    <navigator class='content' url='about' hover-class='none'>
+      <text class='icon-we text-cyan'></text>
+      <text class='text-grey'>关于我们</text>
     </navigator>
   </view>
+</view>
 
-  <navigator url="login" class="login-btn">
-    <text wx:if="{{is_bind}}">切换绑定</text>
-    <text wx:else>立即绑定</text>
+<view class="padding flex flex-direction">
+  <navigator url="login">
+    <button wx:if="{{is_bind}}" class='cu-btn block bg-red shadow-blur lg'>切换绑定</button>
+    <button wx:else class='cu-btn block bg-red shadow-blur lg'>立即绑定</button>
   </navigator>
-
 </view>

@@ -63,6 +63,8 @@ var config = {
     bindUrl: `${api}/wxuser/bind`,
     //完善信息
     appendUrl: `${api}/wxuser/append`,
+    //微信获取授权手机号码并上传
+    wxmobileUrl: `${api}/wxuser/wxmoblie/`,
 
     //上传
     uploadTokenUrl: `${api}/upload/token`,

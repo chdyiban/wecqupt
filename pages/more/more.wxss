@@ -1,7 +1,15 @@
 /**more.wxss**/
+@import "/utils/ColorUI/icon.wxss";
+@import "/utils/ColorUI/colorui.wxss";
 .container{
   background-color: #f6f6f6;
   padding: 0;
+}
+.ucenter-bg{
+  background-image: url('https://yibancdn.ohao.ren/weapp/ucenter_bg.png');
+  justify-content: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 .user-info, .more-btn {
   display: flex;
@@ -16,8 +24,8 @@
 }
 .user-info {
   flex-direction: column;
-  margin: 30rpx 0 -1px;
-  padding: 25rpx 30rpx 20rpx;
+  /* margin: 30rpx 0 -1px;
+  padding: 25rpx 30rpx 20rpx; */
 }
 .info-hd {
   display: flex;
@@ -27,9 +35,11 @@
   color: #aaa;
 }
 .user-avatar {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 5px;
+  width: 100rpx;
+  height: 100rpx;
+  overflow: hidden;
+  border-radius: 6rpx;
+  background-color: #aaa;
 }
 .user-title {
   flex: 1;
