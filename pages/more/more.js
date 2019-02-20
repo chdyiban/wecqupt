@@ -31,6 +31,7 @@ Page({
       url: config.service.wxmobileUrl,
       method: 'POST',
       data: app.key({
+        openid: app._user.openid,
         iv: e.detail.iv,
         encryptedData: e.detail.encryptedData
       }),
