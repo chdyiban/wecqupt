@@ -250,11 +250,12 @@ App({
   processData: function(key){
     var _this = this;
     var data = JSON.parse(_this.util.base64.decode(key));
-    //console.log(data);
+    console.log(data);
     _this._user.is_bind = data.is_bind;
     _this._user.openid = data.user.openid;
     _this._user.teacher = (data.user.type == '教职工');
     _this._user.we = data.user;
+    _this._user.wxmobile = data.user.info.wxmobile;
     _this._time = data.time;
     _this._t = data['token'];
     return data;

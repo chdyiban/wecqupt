@@ -4,7 +4,8 @@ var app = getApp();
 var config = require('../../config');
 Page({
   data: {
-    user: {}
+    user: {},
+    iswxmobile:app._user.wxmobile,
   },
   onShow: function(){
     this.getData();
@@ -23,10 +24,11 @@ Page({
     });
   },
   getPhoneNumber(e) {
+    var _this = this
     console.log(e.detail.errMsg)
     console.log(e.detail.iv)
     console.log(e.detail.encryptedData)
-    wx.showNavigationBarLoading();
+    wx.showNavigationBarLoading()
     wx.request({
       url: config.service.wxmobileUrl,
       method: 'POST',
@@ -37,8 +39,13 @@ Page({
       }),
       success: function (res) {
         if (res.data && res.data.status === 200) {
-          var info = res.data.data;
-          console.log(info)
+          console.log(app._user)
+          app._user.we.info.mobile = res.data.mobile
+          _this.setData({
+            'user': app._user,
+            'iswxmobile': true
+          })
+
         } else {
 
         }
