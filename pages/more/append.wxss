@@ -1,5 +1,7 @@
 /**append.wxss**/
 @import './login.wxss';
+@import "/utils/ColorUI/icon.wxss";
+@import "/utils/ColorUI/colorui.wxss";
 .container{
   height: auto;
 }
@@ -33,7 +35,9 @@
   font-size: 11pt;
   padding: 0 20rpx;
 }
-
+.append-form .append-mobile{
+  color: #ccc;
+}
 .volunteer-help {
   display: flex;
   align-items: center;

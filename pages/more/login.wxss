@@ -82,6 +82,9 @@
   width: 2250rpx;
   animation: wave 10s linear infinite;
 }
+.wave{
+  max-width: none;
+}
 .wave-bg {
   z-index: 1;
   animation: wave-bg 10.25s linear infinite;

@@ -1,7 +1,7 @@
 var config = require('./config')
 //app.js
 App({
-  version: 'v0.2.0', //版本号
+  version: 'v0.2.1', //版本号
   onLaunch: function() {
     var _this = this;
     //读取缓存

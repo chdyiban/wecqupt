@@ -94,6 +94,41 @@ Page({
       url: './help/volunteerHelp',
     })
   },
+  getPhoneNumber(e) {
+    var _this = this
+    wx.showNavigationBarLoading()
+    wx.request({
+      url: config.service.wxmobileUrl,
+      method: 'POST',
+      data: app.key({
+        openid: app._user.openid,
+        iv: e.detail.iv,
+        encryptedData: e.detail.encryptedData
+      }),
+      success: function (res) {
+        if (res.data && res.data.status === 200) {
+          app._user.we.info.mobile = res.data.mobile
+          _this.setData({
+            'mobile':res.data.mobile
+          })
+          wx.showToast({
+            title: '绑定成功',
+            icon: 'success',
+            duration: 2000
+          });
+        } else {
+
+        }
+      },
+      fail: function (res) {
+
+        console.warn('网络错误');
+      },
+      complete: function () {
+        wx.hideNavigationBarLoading();
+      }
+    });
+  },
   confirm: function(){
     var _this = this;
     if(app.g_status){
