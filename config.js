@@ -59,6 +59,11 @@ var config = {
     newsSearch: `${api}/news/search/query`,
     newsShareQrCode: `${api}/Wxcode/getWXACodeUnlimit`,
 
+    //运动会
+    sportsInit: `${api}/sports/index`,
+    sportsScoreDetail: `${api}/sports/detail`,
+    sportsStepsDonate: `${api}/sports/donate`,
+
     //门户绑定
     bindUrl: `${api}/wxuser/bind`,
     //完善信息

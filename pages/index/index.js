@@ -12,7 +12,7 @@ Page({
         { id: 'ykt', name: '一卡通', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'kb', name: '课表查询', disabled: false, teacher_disabled: true, offline_disabled: false },
         { id: 'cj', name: '成绩查询', disabled: false, teacher_disabled: true, offline_disabled: false },
-        { id: 'ks', name: '考试安排', disabled: true, teacher_disabled: false, offline_disabled: false },
+        { id: 'ydh', name: '运动会', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'kjs', name: '空教室', disabled: true, teacher_disabled: false, offline_disabled: true },
         { id: 'xs', name: '学生查询', disabled: true, teacher_disabled: false, offline_disabled: true },
         { id: 'jy', name: '借阅信息', disabled: false, teacher_disabled: false, offline_disabled: false },
@@ -326,52 +326,52 @@ Page({
     });
 
     //借阅信息渲染
-    function jyRender(info){
-      if(parseInt(info.books_num) && info.book_list && info.book_list.length){
-        var nowTime = new Date().getTime();
-        info.book_list.map(function(e){
-          var oDate = e.yhrq.split('-'),
-              oTime = new Date(oDate[0], oDate[1]-1, oDate[2]).getTime();
-          e.timing = parseInt((oTime - nowTime) / 1000 / 60 / 60 / 24);
-          return e;
-        });
-        _this.setData({
-          'card.jy.data': info,
-          'card.jy.show': true,
-          'remind': ''
-        });
-      }
-    }
-    //获取借阅信息
-    loadsum++; //新增正在请求连接
-    wx.request({
-      url: config.service.booksUrl,
-      method: 'POST',
-      data: app.key({
-        ykth: app._user.we.ykth
-      }),
-      success: function(res) {
-        if(res.data && res.data.status === 200){
-          var info = res.data.data;
-          if(info){
-            //保存借阅缓存
-            app.saveCache('jy', info);
-            jyRender(info);
-          }
-        }else{ app.removeCache('jy'); }
-      },
-      complete: function() {
-        loadsum--; //减少正在请求连接
-        if(!loadsum){
-          if(_this.data.remind){
-            _this.setData({
-              remind: '首页暂无展示'
-            });
-          }
-          wx.hideNavigationBarLoading();
-          wx.stopPullDownRefresh();
-        }
-      }
-    });
+    // function jyRender(info){
+    //   if(parseInt(info.books_num) && info.book_list && info.book_list.length){
+    //     var nowTime = new Date().getTime();
+    //     info.book_list.map(function(e){
+    //       var oDate = e.yhrq.split('-'),
+    //           oTime = new Date(oDate[0], oDate[1]-1, oDate[2]).getTime();
+    //       e.timing = parseInt((oTime - nowTime) / 1000 / 60 / 60 / 24);
+    //       return e;
+    //     });
+    //     _this.setData({
+    //       'card.jy.data': info,
+    //       'card.jy.show': true,
+    //       'remind': ''
+    //     });
+    //   }
+    // }
+    // //获取借阅信息
+    // loadsum++; //新增正在请求连接
+    // wx.request({
+    //   url: config.service.booksUrl,
+    //   method: 'POST',
+    //   data: app.key({
+    //     ykth: app._user.we.ykth
+    //   }),
+    //   success: function(res) {
+    //     if(res.data && res.data.status === 200){
+    //       var info = res.data.data;
+    //       if(info){
+    //         //保存借阅缓存
+    //         app.saveCache('jy', info);
+    //         jyRender(info);
+    //       }
+    //     }else{ app.removeCache('jy'); }
+    //   },
+    //   complete: function() {
+    //     loadsum--; //减少正在请求连接
+    //     if(!loadsum){
+    //       if(_this.data.remind){
+    //         _this.setData({
+    //           remind: '首页暂无展示'
+    //         });
+    //       }
+    //       wx.hideNavigationBarLoading();
+    //       wx.stopPullDownRefresh();
+    //     }
+    //   }
+    // });
   }
 });

@@ -1,0 +1,7 @@
+/* pages/core/ydh/ydh.wxss */
+@import "/utils/ColorUI/icon.wxss";
+@import "/utils/ColorUI/colorui.wxss";
+
+.score-panel{
+  height: 60vh;
+}

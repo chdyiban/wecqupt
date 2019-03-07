@@ -25,7 +25,8 @@
     "pages/core/bzr/bzr",
     "pages/core/fw/fw",
     "pages/more/help/volunteerHelp",
-    "pages/news/tags/tags"
+    "pages/news/tags/tags",
+    "pages/core/ydh/ydh"
   ],
   "window": {
     "navigationBarBackgroundColor": "#0167b8",

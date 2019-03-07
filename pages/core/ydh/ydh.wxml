@@ -1,0 +1,360 @@
+<scroll-view scroll-x class="bg-white nav text-center">
+  <view class="cu-item {{0==tabCur?'text-blue cur':''}}" bindtap='tabSelect' data-id="0">
+    热度榜
+  </view>
+  <view class="cu-item {{1==tabCur?'text-blue cur':''}}" bindtap='tabSelect' data-id="1">
+    积分榜
+  </view>
+  <view class="cu-item {{2==tabCur?'text-blue cur':''}}" bindtap='tabSelect' data-id="2">
+    赛程
+  </view>
+</scroll-view>
+
+<!-- heat list start-->
+<view wx:if="{{tabCur == 0}}">
+  <!-- card start-->
+  <view class="padding">
+    <view class="card padding radius shadow-blur bg-blue">
+      <view class="flex justify-between align-center">
+      <view class=''>
+        <text class="text-xl">信息工程学院</text>
+      </view>
+      <view class='cu-tag bg-white sm round margin-left'>
+              <text class='icon-hot text-red'></text>95℃</view>
+      </view>
+      <view class='margin-top'>
+        <text class='icon-rank'></text> 
+        <text class="text-xxl"> 100,324</text> 步（今日：7,256步）
+      </view>
+      <view>
+        <text class="icon-group"> </text> 792 人
+      </view>
+      <!-- <view>
+        <text class="icon-my"> </text>
+        <text class=""> 12k+ 步（个人捐赠）</text>
+      </view> -->
+
+      <view class='margin-top solid-top'>
+        <text class="text-sm">累计步数可兑换哟，还没想好。</text>
+      </view>
+    </view>
+  </view>
+  
+  <!--two buttons -->
+  <view class="flex">
+    <view class='flex-sub margin-left margin-right radius'>
+      <view class="flex flex-direction">
+        <button class='cu-btn bg-grey lg shadow-blur' open-type="share">邀请捐赠</button>
+      </view>
+    </view>
+    <view class='flex-sub margin-right radius'>
+      <view class="flex flex-direction">
+      <button class='cu-btn bg-blue lg shadow-blur' bindtap="donate">捐赠步数+</button>
+    </view>
+    </view>
+  </view>
+  <!--two end -->
+  <!-- card end-->
+
+<view class="cu-bar bg-white solid-bottom margin-top">
+  <view class='action'>
+    <text class='icon-titles text-blue '></text> 其他院系活跃度
+  </view>
+</view>
+  <view class="cu-card case no-card">
+    <view class="cu-list menu menu-avatar">
+      <!--cu-item 1-->
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url(https://image.weilanwl.com/img/square-4.jpg);">
+        </view>
+        <view class='content'>
+          <view>
+            信息工程学院
+            <view class="cu-tag bg-orange sm light round">
+              <text class="text-orange">No.1</text>
+            </view>
+          </view>
+          <view class="text-gray text-sm">
+            <text class="icon-friend"></text> 780次
+            <text class="icon-rank"></text> 105,000,33步
+          </view>
+        </view>
+        <view class="flex content justify-end">
+          <view class='cu-tag bg-red xs light round'>
+              <text class='icon-hot text-red'></text>95℃</view>
+        </view>
+      </view>
+      <!--cu-item 1-->
+      <!--cu-item 1-->
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url(https://image.weilanwl.com/img/square-4.jpg);">
+        </view>
+        <view class='content'>
+          <view>
+            机械学院
+            <view class="cu-tag bg-orange sm light round">
+              <text class="text-orange">No.2</text>
+            </view>
+          </view>
+          <view class="text-gray text-sm">
+            <text class="icon-friend"></text> 780次
+            <text class="icon-rank"></text> 105,000,33步
+          </view>
+        </view>
+        <view class="flex content justify-end">
+           <view class='cu-tag bg-red xs light round'>
+              <text class='icon-hot text-red'></text>73℃</view>
+        </view>
+      </view>
+      <!--cu-item 1-->
+    </view>
+
+  </view>
+</view>
+<!-- heat list end-->
+<view wx:if="{{tabCur == 1}}">
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class='action'>
+      <text class='icon-rankfill text-orange '></text> 积分榜
+    </view>
+    <view class='action'>
+      <view class="cu-tag round line-grey light">更新时间：2019-04-17 19:00</view>
+    </view>
+  </view>
+  <view class="cu-list menu sm-border">
+    <view class="cu-item">
+      <view class='content' bindtap="showModal" data-target="6">
+        <text class='icon-upstage text-red'></text>
+        <text>信息学院(新页面demo)</text>
+      </view>
+      <view class="action">
+        <view class="cu-capsule radius">
+          <view class='cu-tag bg-red '>
+            第1名
+          </view>
+          <view class="cu-tag line-red">
+            2320分
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class='content' bindtap="showModal" data-target="6">
+        <text class='icon-upstage text-orange'></text>
+        <text>公路学院（底部modal）</text>
+      </view>
+      <view class="action">
+        <view class="cu-capsule radius">
+          <view class='cu-tag bg-orange '>
+            第2名
+          </view>
+          <view class="cu-tag line-orange">
+            1970分
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class='content'>
+        <text class='icon-upstage text-yellow'></text>
+        <text>汽车学院</text>
+      </view>
+      <view class="action">
+        <view class="cu-capsule radius">
+          <view class='cu-tag bg-yellow '>
+            第3名
+          </view>
+          <view class="cu-tag line-yellow">
+            1666分
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class='content'>
+        <text class='icon-upstage text-grey'></text>
+        <text>汽车学院</text>
+      </view>
+      <view class="action">
+        <view class="cu-capsule radius">
+          <view class='cu-tag bg-grey'>
+            第4名
+          </view>
+          <view class="cu-tag line-grey">
+            0分
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class='content'>
+        <text class='icon-upstage text-grey'></text>
+        <text>机械学院</text>
+      </view>
+      <view class="action">
+        <view class="cu-capsule radius">
+          <view class='cu-tag bg-grey'>
+            第5名
+          </view>
+          <view class="cu-tag line-grey">
+            0分
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class='content'>
+        <text class='icon-upstage text-grey'></text>
+        <text>经管学院</text>
+      </view>
+      <view class="action">
+        <view class="cu-capsule radius">
+          <view class='cu-tag bg-grey'>
+            第5名
+          </view>
+          <view class="cu-tag line-grey">
+            0分
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class='content'>
+        <text class='icon-upstage text-grey'></text>
+        <text>电控学院</text>
+      </view>
+      <view class="action">
+        <view class="cu-capsule radius">
+          <view class='cu-tag bg-grey'>
+            第6名
+          </view>
+          <view class="cu-tag line-grey">
+            0分
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class='content'>
+        <text class='icon-upstage text-grey'></text>
+        <text>建筑学院</text>
+      </view>
+      <view class="action">
+        <view class="cu-capsule radius">
+          <view class='cu-tag bg-grey'>
+            第7名
+          </view>
+          <view class="cu-tag line-grey">
+            0分
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class='content'>
+        <text class='icon-upstage text-grey'></text>
+        <text>资源学院</text>
+      </view>
+      <view class="action">
+        <view class="cu-capsule radius">
+          <view class='cu-tag bg-grey'>
+            第8名
+          </view>
+          <view class="cu-tag line-grey">
+            0分
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!--bottom modal start-->
+  <view class="cu-modal bottom-modal {{bottomModel == true?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white">
+        <view class='action text-red' bindtap='hideModal'>关闭</view>
+      </view>
+      <scroll-view scroll-x class="bg-white nav text-center">
+        <view class="cu-item {{0==typeTabCur?'text-blue cur':''}}" bindtap='typeTabSelect' data-id="0">
+          田径项目
+        </view>
+        <view class="cu-item {{1==typeTabCur?'text-blue cur':''}}" bindtap='typeTabSelect' data-id="1">
+          国标项目
+        </view>
+        <view class="cu-item {{2==typeTabCur?'text-blue cur':''}}" bindtap='typeTabSelect' data-id="2">
+          趣味项目
+        </view>
+      </scroll-view>
+      <!--score detail content start-->
+      <scroll-view scroll-y class="score-panel margin-top sm-border text-left">
+        <view class="cu-list menu">
+          <view class="cu-item">
+            <view class='content padding-tb-sm'>
+              <view>
+                男子30 + 5人×1分钟跳绳团体赛</view>
+              <view class='text-gray text-sm'>
+                <text class='icon-infofill'></text> 破纪录</view>
+            </view>
+            <view class='action'>
+              <view class="cu-tag round bg-orange light">名次：2</view>
+              <view class="cu-tag round bg-olive light">积分：50</view>
+            </view>
+          </view>
+          <view class="cu-item">
+            <view class='content padding-tb-sm'>
+              <view>
+                2万米混合接力赛（男子1200米、女子800米）</view>
+              <view class='text-gray text-sm'>
+                <text class='icon-infofill'></text> 破纪录</view>
+            </view>
+            <view class='action'>
+              <view class="cu-tag round bg-orange light">名次：2</view>
+              <view class="cu-tag round bg-olive light">积分：50</view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+      <!--score detail content end-->
+    </view>
+  </view>
+  <!-- bottom modal end -->
+</view>
+
+<!--Schedule start-->
+<view wx:if="{{tabCur == 2}}" class="margin-top">
+  <view class="cu-timeline">
+    <view class="cu-time">04-17</view>
+    <view class='cu-item cur icon-noticefill'>
+      <view class="content bg-cyan shadow-blur">
+        <text>14:30</text> 【男子组】30人×60米往返穿越栏架接力（决赛）
+      </view>
+    </view>
+    <view class='cu-item cur icon-noticefill'>
+      <view class="content bg-pink shadow-blur">
+        <text>15:05</text> 【女子组】400米（决赛）
+      </view>
+    </view>
+    <view class="cu-time">04-18</view>
+    <view class='cu-item cur icon-noticefill'>
+      <view class="content bg-blue shadow-blur">
+        <text>09:05</text> 【混合组】自由式轮滑花式绕桩5人团体赛（决赛）
+      </view>
+    </view>
+    <view class='cu-item cur icon-noticefill'>
+      <view class="content bg-pink shadow-blur">
+        <text>15:05</text> 【女子组】400米（决赛）
+      </view>
+    </view>
+    <view class='cu-item cur icon-noticefill'>
+      <view class="content bg-pink shadow-blur">
+        <text>15:05</text> 【女子组】400米（决赛）
+      </view>
+    </view>
+    <view class='cu-item cur icon-noticefill'>
+      <view class="content bg-pink shadow-blur">
+        <text>15:05</text> 【女子组】400米（决赛）
+      </view>
+    </view>
+  </view>
+</view>
+<!--Schedule end>
