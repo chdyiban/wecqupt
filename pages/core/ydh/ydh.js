@@ -11,6 +11,14 @@ Page({
     tabCur: 0,
     typeTabCur: 0,
     bottomModel: false,
+
+    collegeTotalSteps: 0,
+    collegeTodaySteps: 0,
+    collegeTotalDonatePerson: 0,
+    hotListArray:[],
+
+    scoreUpdateTime: '',
+    scoreRankList: [],
   },
 
   tabSelect(e) {
@@ -110,7 +118,7 @@ Page({
           }),
           success: function (res) {
             if (res.data && res.data.status === 200) {
-              console.log(res.data)
+
             } else {
 
             }
@@ -126,17 +134,8 @@ Page({
     })
   },
 
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-    // 运动会API
-    // sportsInit: `${api}/sports/index`,
-    // sportsScoreDetail: `${api}/sports/detail`,
-    // sportsStepsDonate: `${api}/sports/donate`,
-
+  getSportsInitData(){
+    var _this = this
     wx.showNavigationBarLoading()
     wx.request({
       url: config.service.sportsInit,
@@ -146,8 +145,15 @@ Page({
       }),
       success: function (res) {
         if (res.data && res.data.status === 200) {
-          console.log(res.data)
-
+          var scoreData = res.data.data.score
+          var hotData = res.data.data.hot
+          _this.setData({
+            collegeTotalSteps: hotData.me.my_total_steps,
+            collegeTodaySteps: hotData.me.today_grow_steps,
+            hotListArray: hotData.list,
+            scoreRankList: scoreData.list,
+            scoreUpdateTime: scoreData.update_time
+          })
         } else {
 
         }
@@ -160,6 +166,15 @@ Page({
         wx.hideNavigationBarLoading();
       }
     });
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var _this = this
+
+    _this.getSportsInitData()
   },
 
   /**
@@ -194,7 +209,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    var _this = this
+    _this.getSportsInitData()
   },
 
   /**

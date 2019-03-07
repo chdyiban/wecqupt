@@ -16,18 +16,18 @@
   <view class="padding">
     <view class="card padding radius shadow-blur bg-blue">
       <view class="flex justify-between align-center">
-      <view class=''>
-        <text class="text-xl">信息工程学院</text>
-      </view>
-      <view class='cu-tag bg-white sm round margin-left'>
-              <text class='icon-hot text-red'></text>95℃</view>
+        <view class=''>
+          <text class="text-xl">信息工程学院</text>
+        </view>
+        <view class='cu-tag bg-white sm round margin-left'>
+          <text class='icon-hot text-red'></text>95℃</view>
       </view>
       <view class='margin-top'>
-        <text class='icon-rank'></text> 
-        <text class="text-xxl"> 100,324</text> 步（今日：7,256步）
+        <text class='icon-rank'></text>
+        <text class="text-xxl"> {{collegeTotalSteps}}</text> 步（今日：{{collegeTodaySteps}}步）
       </view>
       <view>
-        <text class="icon-group"> </text> 792 人
+        <text class="icon-group"> </text> {{collegeTotalDonatePerson}} 人
       </view>
       <!-- <view>
         <text class="icon-my"> </text>
@@ -39,7 +39,7 @@
       </view>
     </view>
   </view>
-  
+
   <!--two buttons -->
   <view class="flex">
     <view class='flex-sub margin-left margin-right radius'>
@@ -49,61 +49,39 @@
     </view>
     <view class='flex-sub margin-right radius'>
       <view class="flex flex-direction">
-      <button class='cu-btn bg-blue lg shadow-blur' bindtap="donate">捐赠步数+</button>
-    </view>
+        <button class='cu-btn bg-blue lg shadow-blur' bindtap="donate">捐赠步数+</button>
+      </view>
     </view>
   </view>
   <!--two end -->
   <!-- card end-->
 
-<view class="cu-bar bg-white solid-bottom margin-top">
-  <view class='action'>
-    <text class='icon-titles text-blue '></text> 其他院系活跃度
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class='action'>
+      <text class='icon-titles text-blue '></text> 其他院系活跃度
+    </view>
   </view>
-</view>
   <view class="cu-card case no-card">
     <view class="cu-list menu menu-avatar">
       <!--cu-item 1-->
-      <view class="cu-item">
+      <view class="cu-item" wx:for="{{hotListArray}}" wx:key="ranking">
         <view class="cu-avatar round lg" style="background-image:url(https://image.weilanwl.com/img/square-4.jpg);">
         </view>
         <view class='content'>
           <view>
-            信息工程学院
+            {{item.college_name}}
             <view class="cu-tag bg-orange sm light round">
-              <text class="text-orange">No.1</text>
+              <text class="text-orange">No.{{item.ranking}}</text>
             </view>
           </view>
           <view class="text-gray text-sm">
-            <text class="icon-friend"></text> 780次
-            <text class="icon-rank"></text> 105,000,33步
+            <text class="icon-friend"></text> {{item.total_donate_person}}人
+            <text class="icon-rank"></text> {{item.total_donate_steps}}步
           </view>
         </view>
         <view class="flex content justify-end">
           <view class='cu-tag bg-red xs light round'>
-              <text class='icon-hot text-red'></text>95℃</view>
-        </view>
-      </view>
-      <!--cu-item 1-->
-      <!--cu-item 1-->
-      <view class="cu-item">
-        <view class="cu-avatar round lg" style="background-image:url(https://image.weilanwl.com/img/square-4.jpg);">
-        </view>
-        <view class='content'>
-          <view>
-            机械学院
-            <view class="cu-tag bg-orange sm light round">
-              <text class="text-orange">No.2</text>
-            </view>
-          </view>
-          <view class="text-gray text-sm">
-            <text class="icon-friend"></text> 780次
-            <text class="icon-rank"></text> 105,000,33步
-          </view>
-        </view>
-        <view class="flex content justify-end">
-           <view class='cu-tag bg-red xs light round'>
-              <text class='icon-hot text-red'></text>73℃</view>
+            <text class='icon-hot text-red'></text>{{item.heat}}℃</view>
         </view>
       </view>
       <!--cu-item 1-->
@@ -118,154 +96,89 @@
       <text class='icon-rankfill text-orange '></text> 积分榜
     </view>
     <view class='action'>
-      <view class="cu-tag round line-grey light">更新时间：2019-04-17 19:00</view>
+      <view class="cu-tag round line-grey light">更新时间：{{scoreUpdateTime}}</view>
     </view>
   </view>
   <view class="cu-list menu sm-border">
-    <view class="cu-item">
-      <view class='content' bindtap="showModal" data-target="6">
-        <text class='icon-upstage text-red'></text>
-        <text>信息学院(新页面demo)</text>
-      </view>
-      <view class="action">
-        <view class="cu-capsule radius">
-          <view class='cu-tag bg-red '>
-            第1名
-          </view>
-          <view class="cu-tag line-red">
-            2320分
+
+    <view class="cu-item" wx:for="{{scoreRankList}}" wx:key="ranking">
+      <!--第一名列表条件-->
+      <block wx:if="{{item.ranking == 1}}">
+        <view class='content' bindtap="showModal" data-target="{{item.college_id}}">
+          <text class='icon-upstage text-red'></text>
+          <text>{{item.college_name}}</text>
+        </view>
+        <view class="action">
+          <view class="cu-capsule radius">
+            <view class='cu-tag bg-red '>
+              第{{item.ranking}}名
+            </view>
+            <view class="cu-tag line-red">
+              {{item.total}}分
+            </view>
           </view>
         </view>
-      </view>
-    </view>
-    <view class="cu-item">
-      <view class='content' bindtap="showModal" data-target="6">
-        <text class='icon-upstage text-orange'></text>
-        <text>公路学院（底部modal）</text>
-      </view>
-      <view class="action">
-        <view class="cu-capsule radius">
-          <view class='cu-tag bg-orange '>
-            第2名
-          </view>
-          <view class="cu-tag line-orange">
-            1970分
+      </block>
+      <!--第一名列表条件 end-->
+
+      <!--第二名列表条件-->
+      <block wx:elif="{{item.ranking == 2}}">
+        <view class='content' bindtap="showModal" data-target="{{item.college_id}}">
+          <text class='icon-upstage text-orange'></text>
+          <text>{{item.college_name}}</text>
+        </view>
+        <view class="action">
+          <view class="cu-capsule radius">
+            <view class='cu-tag bg-orange'>
+              第{{item.ranking}}名
+            </view>
+            <view class="cu-tag line-orange">
+              {{item.total}}分
+            </view>
           </view>
         </view>
-      </view>
-    </view>
-    <view class="cu-item">
-      <view class='content'>
-        <text class='icon-upstage text-yellow'></text>
-        <text>汽车学院</text>
-      </view>
-      <view class="action">
-        <view class="cu-capsule radius">
-          <view class='cu-tag bg-yellow '>
-            第3名
-          </view>
-          <view class="cu-tag line-yellow">
-            1666分
+      </block>
+      <!--第二名列表条件 end-->
+
+      <!--第三名列表条件-->
+      <block wx:elif="{{item.ranking == 3}}">
+        <view class='content' bindtap="showModal" data-target="{{item.college_id}}">
+          <text class='icon-upstage text-yellow'></text>
+          <text>{{item.college_name}}</text>
+        </view>
+        <view class="action">
+          <view class="cu-capsule radius">
+            <view class='cu-tag bg-yellow'>
+              第{{item.ranking}}名
+            </view>
+            <view class="cu-tag line-yellow">
+              {{item.total}}分
+            </view>
           </view>
         </view>
-      </view>
-    </view>
-    <view class="cu-item">
-      <view class='content'>
-        <text class='icon-upstage text-grey'></text>
-        <text>汽车学院</text>
-      </view>
-      <view class="action">
-        <view class="cu-capsule radius">
-          <view class='cu-tag bg-grey'>
-            第4名
-          </view>
-          <view class="cu-tag line-grey">
-            0分
+      </block>
+      <!--第三名列表条件 end-->
+
+      <!--其他名次循环-->
+      <block wx:else>
+        <view class='content' bindtap="showModal" data-target="{{item.college_id}}">
+          <text class='icon-upstage text-orange'></text>
+          <text>{{item.college_name}}</text>
+        </view>
+        <view class="action">
+          <view class="cu-capsule radius">
+            <view class='cu-tag bg-grey'>
+              第{{item.ranking}}名
+            </view>
+            <view class="cu-tag line-grey">
+              {{item.total}}分
+            </view>
           </view>
         </view>
-      </view>
+      </block>
+      <!--其他名次循环 end-->
     </view>
-    <view class="cu-item">
-      <view class='content'>
-        <text class='icon-upstage text-grey'></text>
-        <text>机械学院</text>
-      </view>
-      <view class="action">
-        <view class="cu-capsule radius">
-          <view class='cu-tag bg-grey'>
-            第5名
-          </view>
-          <view class="cu-tag line-grey">
-            0分
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="cu-item">
-      <view class='content'>
-        <text class='icon-upstage text-grey'></text>
-        <text>经管学院</text>
-      </view>
-      <view class="action">
-        <view class="cu-capsule radius">
-          <view class='cu-tag bg-grey'>
-            第5名
-          </view>
-          <view class="cu-tag line-grey">
-            0分
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="cu-item">
-      <view class='content'>
-        <text class='icon-upstage text-grey'></text>
-        <text>电控学院</text>
-      </view>
-      <view class="action">
-        <view class="cu-capsule radius">
-          <view class='cu-tag bg-grey'>
-            第6名
-          </view>
-          <view class="cu-tag line-grey">
-            0分
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="cu-item">
-      <view class='content'>
-        <text class='icon-upstage text-grey'></text>
-        <text>建筑学院</text>
-      </view>
-      <view class="action">
-        <view class="cu-capsule radius">
-          <view class='cu-tag bg-grey'>
-            第7名
-          </view>
-          <view class="cu-tag line-grey">
-            0分
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="cu-item">
-      <view class='content'>
-        <text class='icon-upstage text-grey'></text>
-        <text>资源学院</text>
-      </view>
-      <view class="action">
-        <view class="cu-capsule radius">
-          <view class='cu-tag bg-grey'>
-            第8名
-          </view>
-          <view class="cu-tag line-grey">
-            0分
-          </view>
-        </view>
-      </view>
-    </view>
+
   </view>
 
   <!--bottom modal start-->
