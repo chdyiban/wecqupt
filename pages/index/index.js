@@ -115,8 +115,6 @@ Page({
           user: app._user,
           'card.kb.show': false,
           'card.ykt.show': false,
-          'card.jy.show': false,
-          'card.sdf.show': false
         });
         _this.getCardData();
       }

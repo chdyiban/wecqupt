@@ -17,10 +17,10 @@
     <view class="card padding radius shadow-blur bg-blue">
       <view class="flex justify-between align-center">
         <view class=''>
-          <text class="text-xl">信息工程学院</text>
+          <text class="text-xl">{{collegeName}}</text>
         </view>
         <view class='cu-tag bg-white sm round margin-left'>
-          <text class='icon-hot text-red'></text>95℃</view>
+          <text class='icon-hot text-red'></text>{{collegeHeat}}℃</view>
       </view>
       <view class='margin-top'>
         <text class='icon-rank'></text>
@@ -29,10 +29,10 @@
       <view>
         <text class="icon-group"> </text> {{collegeTotalDonatePerson}} 人
       </view>
-      <!-- <view>
+      <view>
         <text class="icon-my"> </text>
-        <text class=""> 12k+ 步（个人捐赠）</text>
-      </view> -->
+        <text class=""> {{myTotalSteps}} 步（个人捐赠）</text>
+      </view>
 
       <view class='margin-top solid-top'>
         <text class="text-sm">累计步数可兑换哟，还没想好。</text>
@@ -86,16 +86,48 @@
       </view>
       <!--cu-item 1-->
     </view>
-
   </view>
+  <!--捐献modal start-->
+  <view class="cu-modal {{donateModal ? 'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class='content'>我的今日步数: {{myTodaySteps}}</view>
+        <view class='action' bindtap='hideDonateModal'>
+          <text class='icon-close text-red'></text>
+        </view>
+      </view>
+      <view class='padding-xl'>
+        <view wx:if="{{donateStatus}}">
+          <view wx:if="{{myTodaySteps <= 10000}}">
+            <view>微信步数超过10000可贡献双倍热度~</view>
+            <view>当前预计贡献热度{{myToadyHeatGrow}}℃~</view>
+          </view>
+          <view wx:else>
+            预计贡献热度{{myToadyHeatGrow}}℃
+          </view>
+        </view>
+        <view wx:else>
+          今日已捐过，明天请继续坚持哟~
+        </view>
+      </view>
+      <view class="cu-bar bg-white justify-end">
+        <view class='action'>
+          <button class='cu-btn line-green text-blue' bindtap='hideDonateModal'>过会再捐</button>
+          <button class='cu-btn bg-blue margin-left' bindtap='submitDonate' >确定捐献</button>
+
+      </view>
+    </view>
+  </view>
+  </view>
+  <!--捐献modal end-->
 </view>
 <!-- heat list end-->
 <view wx:if="{{tabCur == 1}}">
   <view class="cu-bar bg-white solid-bottom margin-top">
-    <view class='action'>
+    <view class='action '>
       <text class='icon-rankfill text-orange '></text> 积分榜
     </view>
-    <view class='action'>
+    <view class='action '>
       <view class="cu-tag round line-grey light">更新时间：{{scoreUpdateTime}}</view>
     </view>
   </view>
@@ -104,8 +136,8 @@
     <view class="cu-item" wx:for="{{scoreRankList}}" wx:key="ranking">
       <!--第一名列表条件-->
       <block wx:if="{{item.ranking == 1}}">
-        <view class='content' bindtap="showModal" data-target="{{item.college_id}}">
-          <text class='icon-upstage text-red'></text>
+        <view class='content ' bindtap="showModal" data-target="{{item.college_id}}">
+          <text class='icon-upstage text-red '></text>
           <text>{{item.college_name}}</text>
         </view>
         <view class="action">
@@ -123,13 +155,13 @@
 
       <!--第二名列表条件-->
       <block wx:elif="{{item.ranking == 2}}">
-        <view class='content' bindtap="showModal" data-target="{{item.college_id}}">
-          <text class='icon-upstage text-orange'></text>
+        <view class='content ' bindtap="showModal" data-target="{{item.college_id}}">
+          <text class='icon-upstage text-orange '></text>
           <text>{{item.college_name}}</text>
         </view>
         <view class="action">
           <view class="cu-capsule radius">
-            <view class='cu-tag bg-orange'>
+            <view class='cu-tag bg-orange '>
               第{{item.ranking}}名
             </view>
             <view class="cu-tag line-orange">
@@ -142,13 +174,13 @@
 
       <!--第三名列表条件-->
       <block wx:elif="{{item.ranking == 3}}">
-        <view class='content' bindtap="showModal" data-target="{{item.college_id}}">
-          <text class='icon-upstage text-yellow'></text>
+        <view class='content ' bindtap="showModal" data-target="{{item.college_id}}">
+          <text class='icon-upstage text-yellow '></text>
           <text>{{item.college_name}}</text>
         </view>
         <view class="action">
           <view class="cu-capsule radius">
-            <view class='cu-tag bg-yellow'>
+            <view class='cu-tag bg-yellow '>
               第{{item.ranking}}名
             </view>
             <view class="cu-tag line-yellow">
@@ -161,13 +193,13 @@
 
       <!--其他名次循环-->
       <block wx:else>
-        <view class='content' bindtap="showModal" data-target="{{item.college_id}}">
-          <text class='icon-upstage text-orange'></text>
+        <view class='content ' bindtap="showModal" data-target="{{item.college_id}}">
+          <text class='icon-upstage text-orange '></text>
           <text>{{item.college_name}}</text>
         </view>
         <view class="action">
           <view class="cu-capsule radius">
-            <view class='cu-tag bg-grey'>
+            <view class='cu-tag bg-grey '>
               第{{item.ranking}}名
             </view>
             <view class="cu-tag line-grey">
@@ -182,47 +214,78 @@
   </view>
 
   <!--bottom modal start-->
-  <view class="cu-modal bottom-modal {{bottomModel == true?'show':''}}">
+  <view class="cu-modal bottom-modal {{bottomModel == true?'show ':' '}}">
     <view class="cu-dialog">
       <view class="cu-bar bg-white">
-        <view class='action text-red' bindtap='hideModal'>关闭</view>
+        <view class='action text-red ' bindtap="hideModal">关闭</view>
       </view>
       <scroll-view scroll-x class="bg-white nav text-center">
-        <view class="cu-item {{0==typeTabCur?'text-blue cur':''}}" bindtap='typeTabSelect' data-id="0">
+        <view class="cu-item {{0==typeTabCur?'text-blue cur ':' '}}" bindtap="typeTabSelect" data-id="0">
           田径项目
         </view>
-        <view class="cu-item {{1==typeTabCur?'text-blue cur':''}}" bindtap='typeTabSelect' data-id="1">
+        <view class="cu-item {{1==typeTabCur?'text-blue cur ':' '}}" bindtap="typeTabSelect" data-id="1">
           国标项目
         </view>
-        <view class="cu-item {{2==typeTabCur?'text-blue cur':''}}" bindtap='typeTabSelect' data-id="2">
+        <view class="cu-item {{2==typeTabCur?'text-blue cur ':' '}}" bindtap="typeTabSelect" data-id="2">
           趣味项目
         </view>
       </scroll-view>
       <!--score detail content start-->
       <scroll-view scroll-y class="score-panel margin-top sm-border text-left">
-        <view class="cu-list menu">
-          <view class="cu-item">
-            <view class='content padding-tb-sm'>
-              <view>
-                男子30 + 5人×1分钟跳绳团体赛</view>
-              <view class='text-gray text-sm'>
-                <text class='icon-infofill'></text> 破纪录</view>
-            </view>
-            <view class='action'>
-              <view class="cu-tag round bg-orange light">名次：2</view>
-              <view class="cu-tag round bg-olive light">积分：50</view>
+        <view class="cu-list menu" wx:if="{{0==typeTabCur}}">
+          <view class="cu-item" wx:if="{{scoreDetailTJ.length == 0}}">
+            <view class="content padding-tb-sm">
+              <view>暂无获奖项目</view>
             </view>
           </view>
-          <view class="cu-item">
-            <view class='content padding-tb-sm'>
+          <view class="cu-item" wx:for="{{scoreDetailTJ}}" wx:key="ranking">
+            <view class='content padding-tb-sm '>
               <view>
-                2万米混合接力赛（男子1200米、女子800米）</view>
-              <view class='text-gray text-sm'>
-                <text class='icon-infofill'></text> 破纪录</view>
+                {{item.event_name}}</view>
+              <view class='text-gray text-sm ' wx:if="{{item.remark}}">
+                <text class='icon-infofill '></text> {{item.remark}}</view>
             </view>
-            <view class='action'>
-              <view class="cu-tag round bg-orange light">名次：2</view>
-              <view class="cu-tag round bg-olive light">积分：50</view>
+            <view class='action '>
+              <view class="cu-tag round bg-orange light">名次：{{item.ranking}}</view>
+              <view class="cu-tag round bg-olive light">积分：{{item.score}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="cu-list menu" wx:elif="{{1==typeTabCur}}">
+          <view class="cu-item" wx:if="{{scoreDetailGB.length == 0}}">
+            <view class="content padding-tb-sm">
+              <view>暂无获奖项目</view>
+            </view>
+          </view>
+          <view class="cu-item" wx:for="{{scoreDetailGB}}" wx:key="ranking">
+            <view class='content padding-tb-sm '>
+              <view>
+                {{item.event_name}}</view>
+              <view class='text-gray text-sm ' wx:if="{{item.remark}}">
+                <text class='icon-infofill '></text> {{item.remark}}</view>
+            </view>
+            <view class='action '>
+              <view class="cu-tag round bg-orange light">名次：{{item.ranking}}</view>
+              <view class="cu-tag round bg-olive light">积分：{{item.score}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="cu-list menu" wx:elif="{{2==typeTabCur}}">
+          <view class="cu-item" wx:if="{{scoreDetailQW.length == 0}}">
+            <view class="content padding-tb-sm">
+              <view>暂无获奖项目</view>
+            </view>
+          </view>
+          <view class="cu-item" wx:for="{{scoreDetailQW}}" wx:key="ranking">
+            <view class='content padding-tb-sm '>
+              <view>
+                {{item.event_name}}</view>
+              <view class='text-gray text-sm ' wx:if="{{item.remark}}">
+                <text class='icon-infofill '></text> {{item.remark}}</view>
+            </view>
+            <view class='action '>
+              <view class="cu-tag round bg-orange light">名次：{{item.ranking}}</view>
+              <view class="cu-tag round bg-olive light">积分：{{item.score}}</view>
             </view>
           </view>
         </view>
@@ -235,37 +298,11 @@
 
 <!--Schedule start-->
 <view wx:if="{{tabCur == 2}}" class="margin-top">
-  <view class="cu-timeline">
-    <view class="cu-time">04-17</view>
-    <view class='cu-item cur icon-noticefill'>
-      <view class="content bg-cyan shadow-blur">
-        <text>14:30</text> 【男子组】30人×60米往返穿越栏架接力（决赛）
-      </view>
-    </view>
-    <view class='cu-item cur icon-noticefill'>
-      <view class="content bg-pink shadow-blur">
-        <text>15:05</text> 【女子组】400米（决赛）
-      </view>
-    </view>
-    <view class="cu-time">04-18</view>
-    <view class='cu-item cur icon-noticefill'>
-      <view class="content bg-blue shadow-blur">
-        <text>09:05</text> 【混合组】自由式轮滑花式绕桩5人团体赛（决赛）
-      </view>
-    </view>
-    <view class='cu-item cur icon-noticefill'>
-      <view class="content bg-pink shadow-blur">
-        <text>15:05</text> 【女子组】400米（决赛）
-      </view>
-    </view>
-    <view class='cu-item cur icon-noticefill'>
-      <view class="content bg-pink shadow-blur">
-        <text>15:05</text> 【女子组】400米（决赛）
-      </view>
-    </view>
-    <view class='cu-item cur icon-noticefill'>
-      <view class="content bg-pink shadow-blur">
-        <text>15:05</text> 【女子组】400米（决赛）
+  <view class="cu-timeline" wx:for="{{schedule}}" wx:key="*this">
+    <view class="cu-time">{{item.date}}</view>
+    <view class='cu-item cur icon-noticefill' wx:for="{{item.list}}" wx:for-item="i" wx:key="*this">
+      <view class="content {{i.type == '男子组' ? 'bg-cyan' : ''}} {{i.type == '女子组' ? 'bg-pink' : ''}} {{i.type == '混合组' ? 'bg-blue' : ''}} shadow-blur">
+        <text>{{i.time}}</text> 【{{i.type}}】{{i.event}}
       </view>
     </view>
   </view>

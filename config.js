@@ -62,7 +62,9 @@ var config = {
     //运动会
     sportsInit: `${api}/sports/index`,
     sportsScoreDetail: `${api}/sports/detail`,
+    sportsStepsQuery: `${api}/sports/steps`,
     sportsStepsDonate: `${api}/sports/donate`,
+    sportsSchedule: `${api}/sports/schedule`,
 
     //门户绑定
     bindUrl: `${api}/wxuser/bind`,
