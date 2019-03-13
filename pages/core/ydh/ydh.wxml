@@ -16,7 +16,7 @@
   <view class="padding">
     <view class="card padding radius shadow-blur bg-blue">
       <view class="flex justify-between align-center">
-        <view class=''>
+        <view class='justify-center'>
           <text class="text-xl">{{collegeName}}</text>
         </view>
         <view class='cu-tag bg-white sm round margin-left'>
@@ -35,7 +35,7 @@
       </view>
 
       <view class='margin-top solid-top'>
-        <text class="text-sm">累计步数可兑换哟，还没想好。</text>
+        <text class="text-sm">个人累计步数可兑换精美礼品</text>
       </view>
     </view>
   </view>
@@ -100,10 +100,13 @@
         <view wx:if="{{donateStatus}}">
           <view wx:if="{{myTodaySteps <= 10000}}">
             <view>微信步数超过10000可贡献双倍热度~</view>
-            <view>当前预计贡献热度{{myToadyHeatGrow}}℃~</view>
+            <view wx:if="{{myToadyHeatGrow > 0}}">当前预计贡献热度{{myToadyHeatGrow}}℃~</view>
+          </view>
+          <view wx:elif="{{myToadyHeatGrow}} >0">
+            预计贡献热度{{myToadyHeatGrow}}℃
           </view>
           <view wx:else>
-            预计贡献热度{{myToadyHeatGrow}}℃
+            快来捐献步数吧~
           </view>
         </view>
         <view wx:else>

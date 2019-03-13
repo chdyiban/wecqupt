@@ -56,6 +56,11 @@
             <text class="desc-time">2019.02.16</text>
           </view>
           <text class="desc-content">利用微信提供原生能力，增加绑定手机号功能</text>
+          <view class="desc-title">
+            <text class="desc-v">v0.3.0</text>
+            <text class="desc-time">2019.03.12</text>
+          </view>
+          <text class="desc-content">“运动会积分榜”模块上线</text>
       </view>
     </view>
   </view>

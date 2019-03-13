@@ -37,7 +37,16 @@ Page({
 
   tabSelect(e) {
     var _this = this
-    //判断当点击赛程按钮时，
+    var now = new Date()
+    //判断点击积分榜时，
+    if (e.currentTarget.dataset.id == 1 && now.getTime() <= 15552576000000){
+      wx.showToast({
+        title: '当前积分榜为2018年数据',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+    //判断当点击赛程按钮
     if (e.currentTarget.dataset.id == 2){
       _this.getSchedule()
     }
@@ -236,12 +245,27 @@ Page({
       success: function (res) {
         wx.hideLoading()
         wx.hideNavigationBarLoading()
-        if (res.data && res.data.status === 200) {
-          wx.showToast({
-            title: '捐献成功~',
-            icon: 'success',
-            duration: 3000
+        if (res.data && res.data.status === 200 ) {
+
+          if(res.data.data.donate_status === false){
+            wx.showToast({
+              title: '今天已经捐过，明天继续哟~',
+              icon: 'none',
+              duration: 3000
+            })
+          }else{
+            //捐献成功
+            wx.showToast({
+              title: '捐献成功~',
+              icon: 'success',
+              duration: 3000
+            })
+          }
+          //关闭捐献窗口
+          _this.setData({
+            donateModal: false,
           })
+          
         } else {
           wx.showToast({
             title: '你走开 ^_^',
