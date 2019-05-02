@@ -1,7 +1,28 @@
 <!--新闻列表页面模板-->
 
-<!--无图模式-->
+<!--colorUI下无图模式 开始-->
 <template name="newsStyle0">
+  <navigator url="/pages/news/news/news_detail?id={{item.id}}">
+    <view class="cu-card article">
+      <view class="cu-item shadow">
+        <view class="title margin-top">
+          <view class="text-content">{{ item.title }}</view>
+        </view>
+        <view class="content flex justify-between">
+          <view class="cu-tag bg-blue light sm round">{{ item.tags }}</view>
+          <view class="text-gray text-sm">
+            <text class="cuIcon-attentionfill margin-lr-xs"></text> 10
+            <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
+            <text class="cuIcon-messagefill margin-lr-xs"></text> 30
+          </view>
+        </view>
+      </view>
+    </view>
+  </navigator>
+</template>
+<!--colorUI下无图模式 结束-->
+<!--无图模式-->
+<template name="newsStyle4">
   <navigator url="/pages/news/news/news_detail?id={{item.id}}">
     <view class="article__item">
       <view class="article__info">
@@ -102,22 +123,22 @@
 <template name="newsStyle2">
   <navigator url="/pages/news/news/news_detail?id={{item.id}}">
     <view class="common-list">
-        <view class="list-item has-img" index="{{index}}" id="{{item.id}}" bindtap="redictDetail">
-          <view class="content-title">
-            <text>{{ item.title }}</text>
-          </view>
-          <view class="content-date">
-            <image src="/images/news/template/calendar.png"></image>
-            <text>{{item.create_date}}</text>
-            <image src="/images/news/template/comments.png"></image>
-            <text class="">{{item.comments}}</text>
-            <image src="/images/news/template/pageviews.png"></image>
-            <text class="">{{item.views}}</text>
-            <image src="/images/news/template/home-like.png"></image>
-            <text class="">{{item.likes}}</text>
-          </view>
-          <image src="{{item.image}}" mode="aspectFill" class="cover"></image>
+      <view class="list-item has-img" index="{{index}}" id="{{item.id}}" bindtap="redictDetail">
+        <view class="content-title">
+          <text>{{ item.title }}</text>
         </view>
+        <view class="content-date">
+          <image src="/images/news/template/calendar.png"></image>
+          <text>{{item.create_date}}</text>
+          <image src="/images/news/template/comments.png"></image>
+          <text class="">{{item.comments}}</text>
+          <image src="/images/news/template/pageviews.png"></image>
+          <text class="">{{item.views}}</text>
+          <image src="/images/news/template/home-like.png"></image>
+          <text class="">{{item.likes}}</text>
+        </view>
+        <image src="{{item.image}}" mode="aspectFill" class="cover"></image>
+      </view>
     </view>
   </navigator>
 </template>

@@ -1,6 +1,6 @@
-<view class="cu-bar solid-bottom">
+<view class="cu-bar bg-white solid-bottom margin-top">
   <view class='action'>
-    <text class='icon-titles text-orange '></text> 我的辅导员
+    <text class='cuIcon-titles text-mauve '></text> 我的辅导员
   </view>
 </view>
 <view class="cu-card dynamic" wx:if="{{step === 0}}">
@@ -20,45 +20,37 @@
   <view class="cu-item shadow">
     <view class=" cu-list menu menu-avatar ">
       <view class="cu-item ">
-        <view class="cu-avatar round lg" style="background-image:url(https://image.weilanwl.com/img/square-1.jpg); "></view>
+        <view class="cu-avatar round lg" style="background-image:url(https://yibancdn.ohao.ren/who.jpg); "></view>
         <view class='content flex-sub'>
           <view>{{adviser.adviser_name}} - {{adviser.adviser_college}}</view>
           <view class='text-gray text-sm flex justify-between'>
-            {{adviser.adviser_class}}班班主任
-          </view>
-        </view>
-        <view class='content flex-sub'>
-          <view class="padding flex justify-end">
-
-            <view wx:if="{{step === 1}}" class='cu-tag bg-green round'>{{rate.msg}}</view>
-            <view wx:if="{{step === 3 || step === 2}}" class='cu-tag line-green round'>{{rate.msg}}</view>
+            {{adviser.adviser_class}}班辅导员
           </view>
         </view>
       </view>
     </view>
-    <view class="text-content" wx:if="{{step === 2}}">
-      班主任尚未上传<view class='cu-tag bg-blue light sm round'>工作日志</view>，暂时不能评价,请等待。
-    </view>
-    <view class="text-content" wx:else>
-      在2018-2019年班主任工作中，共参加班级集体活动
-      <view class='cu-tag bg-red light sm round'>{{adviser.working_logs.input1}}</view>次，参加班会
-      <view class='cu-tag bg-red light sm round'>{{adviser.working_logs.input2}}</view>次，单独辅导学生
-      <view class='cu-tag bg-red light sm round'>{{adviser.working_logs.input3}}</view>人次。
-    </view>
+    <!-- <view class="text-content" wx:if="{{step === 2}}">
+      班主任尚未上传
+      <view class='cu-tag bg-blue light sm round'>工作日志</view>，暂时不能评价,请等待。
+    </view> -->
+    <!-- <view class="text-content">
+      各位同学大家好，这是一份关于大学生对辅导员队伍建设满意度的调查问卷。本问卷仅用于学校建设及学术研究，采用不记名的形式，希望同学们如实填写，尽量不要空项，和我们一起为建设令学生满意的辅导员队伍而努力。谢谢各位的支持。
+    </view>  -->
   </view>
 </view>
 
-<view class="cu-bar solid-bottom" wx:if="{{step === 1}}">
+<view class="cu-bar bg-white solid-bottom" wx:if="{{step === 1}}">
   <view class='action'>
-    <text class='icon-title text-orange '></text> {{mainTitle}}
+    <text class='cuIcon-evaluate text-mauve '></text> {{mainTitle}}
   </view>
 </view>
+<!--step === 1 可提交评价 -->
 <view class='padding' wx:if="{{step === 1}}">
   <view wx:for="{{questionnaire}}" wx:key="index" wx:for-item="i">
     <view class="padding-lr bg-white {{index? 'margin-top' :''}}">
       <view class='solid-bottom padding'>
         <text class='text'>{{index+1}}.{{i.title}}</text>
-        <text wx:if="{{i.type === '3'}}" class='text'>{{starMap[star-1]}}</text>
+        <text wx:if="{{i.type === '3'}}" class='text'> ({{starMap[star-1]}})</text>
       </view>
       <view class='padding'>
         <view wx:if="{{i.type == 3}}">
@@ -69,22 +61,38 @@
             </block>
           </view>
         </view>
-        <view wx:else>
-          <radio-group class="block" data-index="{{index}}" bindchange="radioChange">
-            <label class="radio" wx:for="{{i.options}}" wx:key="index" wx:for-item="k">
-              <radio value="{{index}}" />{{k}}
+        <!--type==1 表示为单选题 -->
+        <view wx:if="{{i.type == 1}}">
+          <radio-group class="flex flex-wrap" data-index="{{index}}" bindchange="radioChange">
+            <label class="padding-sm" wx:for="{{i.options}}" wx:key="index" wx:for-item="k">
+              <radio class="mauve xs radio" value="{{index}}" ></radio>
+              <text> {{k}}</text>
             </label>
           </radio-group>
+        </view>
+
+        <!--type == 2 表示为多选题-->
+        <view wx:if="{{i.type == 2}}">
+          <checkbox-group class="flex flex-wrap" data-index="{{index}}" bindchange="radioChange">
+            <label class="padding-sm" wx:for="{{i.options}}" wx:key="index" wx:for-item="k">
+              <checkbox class="mauve xs radio" value="{{index}}" ></checkbox>
+              <text> {{k}}</text>
+            </label>
+          </checkbox-group>
+        </view>
+        <!--type == 4 表示为填空题-->
+        <view wx:if="{{i.type == 4}}">
+          <input type="text" class="solid-bottom" maxlength="300" placeholder="请在这里输入" cursor-spacing="10" bindblur="radioChange" data-index="{{index}}"></input>
         </view>
       </view>
     </view>
   </view>
 </view>
 <view class='bg-white padding-lr' wx:if="{{step === 3}}">
-  <view class='padding-xs flex align-center'>
+  <view class='padding-xs flex align-center margin-top'>
     <view class='flex-sub text-center'>
-      <view class='solid-bottom text-xsl padding'>
-        <text class=' icon-roundcheckfill text-green'></text>
+      <view class='text-xsl padding'>
+        <text class='cuIcon-roundcheckfill text-green'></text>
       </view>
       <view class='padding'>已完成评价!</view>
     </view>
@@ -97,3 +105,24 @@
     <button wx:if="{{step === 3}}" class='cu-btn bg-green lg shadow-blur bg-green' disabled bindtap="submit">已完成评价</button>
   </view>
 </view>
+
+<!--modal start-->
+<view class="cu-modal {{showTips === true ?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">注意事项</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      各位同学大家好，这是一份关于大学生对辅导员队伍建设满意度的调查问卷。本问卷仅用于学校建设及学术研究，采用不记名的形式，希望同学们如实填写，尽量不要空项，和我们一起为建设令学生满意的辅导员队伍而努力。谢谢各位的支持。
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn bg-mauve margin-left" bindtap="hideModal">我知道了</button>
+      </view>
+    </view>
+  </view>
+</view>
+<!--modal end>

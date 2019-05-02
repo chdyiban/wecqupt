@@ -3,8 +3,8 @@
  */
 var system = wx.getSystemInfoSync();
 // 此处主机域名修改成腾讯云解决方案分配的域名
-if (system.brand == 'devtoolss') {
-  var host = 'http://localhost/fastadmin';
+if (system.brand == 'devtools') {
+  var host = 'http://zkadfu.natappfree.cc/yibanbx';
   var api = host + '/public/api';
 }
 // else{

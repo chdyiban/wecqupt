@@ -1,7 +1,10 @@
 /**news.wxss**/
+@import "/utils/colorui/main.wxss";
+@import "/utils/colorui/icon.wxss";
+
 .container {
-  background-color: #fff;
-  padding-bottom: 20rpx;
+  /* background-color: #fff;
+  padding-bottom: 20rpx; */
 }
 
 .sv__container {
@@ -240,7 +243,7 @@
 }
 
 .articles {
-  background-color: #fff;
+  /* background-color: #fff; */
 }
 
 .article__item {

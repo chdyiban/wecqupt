@@ -19,21 +19,30 @@ Page({
     questionnaire:{},
     star: 0,
     starMap: [
-      '非常差',
-      '差',
+      '很不满意',
+      '不满意',
       '一般',
-      '好',
-      '非常好',
+      '满意',
+      '很满意',
     ],
     optionObj:{},           //radioChange使用
     formData: {             //表单数据 
     },
+    showTips:true,          //提示按钮默认为展示
   },
   onPullDownRefresh: function () {
     this.getData()
   },
-  onLoad: function () {
-    this.getData()
+  onLoad: function (options) {
+    var _this = this
+    app.loginLoad(function () {
+      _this.loginHandler.call(_this, options);
+    });
+    _this.getData()
+  },
+  //关闭提示按钮
+  hideModal: function(){
+    this.setData({ showTips:false})
   },
   getData: function () {
     var _this = this
@@ -95,7 +104,7 @@ Page({
               'adviser.adviser_name': adviserResObj.adviser_name,
               'adviser.adviser_college': adviserResObj.adviser_college,
               'adviser.adviser_class': adviserResObj.adviser_class,
-              'adviser.working_logs':adviserResObj.working_logs,
+              // 'adviser.working_logs':adviserResObj.working_logs,
               'questionnaire':adviserResObj.questionnaire,
             })
             break
@@ -118,7 +127,7 @@ Page({
               'adviser.adviser_name': adviserResObj.adviser_name,
               'adviser.adviser_college': adviserResObj.adviser_college,
               'adviser.adviser_class': adviserResObj.adviser_class,
-              'adviser.working_logs': adviserResObj.working_logs,
+              // 'adviser.working_logs': adviserResObj.working_logs,
             })
             break
           default:
@@ -133,8 +142,9 @@ Page({
       }
     })
   },
-
+  //单选及多选
   radioChange(e) {
+    console.log(e)
     var _this = this
     var index = e.target.dataset.index
     _this.data.optionObj[index] = e.detail.value
@@ -169,20 +179,26 @@ Page({
     //当前判断逻辑 formData.option属性个数与问卷数相同
     if (typeof (_this.data.formData.options) === "undefined" ){
       wx.showToast({
-        title: '请先填写字符串',
+        title: '请先填写问卷',
         mask: true,
         icon: 'none',
       })
       return false
     }
-    if ( _this.data.questionnaire.length !== Object.getOwnPropertyNames(_this.data.formData.options).length){
-      wx.showToast({
-        title: '请填写完再提交',
-        mask: true,
-        icon: 'none',
-      })
-      return false
+
+    //遍历检查必选项是否已经选择
+  
+    for (var i = 0, len = _this.data.questionnaire.length; i < len; i++) {
+      if (_this.data.questionnaire[i].must === true && typeof (_this.data.formData.options[i]) === "undefined") {
+        wx.showToast({
+          title: '请完整填写问卷',
+          mask: true,
+          icon: 'none',
+        })
+        return false
+      }
     }
+
 
     //提交
     wx.request({
@@ -200,13 +216,33 @@ Page({
             icon: 'none',
           })
         }
+
+        if(res.data.status === 200){
+          wx.showToast({
+            title: res.data.msg,
+            mask: true,
+            icon: 'none',
+          })
+        }
+
       },
       fail: function (res) {
         console.log(res)
       },
       complete: function () {
+        _this.getData()
         wx.stopPullDownRefresh()
       }
     })
   },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    return {
+      title: '【辅导员评价】进入易班，对我的辅导员进行匿名评价',
+      // desc: '微信步数可捐赠，提高学院热度',
+    }
+  }
 })
