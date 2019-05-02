@@ -4,6 +4,16 @@ App({
   version: 'v0.2.1', //版本号
   onLaunch: function() {
     var _this = this;
+    try{
+      wx.getSystemInfo({
+        success: e => {
+          _this.globalData.StatusBar = e.statusBarHeight;
+          var custom = wx.getMenuButtonBoundingClientRect();
+          _this.globalData.Custom = custom;
+          _this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
+        }
+      })
+    } catch(e){console.warn('获取设备信息失败')}
     //读取缓存
     try {
       var data = wx.getStorageInfoSync();
@@ -25,6 +35,7 @@ App({
       }
     } catch(e) { console.warn('获取缓存失败'); }
   },
+  globalData:{},
   //保存缓存
   saveCache: function(key, value) {
     if(!key || !value){return;}

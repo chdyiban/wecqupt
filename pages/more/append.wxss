@@ -1,7 +1,7 @@
 /**append.wxss**/
 @import './login.wxss';
-@import "/utils/ColorUI/icon.wxss";
-@import "/utils/ColorUI/colorui.wxss";
+@import "/utils/colorui/main.wxss";
+@import "/utils/colorui/icon.wxss";
 .container{
   height: auto;
 }

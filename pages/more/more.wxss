@@ -1,6 +1,6 @@
 /**more.wxss**/
-@import "/utils/ColorUI/icon.wxss";
-@import "/utils/ColorUI/colorui.wxss";
+@import "/utils/colorui/main.wxss";
+@import "/utils/colorui/icon.wxss";
 .container{
   background-color: #f6f6f6;
   padding: 0;

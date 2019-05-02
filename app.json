@@ -27,7 +27,8 @@
     "pages/more/help/volunteerHelp",
     "pages/news/tags/tags",
     "pages/core/ydh/ydh",
-    "pages/core/ss/ss"
+    "pages/core/ss/ss",
+    "pages/core/fdy/fdy"
   ],
   "window": {
     "navigationBarBackgroundColor": "#0167b8",
