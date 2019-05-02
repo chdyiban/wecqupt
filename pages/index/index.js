@@ -14,7 +14,7 @@ Page({
         { id: 'cj', name: '成绩查询', disabled: true, teacher_disabled: true, offline_disabled: false },
         { id: 'ydh', name: '运动会', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'kjs', name: '空教室', disabled: true, teacher_disabled: false, offline_disabled: true },
-        { id: 'xs', name: '学生查询', disabled: true, teacher_disabled: false, offline_disabled: true },
+        { id: 'ss', name: '我的宿舍', disabled: false, teacher_disabled: false, offline_disabled: true },
         { id: 'jy', name: '借阅信息', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'xc', name: '校车时间', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'bzr', name: '班主任评价', disabled: false, teacher_disabled: true, offline_disabled: false }

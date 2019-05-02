@@ -61,6 +61,11 @@
             <text class="desc-time">2019.03.12</text>
           </view>
           <text class="desc-content">“运动会积分榜”模块上线</text>
+          <view class="desc-title">
+            <text class="desc-v">v0.3.2</text>
+            <text class="desc-time">2019.04.15</text>
+          </view>
+          <text class="desc-content">“运动会积分榜”正式上线，修复已知bug</text>
       </view>
     </view>
   </view>

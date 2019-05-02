@@ -42,7 +42,7 @@ Page({
     }
     console.log(app._user);
     if(!app._user.openid){
-      app.showErrorModal('未能成功登录', '错误');
+      app.showErrorModal('尚未登录，请先退出后从小程序首页进入', '错误');
       return false;
     }
     app.showLoadToast('绑定中');

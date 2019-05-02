@@ -390,3 +390,8 @@ page .navigator-hover{
   display:inline-block;
   overflow:hidden;
 }
+
+.main-core-item .red{
+  color:red;
+  font-weight: bold;
+}

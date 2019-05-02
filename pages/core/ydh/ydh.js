@@ -8,6 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // queryFlag: 1,//防止多个网络请求
+
     tabCur: 0,
     typeTabCur: 0,
     bottomModel: false,
@@ -38,10 +40,10 @@ Page({
   tabSelect(e) {
     var _this = this
     var now = new Date()
-    //判断点击积分榜时，
-    if (e.currentTarget.dataset.id == 1 && now.getTime() <= 15552576000000){
+    //判断点击积分榜时，提示点击可以查看详细分数
+    if (e.currentTarget.dataset.id == 1 ){
       wx.showToast({
-        title: '当前积分榜为2018年数据',
+        title: '点击学院可查看积分明细',
         icon: 'none',
         duration: 3000
       })
@@ -117,7 +119,9 @@ Page({
    */
   donate(e) {
     var _this = this
-    wx.showLoading()
+    wx.showLoading({
+      title: '读取步数中...',
+    })
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.werun']) {
@@ -168,9 +172,10 @@ Page({
                   donateStatus: false
                 })
               }
+             
               _this.setData({
                 myTodaySteps: res.data.data.steps,
-                myToadyHeatGrow: res.data.data.heat_grow,
+                myToadyHeatGrow: parseFloat(res.data.data.heat_grow).toFixed(2), //提升热度保留两位小数
                 donateModal: true
               })
             } else {
@@ -243,11 +248,17 @@ Page({
         openid: app._user.openid,
       }),
       success: function (res) {
-        wx.hideLoading()
+        // wx.hideLoading()
         wx.hideNavigationBarLoading()
         if (res.data && res.data.status === 200 ) {
 
+          //关闭捐献窗口
+          _this.setData({
+            donateModal: false,
+          })
+
           if(res.data.data.donate_status === false){
+            // wx.hideLoading()
             wx.showToast({
               title: '今天已经捐过，明天继续哟~',
               icon: 'none',
@@ -255,16 +266,13 @@ Page({
             })
           }else{
             //捐献成功
+            // wx.hideLoading()
             wx.showToast({
               title: '捐献成功~',
               icon: 'success',
               duration: 3000
             })
           }
-          //关闭捐献窗口
-          _this.setData({
-            donateModal: false,
-          })
           
         } else {
           wx.showToast({
@@ -279,13 +287,21 @@ Page({
       },
       complete: function () {
         wx.hideNavigationBarLoading()
-        wx.hideLoading()
+        setTimeout(() => {
+          wx.hideToast()
+        }, 2000)
       }
     });
   },
 
   getSportsInitData() {
     var _this = this
+    // //判断是否绑定，若为绑定则跳转绑定界面
+    // if (!app._user.is_bind && app._user.openid) {
+    //   wx.navigateTo({
+    //     url: '/pages/more/login'
+    //   });
+    // }
     wx.showNavigationBarLoading()
     wx.request({
       url: config.service.sportsInit,
@@ -294,10 +310,13 @@ Page({
         openid: app._user.openid
       }),
       success: function(res) {
+        wx.stopPullDownRefresh()
         if (res.data && res.data.status === 200) {
           var scoreData = res.data.data.score
           var hotData = res.data.data.hot
           _this.setData({
+            // queryFlag: 0,
+
             collegeName: hotData.me.college_name,
             collegeTotalSteps: hotData.me.college_total_steps,
             collegeTodaySteps: hotData.me.today_grow_steps,
@@ -309,7 +328,7 @@ Page({
             scoreUpdateTime: scoreData.update_time
           })
         } else {
-
+          console.warn('服务器错误');
         }
       },
       fail: function(res) {
@@ -317,7 +336,11 @@ Page({
         console.warn('网络错误');
       },
       complete: function() {
-        wx.hideNavigationBarLoading();
+        // _this.setData({
+        //   queryFlag: 1,
+        // })
+        wx.stopPullDownRefresh()
+        wx.hideNavigationBarLoading()
       }
     });
   },
@@ -327,8 +350,14 @@ Page({
    */
   onLoad: function(options) {
     var _this = this
-
+    app.loginLoad(function () {
+      _this.loginHandler.call(_this, options);
+    });
     _this.getSportsInitData()
+  },
+  //让分享时自动登录
+  loginHandler: function (options) {
+    console.log(options);
   },
 
   /**
@@ -364,7 +393,12 @@ Page({
    */
   onPullDownRefresh: function() {
     var _this = this
-    _this.getSportsInitData()
+    wx.stopPullDownRefresh()
+    //下拉刷新时，强制用queryFlag判断是否重复请求
+    // if(_this.data.queryFlag === 1){
+      _this.getSportsInitData()
+    // }
+    
   },
 
   /**

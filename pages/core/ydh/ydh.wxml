@@ -65,7 +65,7 @@
     <view class="cu-list menu menu-avatar">
       <!--cu-item 1-->
       <view class="cu-item" wx:for="{{hotListArray}}" wx:key="ranking">
-        <view class="cu-avatar round lg" style="background-image:url(https://image.weilanwl.com/img/square-4.jpg);">
+        <view class="cu-avatar round lg" style="background-image:url({{item.college_logo_url}});">
         </view>
         <view class='content'>
           <view>
@@ -113,7 +113,7 @@
           今日已捐过，明天请继续坚持哟~
         </view>
       </view>
-      <view class="cu-bar bg-white justify-end">
+      <view class="cu-bar bg-white justify-end" wx:if="{{donateStatus}}">
         <view class='action'>
           <button class='cu-btn line-green text-blue' bindtap='hideDonateModal'>过会再捐</button>
           <button class='cu-btn bg-blue margin-left' bindtap='submitDonate' >确定捐献</button>
@@ -197,7 +197,7 @@
       <!--其他名次循环-->
       <block wx:else>
         <view class='content ' bindtap="showModal" data-target="{{item.college_id}}">
-          <text class='icon-upstage text-orange '></text>
+          <text class='icon-upstage text-grey '></text>
           <text>{{item.college_name}}</text>
         </view>
         <view class="action">
