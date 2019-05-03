@@ -1,32 +1,13 @@
 /**new_detail.wxss**/
 @import "../detail/detail.wxss";
+@import "/utils/colorui/main.wxss";
+@import "/utils/colorui/icon.wxss";
 
-.shareButton {
+.box{
+  overflow: hidden;
   position: fixed;
-  bottom: 0rpx;
-  left: auto;
-  color: rgba(255, 255, 255, 1);
-  text-decoration: none;
-  background-color: #0167b8;
-  font-size: 24rpx;
-  padding: 12rpx;
-  border-radius: 0;
-  /* border-radius: 8px; *//* let's use box shadows to make the button look more 3-dimensional */
-  box-shadow: 30rpx 0px 30rpx rgba(0, 0, 0, 0.7);
-  margin: 0 auto;
-  width: 100%;
-  text-align: center;
-  -webkit-transition: all 0.1s ease;
-  -moz-transition: all 0.1s ease;
-  transition: all 0.1s ease;
+  bottom: 0;
 }
-
-/* 
-.share-image {
-  width: 600rpx;
-  height: 888rpx;
-  margin: 0 75rpx;
-} */
 
 .mask {
   width: 100%;

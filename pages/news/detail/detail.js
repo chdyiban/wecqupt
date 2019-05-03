@@ -388,5 +388,17 @@ module.exports.ipage = {
       }
     })
   },
+  notopentips(){
+    wx.showToast({
+      title: "暂未开放",
+      mask: true,
+      icon: 'none',
+    })
+  },
+  hideModal(){
+    this.setData({
+      showModal:false,
+    })
+  }
 
 };

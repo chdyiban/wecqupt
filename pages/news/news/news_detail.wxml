@@ -2,11 +2,33 @@
 
 <include src="../detail/detail.wxml" />
 
-<button class="shareButton" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">生成分享卡片</button>
+<view class="box solid-top">
+  <view class="cu-bar search bg-white tabbar border shop">
+    <view class="search-form round">
+      <input type="text" placeholder=" 输入评论.." bindtap="notopentips"></input>
+    </view>
+    <view class="action" bindtap="notopentips">
+      <view class="cuIcon-appreciate"></view> 点赞
+    </view>
+    <button class="action" open-type="share">
+      <view class="cuIcon-share"></view>
+      分享
+    </button>
+    <button class="action" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
+      <view class="cuIcon-pic text-green"></view>
+      海报
+    </button>
+  </view>
+</view>
 
 <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modalDlg" wx:if="{{showModal}}">
   <image src="{{shareImage}}" class="share-image"></image>
-  <button bindtap="eventSave">下载到本地</button>
+
+    <view class="btn-group padding">
+      <button class="cu-btn round " bindtap="hideModal">关闭</button>
+      <button class="cu-btn bg-green round margin-left" bindtap="eventSave">保存到手机</button>
+    </view>
+
 </view>
-<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"/>
+<canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage" />

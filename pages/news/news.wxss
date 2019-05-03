@@ -86,11 +86,11 @@
   width: 80rpx;
 }
 
-.content {
+/* .content {
   display: flex;
   flex-direction: column;
   padding: 160rpx 20rpx 0;
-}
+} */
 
 .content-ending {
   width: 100%;
@@ -550,3 +550,18 @@
 
 /*common list end */
 
+/*colorUI 适配CSS*/
+.img-title{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.img-title-font{
+  font-size:30rpx;
+  font-weight:900;
+  color:var(--black);
+}
+.cu-card .cu-item{
+  margin: 15rpx 30rpx;
+}

@@ -4,7 +4,7 @@ var app = getApp()
 var config = require('../../../config')
 Page({
   data: {
-    mainTitle:'辅导员满意度调查',
+    mainTitle:'辅导员满意度调查(匿名)',
     step:null,
     rate:{
       status:false,

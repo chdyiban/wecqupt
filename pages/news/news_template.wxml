@@ -5,15 +5,16 @@
   <navigator url="/pages/news/news/news_detail?id={{item.id}}">
     <view class="cu-card article">
       <view class="cu-item shadow">
-        <view class="title margin-top">
-          <view class="text-content">{{ item.title }}</view>
+        <view class="title">
+        <view class="cu-tag bg-blue light sm round" wx:for="{{item.tagslist}}" wx:key wx:for-item="i">{{ i.name }}</view>
         </view>
-        <view class="content flex justify-between">
-          <view class="cu-tag bg-blue light sm round">{{ item.tags }}</view>
+        <view class="title">
+          <view class="text-content solid-bottom padding-bottom">{{ item.title }}</view>
+        </view>
+        <view class="content margin-top">
           <view class="text-gray text-sm">
-            <text class="cuIcon-attentionfill margin-lr-xs"></text> 10
-            <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
-            <text class="cuIcon-messagefill margin-lr-xs"></text> 30
+            <text class="cuIcon-time margin-right-xs"></text>{{ item.create_date }}
+            <text class="cuIcon-attentionfill margin-lr-xs"></text>{{ item.views }}
           </view>
         </view>
       </view>
@@ -21,6 +22,33 @@
   </navigator>
 </template>
 <!--colorUI下无图模式 结束-->
+
+<!--colorUI下普通模式（单图） 开始-->
+<template name="newsStyle2">
+  <navigator url="/pages/news/news/news_detail?id={{item.id}}">
+    <view class="cu-card article">
+      <view class="cu-item shadow">
+        <view class="title">
+          <view class="cu-tag bg-blue light sm round" wx:for="{{item.tagslist}}" wx:key wx:for-item="i">{{ i.name }}</view>
+        </view>
+        <view class="content">
+          <image src="{{ item.image }}" mode="aspectFill"></image>
+          <view class="img-title">
+            <view class="img-title-font">{{ item.title }}</view>
+            <view>
+              <view class="text-gray text-sm">
+                <text class="cuIcon-time margin-right-xs"></text>{{ item.create_date }}
+                <text class="cuIcon-attentionfill margin-lr-xs"></text>{{ item.views }}
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </navigator>
+</template>
+
+<!--colorUI下普通模式（单图） 结束-->
 <!--无图模式-->
 <template name="newsStyle4">
   <navigator url="/pages/news/news/news_detail?id={{item.id}}">
@@ -120,7 +148,7 @@
   </navigator>
 </template>
 
-<template name="newsStyle2">
+<!-- <template name="newsStyle2">
   <navigator url="/pages/news/news/news_detail?id={{item.id}}">
     <view class="common-list">
       <view class="list-item has-img" index="{{index}}" id="{{item.id}}" bindtap="redictDetail">
@@ -141,4 +169,4 @@
       </view>
     </view>
   </navigator>
-</template>
+</template> -->

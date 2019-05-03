@@ -64,7 +64,7 @@
         <text class="cuIcon-close text-red"></text>
       </view>
     </view>
-    <view class="padding-xl">
+    <view class="padding-xl" selectable="true">
       {{modalContent}}
     </view>
   </view>

@@ -9,8 +9,8 @@
         <view class="user-title">
           <view class="user-name">
             <text>{{user.we.name}}</text>
-            <text wx:if="{{user.we.more.sex === '男'}}" class="icon-male text-blue"></text>
-            <text wx:elif="{{user.we.more.sex === '女'}}" class="icon-female text-pink"></text>
+            <text wx:if="{{user.we.more.sex === '男'}}" class="cuIcon-male text-blue"></text>
+            <text wx:elif="{{user.we.more.sex === '女'}}" class="cuIcon-female text-pink"></text>
           </view>
           <text class="user-id">{{user.we.id}}</text>
         </view>
@@ -26,7 +26,7 @@
           <text class="user-text">宿舍：{{user.we.info.build}}#{{user.we.info.room}}</text>
           <view class="user-text">
             <text class="text-grey">手机：{{user.we.info.mobile}}</text>
-            <text wx:if="{{iswxmobile}}" class="icon-safe text-blue"></text>  
+            <text wx:if="{{iswxmobile}}" class="cuIcon-safe text-blue"></text>  
           </view>
         </view>
         <view class="info-bd-right">
@@ -61,13 +61,13 @@
 <view wx:if="{{is_bind}}" class="cu-list menu sm-border">
   <view class="cu-item arrow" wx:if="{{!user.teacher}}">
     <navigator class="content" url="append" hover-class="none">
-      <text class='icon-formfill'></text>
+      <text class='cuIcon-formfill'></text>
       <text class='text-grey'>完善信息</text>
     </navigator>
   </view>
   <view class="cu-item arrow">
     <button class='cu-btn content' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
-      <text class='icon-mobile'></text>
+      <text class='cuIcon-mobile'></text>
       <text class='text-grey'>绑定手机</text>
       <text wx:if="{{iswxmobile}}" class='text-blue'> (已绑定)</text>    
     </button>
@@ -76,19 +76,19 @@
 <view class="cu-list menu sm-border">
   <view class="cu-item arrow">
     <button class='cu-btn content' open-type='contact'>
-      <text class='icon-service text-yellow'></text>
+      <text class='cuIcon-service text-yellow'></text>
       <text class='text-grey'>智能客服</text>
     </button>
   </view>
   <view class="cu-item arrow">
     <button class='cu-btn content' open-type='feedback'>
-      <text class='icon-writefill text-cyan'></text>
+      <text class='cuIcon-writefill text-cyan'></text>
       <text class='text-grey'>意见反馈</text>
     </button>
   </view>
   <view class="cu-item arrow">
     <navigator class='content' url='about' hover-class='none'>
-      <text class='icon-we text-cyan'></text>
+      <text class='cuIcon-we text-cyan'></text>
       <text class='text-grey'>关于我们</text>
     </navigator>
   </view>

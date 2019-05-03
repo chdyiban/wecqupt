@@ -66,6 +66,11 @@
             <text class="desc-time">2019.04.15</text>
           </view>
           <text class="desc-content">“运动会积分榜”正式上线，修复已知bug</text>
+          <view class="desc-title">
+            <text class="desc-v">v0.3.4</text>
+            <text class="desc-time">2019.05.02</text>
+          </view>
+          <text class="desc-content">“辅导员评价”、“我的宿舍”模块正式上线，修改咨询页面样式</text>
       </view>
     </view>
   </view>
