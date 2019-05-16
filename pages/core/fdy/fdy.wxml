@@ -27,6 +27,11 @@
             {{adviser.adviser_class}}班辅导员
           </view>
         </view>
+        <view class='flex content justify-end margin-left'>
+          <view class='cu-tag bg-red xs light round' bindtap='notMyAdvisor'>
+            <text class='cuIcon-question text-red'> </text> 信息有误
+          </view>
+        </view>
       </view>
     </view>
     <!-- <view class="text-content" wx:if="{{step === 2}}">
@@ -42,6 +47,20 @@
 <view class="cu-bar bg-white solid-bottom" wx:if="{{step === 1}}">
   <view class='action'>
     <text class='cuIcon-evaluate text-mauve '></text> {{mainTitle}}
+  </view>
+</view>
+<view class="padding" wx:if="{{errorPanel}}">
+  <view class="padding-lr bg-white {{index? 'margin-top' :''}}">
+    <view class='solid-bottom padding'>
+      <text class='text'>正确的评价步骤为：</text>
+    </view>
+    <view class="padding">
+      <text class='grid col-1'>1.打开“长大易班”微信小程序</text>
+      <text class='grid col-1'>2.在弹出绑定界面输入一卡通账户及密码（同信息门户）</text>
+      <text class='grid col-1'>3.完善信息（可略过）</text>
+      <text class='grid col-1'>4.进入首页“辅导员评价”应用，提交匿名评价。</text>
+      <text class='grid col-1'>5.若仍不能显示，请尝试退出后重新进入。</text>
+    </view>
   </view>
 </view>
 <!--step === 1 可提交评价 -->
@@ -101,7 +120,7 @@
 <view style="margin-bottom:150rpx"></view>
 <view class="bg-white text-center footer-button">
   <view class="padding flex flex-direction">
-    <button wx:if="{{step === 1}}" class='cu-btn bg-green lg shadow-blur bg-green' bindtap="submit">提交评价</button>
+    <button wx:if="{{step === 1}}" class='cu-btn bg-green lg shadow-blur bg-green' bindtap="submit">提交匿名评价</button>
     <button wx:if="{{step === 3}}" class='cu-btn bg-green lg shadow-blur bg-green' disabled bindtap="submit">已完成评价</button>
   </view>
 </view>
@@ -110,13 +129,13 @@
 <view class="cu-modal {{showTips === true ?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
-      <view class="content">注意事项</view>
+      <view class="content">{{tipsTitle}}</view>
       <view class="action" bindtap="hideModal">
         <text class="cuIcon-close text-red"></text>
       </view>
     </view>
     <view class="padding-xl">
-      各位同学大家好，这是一份关于大学生对辅导员队伍建设满意度的调查问卷。本问卷仅用于学校建设及学术研究，采用不记名的形式，希望同学们如实填写，尽量不要空项，和我们一起为建设令学生满意的辅导员队伍而努力。谢谢各位的支持。
+      {{tipsContent}}
     </view>
     <view class="cu-bar bg-white justify-end">
       <view class="action">

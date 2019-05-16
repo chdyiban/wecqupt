@@ -3,14 +3,11 @@
  */
 var system = wx.getSystemInfoSync();
 // 此处主机域名修改成腾讯云解决方案分配的域名
-if (system.brand == 'devtoolss') {
-  var host = 'http://zkadfu.natappfree.cc/yibanbx';
+if (system.brand == 'devtools') {
+  var host = 'http://iicxa5.natappfree.cc/yibanbx';
   var api = host + '/public/api';
 }
-// else{
-//   var host = 'https://service.knocks.tech';
-//   var api = host + '/?s=api';
-// }
+
 else {
   var host = 'https://yiban.chd.edu.cn';
   var api = host + '/api';
@@ -58,6 +55,8 @@ var config = {
     newsSearchSuggest: `${api}/news/search/chssuggest`,
     newsSearch: `${api}/news/search/query`,
     newsShareQrCode: `${api}/Wxcode/getWXACodeUnlimit`,
+    //新闻模块-标签配置
+    newsTagsUrl: `${api}/news/information/tags`,
 
     //运动会
     sportsInit: `${api}/sports/index`,

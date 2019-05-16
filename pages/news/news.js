@@ -42,13 +42,13 @@ Page({
     this.initBar();
   },
   initBar:function(){
-    var that = this;
+    var _this = this;
     wx.request({
       url: config.service.newsNavUrl,
       success: function (res) {
         if (res.data && res.data.status === 200) {
           if (res.data.data) {
-            that.setData({
+            _this.setData({
               list:res.data.data,
             });
           }
@@ -58,7 +58,10 @@ Page({
         app.showErrorModal(res.message);
       },
       complete: function () {
-        that.getNewsList();
+        //获取新闻列表
+        _this.getNewsList()
+        //将nav写入缓存
+        _this.setNavToWXCache()
       }
     });
   },
@@ -102,13 +105,7 @@ Page({
       return;
     }
     typeId = typeId || _this.data.active.id;
-    // if (_this.data.page >= 100) {
-    //   _this.setData({
-    //     'active.showMore': false,
-    //     'active.remind': '没有更多啦'
-    //   });
-    //   return false;
-    // }
+
     if (!_this.data.page) {
       _this.setData({
         'active.data': _this.data.list[typeId].storage
@@ -182,9 +179,14 @@ Page({
       }
     });
   },
+  //将新闻写入wx.setStorageSync
+  setNavToWXCache: function(){
+    
+    wx.setStorageSync('userTags',this.data.list)
+  },
   //获取焦点
   changeFilter: function (e) {
-    //console.log(e.target);
+    console.log(e.target);
     this.setData({
       'active': {
         'id': e.target.dataset.id,

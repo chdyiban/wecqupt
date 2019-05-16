@@ -13,8 +13,8 @@ Page({
         { id: 'kb', name: '课表查询', disabled: false, teacher_disabled: true, offline_disabled: false },
         { id: 'cj', name: '成绩查询', disabled: true, teacher_disabled: true, offline_disabled: false },
         { id: 'ydh', name: '运动会', disabled: false, teacher_disabled: false, offline_disabled: false },
-        { id: 'fdy', name: '辅导员评价', disabled: false, teacher_disabled: false, offline_disabled: true },
-        { id: 'ss', name: '我的宿舍', disabled: false, teacher_disabled: false, offline_disabled: true },
+        { id: 'fdy', name: '辅导员评价', disabled: false, color:'red', teacher_disabled: false, offline_disabled: true },
+        { id: 'ss', name: '我的宿舍', disabled: true, teacher_disabled: false, offline_disabled: true },
         { id: 'jy', name: '借阅信息', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'xc', name: '校车时间', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'bzr', name: '班主任评价', disabled: true, teacher_disabled: true, offline_disabled: false }
@@ -55,15 +55,15 @@ Page({
         show: false,
         data: {}
       },
-      'sdf': {
-        show: false,
-        data: {
-          'room': '',
-          'record_time': '',
-          'cost': 0,
-          'spend': 0
-        }
-      }
+      // 'sdf': {
+      //   show: false,
+      //   data: {
+      //     'room': '',
+      //     'record_time': '',
+      //     'cost': 0,
+      //     'spend': 0
+      //   }
+      // }
     },
     user: {},
     disabledItemTap: false //点击了不可用的页面
@@ -189,8 +189,8 @@ Page({
     //判断并读取缓存
     if (app.cache.kb && !app._user.teacher){ kbRender(app.cache.kb); }
     if(app.cache.ykt){ yktRender(app.cache.ykt); }
-    if(app.cache.sdf){ sdfRender(app.cache.sdf); }
-    if(app.cache.jy){ jyRender(app.cache.jy); }
+    // if(app.cache.sdf){ sdfRender(app.cache.sdf); }
+    // if(app.cache.jy){ jyRender(app.cache.jy); }
     if(_this.data.offline){ return; }
     wx.showNavigationBarLoading();
 

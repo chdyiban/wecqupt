@@ -29,6 +29,9 @@ Page({
     formData: {             //表单数据 
     },
     showTips:true,          //提示按钮默认为展示
+    tipsTitle:'问卷提示',
+    tipsContent:'各位同学大家好，这是一份关于大学生对辅导员队伍建设满意度的调查问卷。本问卷仅用于学校建设及学术研究，采用不记名的形式，希望同学们如实填写，尽量不要空项，和我们一起为建设令学生满意的辅导员队伍而努力。谢谢各位的支持。',
+    errorPanel:false,
   },
   onPullDownRefresh: function () {
     this.getData()
@@ -47,12 +50,12 @@ Page({
   getData: function () {
     var _this = this
 
-    //学号(we.id) 与班级号(we.more.bj) 半段
-    if (!app._user.we.id || !app._user.we.more.bj) {
-      wx.navigateTo({
-        url: '/pages/more/append'
-      })
-    }
+    // //学号(we.id) 与班级号(we.more.bj) 半段
+    // if (!app._user.we.id || !app._user.we.more.bj) {
+    //   wx.navigateTo({
+    //     url: '/pages/more/append'
+    //   })
+    // }
 
     //formData数据初始化
     _this.setData({
@@ -80,6 +83,9 @@ Page({
         wx.hideToast()
         var adviserResObj = res.data.data
         if(res.data.status != 200){
+          _this.setData({
+            errorPanel: true,
+          })
           //服务器出错或非法请求
           wx.showToast({
             title: "error:"+res.data.msg,
@@ -135,7 +141,10 @@ Page({
         }
       },
       fail: function (res) {
-       
+        wx.stopPullDownRefresh()
+        _this.setData({
+          errorPanel: true,
+        })
       },
       complete: function () {
         wx.stopPullDownRefresh()
@@ -233,6 +242,14 @@ Page({
         _this.getData()
         wx.stopPullDownRefresh()
       }
+    })
+  },
+
+  notMyAdvisor: function (){
+    this.setData({
+      tipsContent: '若辅导员信息有误，请先不要填写问卷，由班长反馈即可。\n客服QQ群:467498640，联系电话15991651685',
+      tipsTitle: '不是我的辅导员',
+      showTips: true,
     })
   },
 

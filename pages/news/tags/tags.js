@@ -1,4 +1,5 @@
 // pages/news/tags/tags.js
+var config = require('../../../config');
 Page({
 
   /**
@@ -6,23 +7,10 @@ Page({
    */
   data: {
     active: false,
-    topic: [
-      { type: 'topic', name: "官网新闻", channel: 4 },
-      { type: 'topic', name: "先锋家园", channel: 5 },
-      { type: 'topic', name: "门户通知", channel: 7 },
-    ],
-    tuan: [
-      { type: 'tuan', name: "专题头条" },
-      { type: 'tuan', name: "公告通知" },
-      { type: 'tuan', name: "团学新闻" },
-      { type: 'tuan', name: "活动预告" },
-      { type: 'tuan', name: "院系传真" },
-    ],
-    // college: ["公路学院", "汽车学院", "机械学院","经管学院","电控学院","信息学院"],
-    choose: [
-      { type: 'topic', name: "官网新闻", channel: 4 },
-      { type: 'topic', name: "综合新闻", channel: 5 }
-    ],
+    vip: [],
+    tuan: [],
+    college: [],
+    choose: [],
     userTagsCache:{}
   },
 
@@ -39,26 +27,79 @@ Page({
       if (value) {
         _this.data.userTagsCache = value
 
-        //遍历缓存栏目，将已经在里面的删除
-        _this.data.userTagsCache.forEach(function(v){
-          for(var i = 0; i<_this.data[v.type].length;i++){
-            if (v.name === _this.data[v.type][i].name) {
-              _this.data[v.type].splice(i, 1)
-              break
-            }
-          }
-        });
-
-        
-        //我的栏目赋值
-        _this.setData({
-          choose: value,
-          tuan: _this.data.tuan,
-          //college: _this.data.college,
-          topic: _this.data.topic
-        })
       }
     } catch (e) { console.warn(e) }
+
+    //读取所有标签
+    wx.request({
+      url: config.service.newsTagsUrl,
+      success: function (res) {
+        if (res.data && res.data.status === 200) {
+          //这里应首先删除已经在nav里面的标签,最方便
+          var tagList = res.data.data
+          //将剩下标签数组按分类写入到tags中
+          var tmpVip = [];
+          var tmpTuan = [];
+          var tmpCollege = [];
+          tagList.forEach(function (v,k) {
+            //先判断是否在我的栏目中，在则不展示
+            //if(){}
+            // _this.data.userTagsCache.forEach(val,key){
+            //   if()
+            // }
+            switch(v.category_id){
+              case 0:
+                tmpVip.push(v)
+                break
+              case 1:
+                tmpTuan.push(v)
+                break
+              case 2:
+                tmpCollege.push(v)
+                break
+            }
+          })
+          _this.setData({
+            vip: tmpVip,
+            tuan: tmpTuan,
+            college: tmpCollege
+          })
+        }
+      },
+      fail: function (res) {
+        app.showErrorModal(res.message)
+      },
+      complete: function () {
+      }
+    });
+
+    // //读取缓存
+    // try {
+    //   var data = wx.getStorageInfoSync()
+    //   var value = wx.getStorageSync('userTags')
+    //   if (value) {
+    //     _this.data.userTagsCache = value
+
+    //     //遍历缓存栏目，将已经在里面的删除
+    //     _this.data.userTagsCache.forEach(function(v,k){
+    //       for(var i = 0; i<_this.data[v.type].length;i++){
+    //         if (v.name === _this.data[v.type][i].name) {
+    //           _this.data[v.type].splice(i, 1)
+    //           break
+    //         }
+    //       }
+    //     });
+
+        
+    //     //我的栏目赋值
+    //     _this.setData({
+    //       choose: value,
+    //       tuan: _this.data.tuan,
+    //       college: _this.data.college,
+    //       vip: _this.data.vip
+    //     })
+    //   }
+    // } catch (e) { console.warn(e) }
   },
 
   /**
@@ -145,8 +186,8 @@ Page({
     _this.setData({
       choose:_this.data.choose,
       tuan:_this.data.tuan,
-      //college:_this.data.college,
-      topic:_this.data.topic
+      college:_this.data.college,
+      vip:_this.data.vip
     })
   },
   addTag:function(e){
@@ -169,8 +210,8 @@ Page({
     _this.setData({
       choose: _this.data.choose,
       tuan: _this.data.tuan,
-      //college: _this.data.college,
-      topic: _this.data.topic
+      college: _this.data.college,
+      vip: _this.data.vip
     })    
   },
 
