@@ -8,9 +8,8 @@
       </view>
     </view>
     <view class="items">
-      <view class="item all">推荐</view>
       <block wx:for="{{choose}}" wx:key="id">
-        <view bindtap="deleteTag" class="item all" data-name="{{item.name}}" data-type="{{item.type}}">
+        <view bindtap="deleteTag" class="item all" data-name="{{item.name}}" data-type="{{item.type_id}}">
             <image wx:if="{{active}}" src="/images/news/delete.png" class="tag-icon"></image>
           <view class="name">{{item.name}}</view>
         </view>
@@ -21,8 +20,8 @@
       重要主题
     </view>
     <view class="items">
-      <block wx:for="{{vip}}" wx:key="{{index}}">
-        <view bindtap="addTag" class="item" data-name="{{item.name}}" data-type="vip">
+      <block wx:for="{{tags[0]}}" wx:key="{{index}}">
+        <view bindtap="addTag" class="item" data-name="{{item.name}}" data-type="0">
           <image wx:if="{{active}}" src="/images/news/add.png" class="tag-icon"></image>
           <view class="name">{{item.name}}</view>
         </view>
@@ -32,8 +31,8 @@
       共青团
     </view>
     <view class="items">
-      <block wx:for="{{tuan}}" wx:key="{{index}}">
-        <view bindtap="addTag" class="item" data-name="{{item.name}}" data-type="tuan">
+      <block wx:for="{{tags[1]}}" wx:key="{{index}}">
+        <view bindtap="addTag" class="item" data-name="{{item.name}}" data-type="1">
           <image wx:if="{{active}}" src="/images/news/add.png" class="tag-icon"></image>
           <view class="name">{{item.name}}</view>
         </view>
@@ -43,8 +42,8 @@
       学院
     </view>
     <view class="items">
-      <block wx:for="{{college}}" wx:key="{{index}}">
-        <view bindtap="add({{item}},college)" class="item">
+      <block wx:for="{{tags[2]}}" wx:key="{{index}}">
+        <view bindtap="addTag" class="item" data-name="{{item.name}}" data-type="2">
           <image wx:if="{{active}}" src="/images/news/add.png" class="tag-icon"></image>
           <view class="name">{{item.name}}</view>
         </view>

@@ -4,8 +4,8 @@
 var system = wx.getSystemInfoSync();
 // 此处主机域名修改成腾讯云解决方案分配的域名
 if (system.brand == 'devtools') {
-  var host = 'http://iicxa5.natappfree.cc/yibanbx';
-  var api = host + '/public/api';
+  var host = 'http://xdx8cj.natappfree.cc/yibanbx/public';
+  var api = host + '/api';
 }
 
 else {
@@ -57,6 +57,7 @@ var config = {
     newsShareQrCode: `${api}/Wxcode/getWXACodeUnlimit`,
     //新闻模块-标签配置
     newsTagsUrl: `${api}/news/information/tags`,
+    newsTagsSetUrl: `${api}/news/information/setnav`, 
 
     //运动会
     sportsInit: `${api}/sports/index`,

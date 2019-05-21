@@ -18,6 +18,7 @@ Page({
     disabledRemind: false,
     scrollTop: 0,
     headerStyle: 'relative',
+    navFlag:false,//用来判断是否更新导航条，如果有更新，则从缓存中读取导航数据
   },
   onLoad: function () {
     var _this = this;
@@ -41,10 +42,21 @@ Page({
     });
     this.initBar();
   },
+  onShow:function(){
+    var _this = this
+    console.warn("onshow!!!")
+    //若navFlag 为true 说明用户在tags页面保存过tags,此时从缓存读取最新nav
+    _this.refreshNav()
+  },
   initBar:function(){
     var _this = this;
     wx.request({
       url: config.service.newsNavUrl,
+      method: 'POST',
+      data: app.key({
+        openid: app._user.openid,
+        id: app._user.we.id
+      }),
       success: function (res) {
         if (res.data && res.data.status === 200) {
           if (res.data.data) {
@@ -61,7 +73,7 @@ Page({
         //获取新闻列表
         _this.getNewsList()
         //将nav写入缓存
-        _this.setNavToWXCache()
+        _this.setNavToStorage()
       }
     });
   },
@@ -84,9 +96,9 @@ Page({
   },
   //上滑加载更多
   onReachBottom: function () {
-    var _this = this;
+    var _this = this
     if (_this.data.active.showMore) {
-      _this.getNewsList();
+      _this.getNewsList()
     }
   },
   chooseTags: function(){
@@ -115,13 +127,25 @@ Page({
       'active.remind': '正在加载中'
     });
     wx.showNavigationBarLoading();
-    wx.request({
-      url: config.service.newsListUrl,
-      data: {
+    var data = {};
+    if (_this.data.list[typeId].channel === undefined){
+      //tags
+      data = {
+        page: _this.data.page + 1,
+        openid: app._user.openid,
+        tag: _this.data.list[typeId].tag,
+      }
+    }else{
+      //channel
+      data = {
         page: _this.data.page + 1,
         openid: app._user.openid,
         channel: _this.data.list[typeId].channel,
-      },
+      }
+    }
+    wx.request({
+      url: config.service.newsListUrl,
+      data: data,
       success: function (res) {
         if (res.data && res.data.status === 200) {
           if (_this.data.active.id != typeId) { return false; }
@@ -180,13 +204,28 @@ Page({
     });
   },
   //将新闻写入wx.setStorageSync
-  setNavToWXCache: function(){
-    
+  setNavToStorage: function(){
     wx.setStorageSync('userTags',this.data.list)
+  },
+  getNavFromStorage: function(){
+    console.log(wx.getStorageSync('userTags'))
+    return wx.getStorageSync('userTags')
+  },
+  //刷新导航条
+  refreshNav: function(){
+    var _this = this
+    var flag =  wx.getStorageSync('refreshNav')
+    
+    if(flag){
+      console.log("=====refreshnav===")
+      _this.setData({
+        list: _this.getNavFromStorage()
+      })
+      wx.setStorageSync('refreshNav', false)
+    }
   },
   //获取焦点
   changeFilter: function (e) {
-    console.log(e.target);
     this.setData({
       'active': {
         'id': e.target.dataset.id,

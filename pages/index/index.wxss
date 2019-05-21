@@ -296,7 +296,7 @@ page .navigator-hover{
   height: 231rpx;
   /*background-image: url('/images/index/jy-book.png');*/
   /*微信暂不支持静态bgimg文件，改用服务器url*/
-  background-image: url('https://we.cqu.pt/app/images/index/jy-book.png');
+  /* background-image: url('https://we.cqu.pt/app/images/index/jy-book.png'); */
   background-size: 100% 100%;
   padding: 5rpx 5rpx 50rpx 30rpx;
   color: #fff;
@@ -394,4 +394,15 @@ page .navigator-hover{
 .main-core-item .red{
   color:red;
   font-weight: bold;
+}
+
+/*将button按钮设置为同样图标*/
+.kf-index-button{
+  background-image: url('https://yibancdn.ohao.ren/weapp/nav/kf.png');
+  background-size: 100% 100%;
+  background-color: #fff;
+  border-radius:0;
+}
+.kf-index-button::after{
+  border: none;
 }

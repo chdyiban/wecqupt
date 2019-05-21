@@ -18,6 +18,10 @@
         <text class="core-item-name">{{item.name}}</text>
       </view>
     </block>
+    <view class="main-core-item">
+      <button class="core-item-icon kf-index-button" src="/images/core/bx.png" open-type="contact" />
+      <text class="core-item-name">智能客服</text>
+    </view>
   </swiper-item>
   </swiper>
     <view class="fix_tip {{disabledItemTap?'active':''}}">
