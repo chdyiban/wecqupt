@@ -3,7 +3,7 @@
  */
 var system = wx.getSystemInfoSync();
 // 此处主机域名修改成腾讯云解决方案分配的域名
-if (system.brand == 'devtools') {
+if (system.brand == 'devtoolss') {
   var host = 'http://xdx8cj.natappfree.cc/yibanbx/public';
   var api = host + '/api';
 }

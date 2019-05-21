@@ -188,7 +188,7 @@ Page({
     var _this = this;
     //判断并读取缓存
     if (app.cache.kb && !app._user.teacher){ kbRender(app.cache.kb); }
-    if(app.cache.ykt){ yktRender(app.cache.ykt); }
+    // if(app.cache.ykt){ yktRender(app.cache.ykt); }
     // if(app.cache.sdf){ sdfRender(app.cache.sdf); }
     // if(app.cache.jy){ jyRender(app.cache.jy); }
     if(_this.data.offline){ return; }
@@ -259,8 +259,9 @@ Page({
     });
 
     //一卡通渲染
+    //一卡通对接失败，暂时不启用 2019.05.19
     function yktRender(list){
-      //console.log(list);
+      console.log(list);
       if(list.length > 0){
         var last = list[0],
             last_time = last.time.split(' ')[0],
@@ -290,38 +291,39 @@ Page({
       }
     }
     //获取一卡通数据
-    loadsum++; //新增正在请求连接
-    wx.request({
-      url: config.service.yikatongUrl,
-      method: 'POST',
-      data: app.key({
-        //yktID: app._user.we.ykth
-        id: app._user.we.id,
-        //teacher:app._user.teacher
-      }),
-      success: function(res) {
-        if(res.data && res.data.status === 200){
-          var list = res.data.data;
-          if(list){
-            //保存一卡通缓存
-            app.saveCache('ykt', list);
-            yktRender(list);
-          }
-        }else{ app.removeCache('ykt'); }
-      },
-      complete: function() {
-        loadsum--; //减少正在请求连接
-        if(!loadsum){
-          if(_this.data.remind){
-            _this.setData({
-              remind: '首页暂无展示'
-            });
-          }
-          wx.hideNavigationBarLoading();
-          wx.stopPullDownRefresh();
-        }
-      }
-    });
+    //loadsum++; //新增正在请求连接
+
+    // wx.request({
+    //   url: config.service.yikatongUrl,
+    //   method: 'POST',
+    //   data: app.key({
+    //     //yktID: app._user.we.ykth
+    //     id: app._user.we.id,
+    //     //teacher:app._user.teacher
+    //   }),
+    //   success: function(res) {
+    //     if(res.data && res.data.status === 200){
+    //       var list = res.data.data;
+    //       if(list){
+    //         //保存一卡通缓存
+    //         app.saveCache('ykt', list);
+    //         yktRender(list);
+    //       }
+    //     }else{ app.removeCache('ykt'); }
+    //   },
+    //   complete: function() {
+    //     loadsum--; //减少正在请求连接
+    //     if(!loadsum){
+    //       if(_this.data.remind){
+    //         _this.setData({
+    //           remind: '首页暂无展示'
+    //         });
+    //       }
+    //       wx.hideNavigationBarLoading();
+    //       wx.stopPullDownRefresh();
+    //     }
+    //   }
+    // });
 
     //借阅信息渲染
     // function jyRender(info){

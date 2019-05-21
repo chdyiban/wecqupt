@@ -127,8 +127,11 @@ Page({
 
     //按钮激活状态,写缓存
     if (_this.data.active === true) {
-      _this.userTagsCache = _this.data.choose
-
+      
+      //自定义标签先进行对ID重排序
+      _this.data.choose.forEach(function(v,k){
+        _this.data.choose[k].id = k
+      })
       wx.setStorage({
         key: 'userTags',
         data: _this.data.choose

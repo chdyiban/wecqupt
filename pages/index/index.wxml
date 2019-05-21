@@ -66,7 +66,7 @@
     </view>
 
     <!--一卡通-->
-    <view class="main-card-item" id="ykt" wx-if="{{card.ykt.show}}">
+    <!-- <view class="main-card-item" id="ykt" wx-if="{{card.ykt.show}}">
       <navigator url="/pages/core/ykt/ykt">
         <view class="card-item-hd">
           <image class="card-item-icon" src="/images/core/ykt.png"></image>
@@ -99,7 +99,7 @@
           </block>
         </view>
       </navigator>
-    </view>
+    </view> -->
     
   </view>
 
